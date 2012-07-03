@@ -31,7 +31,6 @@
 
 package org.oxbow.swingbits.dialog.task.design;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.SystemColor;

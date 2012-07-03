@@ -31,9 +31,7 @@
 
 package org.oxbow.swingbits.dialog.task.design;
 
-import java.awt.Color;
 import java.awt.Component;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
@@ -113,24 +111,26 @@ public class CommandLinkButton extends JToggleButton {
 
 	private String buildText() {
 
-		Font fontInstr = UIManager.getFont( IContentDesign.FONT_INSTRUCTION );
-		Font fontText  = UIManager.getFont( IContentDesign.FONT_TEXT );
-		Color colorInstr = UIManager.getColor( IContentDesign.COLOR_INSTRUCTION_FOREGROUND);
-
-		StringBuffer txt = new StringBuffer();
-		txt.append( "<html><head><style type='text/css'>" );
-		txt.append(	"p.tdi { " + Markup.toCSS(fontInstr) + Markup.toCSS(colorInstr) + " }" );
-		txt.append(	"p.tdt { " + Markup.toCSS(fontText)  + Markup.toCSS(colorInstr) + " }" );
+		String txt = 
+			"<html><head>" +
+			  "<style type='text/css'>" +
+			    "p.tdi { %s%s }" +
+			    "p.tdt { %s%s }" +
+			  "</style>" +
+			"</head>" +
+			  "<p class=\"tdi\">%s</p>" +
+			  "<p class=\"tdt\">%s</p>" +
+			"</html>";
 		
-		//txt.append( String.format( "div { " + Markup.toSizeCSS(fontText) +" }" ));
-		txt.append( "</style></head>" );
-		txt.append( "<p class=\"tdi\">" + Markup.toHTML( link.getInstruction(), false )  + "</p>" );
-		txt.append( "<p class=\"tdt\">" + Markup.toHTML( link.getText(), false ) + "</p>");
-		txt.append( "</html>" );
-
-		System.out.println(txt);
-		System.out.println();
-		return txt.toString();
+		String instrColorCss = Markup.toCSS(UIManager.getColor( IContentDesign.COLOR_INSTRUCTION_FOREGROUND ));
+		
+		return String.format(txt,
+				Markup.toCSS(UIManager.getFont( IContentDesign.FONT_INSTRUCTION )),
+				instrColorCss,
+				Markup.toCSS(UIManager.getFont( IContentDesign.FONT_TEXT )),
+				instrColorCss,
+				Markup.toHTML( link.getInstruction(), false ),
+				Markup.toHTML( link.getText(), false ) );
 
 	}
 
