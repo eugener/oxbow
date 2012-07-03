@@ -1,13 +1,12 @@
-**SwingBits** library is a collection of useful Swing components and utilities.    
-Here are some of the features
+**SwingBits** library is a collection of useful Swing components and utilities.
+The documentation can be found in the [Wiki](https://github.com/eugener/oxbow/wiki)
+Here are some of its features:
    
 #### Table Filtering
->[Documentation](https://github.com/eugener/oxbow/wiki/Task-Dialog)
 
 ![Table Filtering](http://posterous.com/getfile/files.posterous.com/temp-2011-02-14/qyHFuvhhnBouGlzeaJvnpbwGdFAcvudGgszbofAElhpFxoyrxkGJHBFaDdti/TableFilter_Actions.png?w=450)
 
 #### Task Dialogs    
->[Documentation](https://github.com/eugener/oxbow/wiki/Task-Dialog)
 
 ![Task Dialog 2](http://mcoj.files.wordpress.com/2010/02/taskdialog-nimbus.jpg?w=450)
 ![Task Dialog 1](http://mcoj.files.wordpress.com/2010/02/taskdialog-footer.jpg?w=450)
