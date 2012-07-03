@@ -1,5 +1,7 @@
 **SwingBits** library is a collection of useful Swing components and utilities.
+
 The documentation can be found in the [Wiki](https://github.com/eugener/oxbow/wiki)
+
 Here are some of its features:
    
 #### Table Filtering
