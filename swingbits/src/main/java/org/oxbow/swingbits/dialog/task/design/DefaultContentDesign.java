@@ -31,6 +31,7 @@
 
 package org.oxbow.swingbits.dialog.task.design;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.SystemColor;
@@ -61,8 +62,8 @@ public class DefaultContentDesign implements IContentDesign {
 		UIManager.put( ICON_COMMAND_LINK, createResourceIcon( "arrowGreenRight.png"));
 
 		UIManager.put( COLOR_MESSAGE_BACKGROUND,     SystemColor.window );
-		UIManager.put( COLOR_INSTRUCTION_FOREGROUND, SystemColor.textHighlight.darker() ); //???
-
+		UIManager.put( COLOR_INSTRUCTION_FOREGROUND, SystemColor.textHighlight.darker() ); 
+		
 		UIManager.put( FONT_INSTRUCTION, deriveFont( "Label.font", null, 1.4f ) );
 		UIManager.put( FONT_TEXT, deriveFont( "Label.font", null, 1f ) );
 
@@ -81,7 +82,6 @@ public class DefaultContentDesign implements IContentDesign {
 		content.lbInstruction.setForeground( UIManager.getColor( IContentDesign.COLOR_INSTRUCTION_FOREGROUND ));
 
 		content.lbText.setFont( UIManager.getFont(IContentDesign.FONT_TEXT ));
-
 		content.pComponent.setOpaque(false);
 
 		content.removeAll();

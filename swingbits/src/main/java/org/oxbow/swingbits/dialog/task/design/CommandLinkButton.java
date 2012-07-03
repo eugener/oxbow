@@ -119,14 +119,17 @@ public class CommandLinkButton extends JToggleButton {
 
 		StringBuffer txt = new StringBuffer();
 		txt.append( "<html><head><style type='text/css'>" );
-		txt.append(	"p { " + Markup.toCSS(fontInstr) +	Markup.toCSS(colorInstr) + " };" );
+		txt.append(	"p.tdi { " + Markup.toCSS(fontInstr) + Markup.toCSS(colorInstr) + " }" );
+		txt.append(	"p.tdt { " + Markup.toCSS(fontText)  + Markup.toCSS(colorInstr) + " }" );
 		
-		txt.append( String.format( "div { " + Markup.toSizeCSS(fontText) +" }" ));
+		//txt.append( String.format( "div { " + Markup.toSizeCSS(fontText) +" }" ));
 		txt.append( "</style></head>" );
-		txt.append( "<p>" + Markup.toHTML( link.getInstruction(), false )  + "</p>" );
-		txt.append( "<div>" + Markup.toHTML( link.getText(), false ) + "</div>");
+		txt.append( "<p class=\"tdi\">" + Markup.toHTML( link.getInstruction(), false )  + "</p>" );
+		txt.append( "<p class=\"tdt\">" + Markup.toHTML( link.getText(), false ) + "</p>");
 		txt.append( "</html>" );
 
+		System.out.println(txt);
+		System.out.println();
 		return txt.toString();
 
 	}

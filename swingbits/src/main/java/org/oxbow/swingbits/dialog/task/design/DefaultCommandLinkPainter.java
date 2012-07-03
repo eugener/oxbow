@@ -86,7 +86,9 @@ public class DefaultCommandLinkPainter implements ICommandLinkPainter {
 		} 
 		
 		Color messageBackground = normalize(UIManager.getColor( IContentDesign.COLOR_MESSAGE_BACKGROUND ));
-		Color instructionForeground = normalize(UIManager.getColor( IContentDesign.COLOR_INSTRUCTION_FOREGROUND ));
+		Color instructionForeground = normalize(UIManager.getColor( 
+//				SystemColor.textHighlight.darker() )); 
+				IContentDesign.COLOR_INSTRUCTION_FOREGROUND ));
 		
 		if ( model.isArmed() ) {
 

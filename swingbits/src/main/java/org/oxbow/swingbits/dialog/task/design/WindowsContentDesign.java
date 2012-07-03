@@ -29,27 +29,27 @@
  *
  */
 
-package org.oxbow.swingbits.dialog.task;
+package org.oxbow.swingbits.dialog.task.design;
 
-import org.oxbow.swingbits.dialog.task.design.DefaultContentDesign;
-import org.oxbow.swingbits.dialog.task.design.LinuxContentDesign;
-import org.oxbow.swingbits.dialog.task.design.MacOsContentDesign;
-import org.oxbow.swingbits.dialog.task.design.WindowsContentDesign;
-import org.oxbow.swingbits.util.OperatingSystem;
+import java.awt.Color;
+import java.awt.Font;
 
-public class ContentDesignFactory {
+import javax.swing.UIManager;
 
-	private ContentDesignFactory() {}
+public class WindowsContentDesign extends DefaultContentDesign {
 
-	public static final IContentDesign getDesignByOperatingSystem() {
+	@Override
+	public void updateUIDefaults() {
 
-		switch( OperatingSystem.getCurrent() ) {
-			case MACOS  : return new MacOsContentDesign();
-			case LINUX  : return new LinuxContentDesign();
-			case WINDOWS: return new WindowsContentDesign();
-			default   : return new DefaultContentDesign();
-		}
+		super.updateUIDefaults();
+
+		UIManager.put( COLOR_INSTRUCTION_FOREGROUND, new Color(0x0033A0)); 
+
+		Font fontBase =  new Font("Segoe UI", 0, 11);
+		UIManager.put( FONT_INSTRUCTION, 
+			fontBase.deriveFont( fontBase.getStyle(), fontBase.getSize2D() * 1.4f ) );
 		
 	}
+	
 	
 }
