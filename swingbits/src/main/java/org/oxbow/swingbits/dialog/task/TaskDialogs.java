@@ -33,8 +33,6 @@ package org.oxbow.swingbits.dialog.task;
 
 import java.awt.Dimension;
 import java.awt.Window;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -54,6 +52,7 @@ import net.miginfocom.swing.MigLayout;
 
 import org.oxbow.swingbits.dialog.task.TaskDialog.StandardCommand;
 import org.oxbow.swingbits.dialog.task.design.CommandLinkButton;
+import org.oxbow.swingbits.dialog.task.design.CommandLinkButtonGroup;
 import org.oxbow.swingbits.util.Strings;
 import org.oxbow.swingbits.util.swing.AncestorAdapter;
 
@@ -336,7 +335,7 @@ public final class TaskDialogs {
 			
 			dlg.setCommands( StandardCommand.CANCEL );
 
-			final ButtonGroup bGroup = new ButtonGroup();
+			final CommandLinkButtonGroup bGroup = new CommandLinkButtonGroup();
 		    List<ButtonModel> models = new ArrayList<ButtonModel>();
 		    final List<CommandLinkButton> buttons = new ArrayList<CommandLinkButton>();
 
@@ -348,14 +347,6 @@ public final class TaskDialogs {
 				buttons.add( btn );
 				bGroup.add(btn);
 				p.add( btn, "dock north");
-				btn.addFocusListener( new FocusAdapter() {
-
-					@Override
-					public void focusGained(FocusEvent e) {
-						bGroup.setSelected( ((CommandLinkButton)e.getSource()).getModel() , true);
-					}
-				});
-
 			}
 
 			if ( defaultChoice >= 0 && defaultChoice < choices.size()) {
@@ -373,10 +364,7 @@ public final class TaskDialogs {
 			}
 			p.setOpaque(false);
 
-
-//			dlg.setIcon( );//TaskDialog.StandardIcon.QUESTION));
 			dlg.setFixedComponent(p);
-//			dlg.setCommandsVisible(false);
 
 			return dlg.show().equals(StandardCommand.CANCEL)?  -1: models.indexOf( bGroup.getSelection());
 

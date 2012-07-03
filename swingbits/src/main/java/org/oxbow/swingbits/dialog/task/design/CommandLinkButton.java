@@ -38,6 +38,8 @@ import java.awt.Graphics;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 import javax.swing.Icon;
 import javax.swing.JToggleButton;
@@ -76,6 +78,22 @@ public class CommandLinkButton extends JToggleButton {
 		
 		if ( painter != null ) painter.intialize(this);
 
+		addFocusListener(new FocusAdapter() {
+
+	        @Override
+	        public void focusGained(FocusEvent e) {
+	            setSelected(true);
+	        }
+
+	        @Override
+	        public void focusLost(FocusEvent e) {
+	            // NOTE: if we really are de-selected is controlled by the
+	        	// ButtonGroup.
+	            setSelected(false);
+	        }
+
+	    });
+		
 		addActionListener( new ActionListener() {
 
 			@Override
