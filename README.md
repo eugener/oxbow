@@ -1,7 +1,7 @@
 **SwingBits** library is a collection of useful Swing components and utilities.   
 Please note that TaskDialog library is now a part of SwingBits
 
-The documentation can be found in the [Project Wiki](https://github.com/eugener/oxbow/wiki)
+The documentation can be found in the [Project Wiki](https://github.com/eugener/oxbow/wiki/Table-Filtering)
 
 Here are some of its features:
    
