@@ -32,35 +32,34 @@
 package org.oxbow.swingbits.dialog.task.design;
 
 import java.awt.Color;
-import java.awt.Font;
 
-import javax.swing.UIManager;
+public class WindowsCommandLinkPainter extends DefaultCommandLinkPainter {
 
-import org.oxbow.swingbits.dialog.task.ICommandLinkPainter;
-
-public class WindowsContentDesign extends DefaultContentDesign {
-
-	@Override
-	public void updateUIDefaults() {
-
-		super.updateUIDefaults();
-
-		UIManager.put( COLOR_INSTRUCTION_FOREGROUND, new Color(0x0033A0)); 
-
-		Font fontBase =  new Font("Segoe UI", 0, 11);
-		UIManager.put( FONT_INSTRUCTION, 
-			fontBase.deriveFont( fontBase.getStyle(), fontBase.getSize2D() * 1.4f ) );
-		
-	}
+	private LinkChrome selectedChrome = new LinkChrome(
+				new Color(0xFBFBFC),
+				new Color(0xE6E6E6),
+				new Color(0xDADADA),
+				1, 7 );
 	
+	private LinkChrome armedChrome = new LinkChrome(
+			    new Color(0xFCFDFF),
+			    new Color(0xEDF5FF),
+			    new Color(0xB9D7FC),
+				1, 7 );
 	
-	@Override
-	public ICommandLinkPainter getCommandLinkPainter() {
-		if (commandButtonPainter == null) {
-			commandButtonPainter = new WindowsCommandLinkPainter();
+	private LinkChrome rolloverChrome = new LinkChrome(
+		    new Color(0xFCFDFF),
+		    new Color(0xEDF5FF),
+		    new Color(0xB9D7FC),
+			1, 7 );
+	
+	protected LinkChrome getLinkChrome( LinkState linkState ) {
+		switch( linkState ) {
+			case SELECTED: return selectedChrome;
+			case ARMED   : return armedChrome; 
+			case ROLLOVER: return rolloverChrome;
+			default      : return selectedChrome;
 		}
-		return commandButtonPainter;
-	}	
-	
-	
+	}
+
 }

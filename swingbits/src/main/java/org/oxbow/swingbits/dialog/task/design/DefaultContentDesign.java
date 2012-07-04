@@ -49,8 +49,7 @@ import org.oxbow.swingbits.dialog.task.TaskDialog;
 
 public class DefaultContentDesign implements IContentDesign {
 
-
-	private ICommandLinkPainter commandButtonPainter;
+	protected ICommandLinkPainter commandButtonPainter;
 
 	@Override
 	public void updateUIDefaults() {

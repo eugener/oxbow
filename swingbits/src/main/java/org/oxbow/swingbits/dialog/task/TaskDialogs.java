@@ -347,7 +347,7 @@ public final class TaskDialogs {
 				models.add( btn.getModel());
 				buttons.add( btn );
 				bGroup.add(btn);
-				p.add( btn, "dock north");
+				p.add( btn, "dock north, gapbottom 8");
 			}
 
 			if ( defaultChoice >= 0 && defaultChoice < choices.size()) {
