@@ -336,11 +336,12 @@ public final class TaskDialogs {
 			dlg.setCommands( StandardCommand.CANCEL );
 
 			final CommandLinkButtonGroup bGroup = new CommandLinkButtonGroup();
-		    List<ButtonModel> models = new ArrayList<ButtonModel>();
+		    final List<ButtonModel> models = new ArrayList<ButtonModel>();
 		    final List<CommandLinkButton> buttons = new ArrayList<CommandLinkButton>();
 
 		    CommandLinkButton btn;
 			JPanel p = new JPanel( new MigLayout(""));
+			p.setOpaque(false);
 			for( CommandLink link: choices ) {
 				btn = new CommandLinkButton(link, TaskDialog.getDesign().getCommandLinkPainter());
 				models.add( btn.getModel());
@@ -362,7 +363,7 @@ public final class TaskDialogs {
 
 				});
 			}
-			p.setOpaque(false);
+			
 
 			dlg.setFixedComponent(p);
 
@@ -422,11 +423,12 @@ public final class TaskDialogs {
 	 * @return
 	 */
 	public static TaskDialogBuilder build( Window parent, String instruction, String text) {
-		TaskDialogBuilder builder = new TaskDialogBuilder();
-		builder.parent( parent );
-		builder.instruction(instruction);
-		builder.text(text);
-		return builder;
+//		TaskDialogBuilder builder = new TaskDialogBuilder();
+//		builder.parent( parent );
+//		builder.instruction(instruction);
+//		builder.text(text);
+//		return builder;
+		return build().parent(parent).instruction(instruction).text(text);
 	}
 
 	/**

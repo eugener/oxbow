@@ -40,7 +40,7 @@ import org.oxbow.swingbits.dialog.task.ICommandLinkPainter;
 public class MacOsCommandLinkPainter implements	ICommandLinkPainter {
 
 	@Override
-	public void intialize(JComponent source) {}
+	public void prepareSource(JComponent source) {}
 
 	@Override
 	public void paint(Graphics g, JComponent source) {}

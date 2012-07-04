@@ -48,7 +48,7 @@ import org.oxbow.swingbits.dialog.task.IContentDesign;
 public class DefaultCommandLinkPainter implements ICommandLinkPainter {
 
 	@Override
-	public void intialize(JComponent source) {
+	public void prepareSource(JComponent source) {
 		
 		if ( source instanceof AbstractButton ) {
 

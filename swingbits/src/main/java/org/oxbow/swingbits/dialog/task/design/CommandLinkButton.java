@@ -54,6 +54,8 @@ import org.oxbow.swingbits.util.Markup;
 public class CommandLinkButton extends JToggleButton {
 
 	private static final long serialVersionUID = 1L;
+	private static final Insets buttonInsets = new Insets(7, 7, 7, 15);
+	
 	private final CommandLink link;
 	private final ICommandLinkPainter painter;
 
@@ -72,9 +74,9 @@ public class CommandLinkButton extends JToggleButton {
 		setIcon( icon == null? UIManager.getIcon( IContentDesign.ICON_COMMAND_LINK ): icon );
 		setText(buildText());
 		
-		setMargin( new Insets(7, 7, 7, 7));
+		setMargin( buttonInsets );
 		
-		if ( painter != null ) painter.intialize(this);
+		if ( painter != null ) painter.prepareSource(this);
 
 		addFocusListener(new FocusAdapter() {
 
