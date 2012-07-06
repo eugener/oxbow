@@ -1,4 +1,4 @@
-**SwingBits** is a collection of useful Swing components and utilities.   
+**SwingBits** is a collection of useful components and utilities for Java Swing Toolkit
 The documentation can be found in the [Project Wiki](https://github.com/eugener/oxbow/wiki/Table-Filtering)
 
 
