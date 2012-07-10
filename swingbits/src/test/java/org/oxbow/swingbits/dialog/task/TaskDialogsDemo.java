@@ -35,6 +35,8 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Locale;
 
 import javax.swing.DefaultComboBoxModel;
@@ -55,6 +57,7 @@ public class TaskDialogsDemo extends JPanel {
 	private final JButton btInform = new JButton("inform");
 	private final JButton btWarn = new JButton("warn");
 	private final JButton btRadioChoice = new JButton("radioChoice");
+	private final JButton btCheckChoice = new JButton("checkChoice");
 	private final JButton btChoice = new JButton("choice");
 	private final JButton btException = new JButton("showException");
 	private final JButton btSimple = new JButton("simple message");
@@ -160,6 +163,16 @@ public class TaskDialogsDemo extends JPanel {
 			}
 		});
 
+		btCheckChoice.addActionListener( new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Collection<String> result =  TaskDialogs.build( null, "You've got selection to make", "Go ahead" ).
+				                                checkChoice( Arrays.asList("Yes", "No", "May be"), Arrays.asList("No") );
+				System.out.println("Your choice is " + result );
+			}
+		});
+		
 		btChoice.addActionListener( new ActionListener() {
 
 			@Override
@@ -208,7 +221,8 @@ public class TaskDialogsDemo extends JPanel {
 		add(btInform, "cell 1 3,growx,aligny top");
 		add(btWarn, "cell 1 4,growx,aligny top");
 		add(btRadioChoice, "cell 2 2,growx,aligny top");
-		add(btChoice, "cell 2 3,growx,aligny top");
+		add(btCheckChoice, "cell 2 3,growx,aligny top");
+		add(btChoice, "cell 2 4,growx,aligny top");
 		add(btException, "cell 3 2,growx,aligny top");
 		add(btInput, "cell 3 3,growx,aligny top");
 		

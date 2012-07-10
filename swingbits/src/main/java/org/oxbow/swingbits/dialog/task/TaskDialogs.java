@@ -31,16 +31,19 @@
 
 package org.oxbow.swingbits.dialog.task;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Window;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ButtonModel;
 import javax.swing.Icon;
 import javax.swing.JFormattedTextField;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -53,6 +56,7 @@ import net.miginfocom.swing.MigLayout;
 import org.oxbow.swingbits.dialog.task.TaskDialog.StandardCommand;
 import org.oxbow.swingbits.dialog.task.design.CommandLinkButton;
 import org.oxbow.swingbits.dialog.task.design.CommandLinkButtonGroup;
+import org.oxbow.swingbits.list.CheckList;
 import org.oxbow.swingbits.util.Strings;
 import org.oxbow.swingbits.util.swing.AncestorAdapter;
 
@@ -315,6 +319,41 @@ public final class TaskDialogs {
 			return radioChoice( defaultChoice, Arrays.asList(choices));
 		}
 
+		/**
+		 * Simplifies the presentation of choice based on check boxes
+		 * Check boxes are wrapped into a scrollable check list if there are more than 7 of them
+		 * @param choices All available choices presented
+		 * @param defaultSelection choices checked by default 
+		 * @return collection of checked choices
+		 */
+		public <T> Collection<T> checkChoice( List<T> choices, Collection<T> defaultSelection ) {
+
+			TaskDialog dlg = questionDialog( parent, getTitle( TaskDialog.makeKey("Choice")), null, instruction, text);
+			
+            JList list = new JList();
+            CheckList<T> checkList = new CheckList.Builder(list).build();
+			checkList.setData(choices);
+			checkList.setCheckedItems(defaultSelection);
+			
+			dlg.setIcon( getIcon(TaskDialog.StandardIcon.QUESTION));
+			if ( choices.size() > 7 ) {
+				dlg.setFixedComponent( new JScrollPane(list));	
+			} else {
+				// blend list color with dialog
+				Color listColor = UIManager.getColor(IContentDesign.COLOR_MESSAGE_BACKGROUND);
+				list.setBackground(listColor);
+				list.setSelectionBackground(listColor);
+				list.setSelectionForeground( list.getForeground());
+				dlg.setFixedComponent(list);	
+			}
+
+			TextWithWaitInterval twi = new TextWithWaitInterval(instruction);
+	        dlg.setCommands( StandardCommand.OK.derive(TaskDialog.makeKey("Select"), twi.getWaitInterval()),
+	        		         StandardCommand.CANCEL );
+
+			return dlg.show().equals(StandardCommand.OK)? checkList.getCheckedItems() : null;
+
+		}
 
 		/**
 		 * Simplifies the presentation of choice based on command links
