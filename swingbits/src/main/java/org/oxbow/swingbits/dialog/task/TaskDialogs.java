@@ -373,16 +373,17 @@ public final class TaskDialogs {
 					text);
 			
 			dlg.setCommands( StandardCommand.CANCEL );
-
 			final CommandLinkButtonGroup bGroup = new CommandLinkButtonGroup();
+			
 		    final List<ButtonModel> models = new ArrayList<ButtonModel>();
 		    final List<CommandLinkButton> buttons = new ArrayList<CommandLinkButton>();
 
 		    CommandLinkButton btn;
 			JPanel p = new JPanel( new MigLayout(""));
 			p.setOpaque(false);
+			int linkIndex = 0;
 			for( CommandLink link: choices ) {
-				btn = new CommandLinkButton(link, TaskDialog.getDesign().getCommandLinkPainter());
+				btn = new CommandLinkButton(link, TaskDialog.getDesign().getCommandLinkPainter(), linkIndex++ );
 				models.add( btn.getModel());
 				buttons.add( btn );
 				bGroup.add(btn);
@@ -405,8 +406,8 @@ public final class TaskDialogs {
 			
 
 			dlg.setFixedComponent(p);
-
-			return dlg.show().equals(StandardCommand.CANCEL)?  -1: models.indexOf( bGroup.getSelection());
+			return dlg.show().equals(StandardCommand.CANCEL)?  -1: 
+				((CommandLinkButton)dlg.getClientProperty( CommandLinkButton.BUTTON_REFERENCE_PROPERTY)).getIndex();
 
 		}
 

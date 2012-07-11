@@ -129,7 +129,7 @@ public class TaskDialogContent extends JPanel implements TaskDialog.Details, Tas
 	public String getInstruction() {
 		return instruction;
 	}
-
+	
 	public void setCommands( Set<? extends TaskDialog.Command> commands, boolean lockButtonSize ) {
 
 		pCommands.removeAll();
@@ -138,13 +138,12 @@ public class TaskDialogContent extends JPanel implements TaskDialog.Details, Tas
 		TaskDialog owner = getOwner();
 		for( final TaskDialog.Command c: commands) {
 			String tag = c.getTag() == null? "": c.getTag().toString();
-			pCommands.add( new JButton( new CommandAction(c, owner) ), group + "aligny top, " + tag  );
+			JButton button = new JButton( new CommandAction(c, owner) );
+			pCommands.add( button, group + "aligny top, " + tag  );
 		}
-		
-		
 
 	}
-
+	
 	public boolean isCommandsVisible() {
 		return pCommandPane.isVisible();
 	}

@@ -803,6 +803,14 @@ public class TaskDialog extends SwingBean {
 		return text.startsWith(I18N_PREFIX)? getLocalizedString(text.substring(I18N_PREFIX.length())) : text;
 	}
 
+	
+	public Object getClientProperty( Object key ) {
+		return dlg.getRootPane().getClientProperty(key);
+	}
+	
+	public void putClientProperty( Object key, Object value ) {
+		dlg.getRootPane().putClientProperty(key, value);
+	}
 
 	/**
 	 * Shows or hides this {@code Dialog} depending on the value of parameter
@@ -828,6 +836,7 @@ public class TaskDialog extends SwingBean {
 	public void setResult( Command result ) {
 		this.result.set(result);
 	}
+	
 
 	/**
 	 * Shows the dialog

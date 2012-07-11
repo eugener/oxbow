@@ -52,17 +52,21 @@ import org.oxbow.swingbits.util.Markup;
 
 
 public class CommandLinkButton extends JToggleButton {
-
+	
+	public static final String BUTTON_REFERENCE_PROPERTY = "TaskDialog.commandLink.button";
+	
 	private static final long serialVersionUID = 1L;
 	private static final Insets buttonInsets = new Insets(7, 7, 7, 15);
 	
 	private final CommandLink link;
 	private final ICommandLinkPainter painter;
+	private final int buttonIndex; 
 
-	public CommandLinkButton( CommandLink link, ICommandLinkPainter painter ) {
+	public CommandLinkButton( CommandLink link, ICommandLinkPainter painter, int buttonIndex ) {
 		super();
 		this.link = link;
 		this.painter = painter;
+		this.buttonIndex = buttonIndex;
 
 		setHorizontalAlignment(SwingConstants.LEFT);
 		setHorizontalTextPosition(SwingConstants.RIGHT);
@@ -101,7 +105,8 @@ public class CommandLinkButton extends JToggleButton {
 
 				TaskDialog dlg = TaskDialog.getInstance((Component) e.getSource());
 				if ( dlg != null ) {
-					dlg.setResult( TaskDialog.StandardCommand.OK);
+					dlg.putClientProperty(BUTTON_REFERENCE_PROPERTY, CommandLinkButton.this );
+					dlg.setResult( TaskDialog.StandardCommand.OK );
 					dlg.setVisible(false);
 				}
 
@@ -109,6 +114,10 @@ public class CommandLinkButton extends JToggleButton {
 
 		});
 
+	}
+	
+	public int getIndex() {
+		return buttonIndex;
 	}
 
 	private String buildText() {
