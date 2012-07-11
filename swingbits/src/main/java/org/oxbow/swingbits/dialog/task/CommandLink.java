@@ -32,8 +32,11 @@
 package org.oxbow.swingbits.dialog.task;
 
 import javax.swing.Icon;
+import javax.swing.KeyStroke;
 
-public class CommandLink {
+import org.oxbow.swingbits.dialog.task.TaskDialog.CommandTag;
+
+public class CommandLink implements TaskDialog.Command {
 
 	private final String instruction;
 	private final String text;
@@ -59,6 +62,43 @@ public class CommandLink {
 	
 	public Icon getIcon() {
 		return icon;
+	}
+
+	
+	
+	@Override
+	public String getTitle() {
+		return instruction;
+	}
+
+	@Override
+	public CommandTag getTag() {
+		return null;
+	}
+
+	@Override
+	public String getDescription() {
+		return text;
+	}
+
+	@Override
+	public boolean isClosing() {
+		return true;
+	}
+
+	@Override
+	public int getWaitInterval() {
+		return 0;
+	}
+
+	@Override
+	public boolean isEnabled(boolean validationResult) {
+		return true;
+	}
+
+	@Override
+	public KeyStroke getKeyStroke() {
+		return null;
 	}
 
 }
