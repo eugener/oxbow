@@ -14,6 +14,9 @@ Here are some of its features:
 
 #### Task Dialogs    
 
+![Nimbus LAF Task Dialog](http://mcoj.files.wordpress.com/2012/07/nimbuslaf-taskdialog.png)
+![Windows LAF Task Dialog](http://mcoj.files.wordpress.com/2012/07/windowslaf-taskdialog.png)
+
 ![Task Dialog 2](http://mcoj.files.wordpress.com/2010/02/taskdialog-nimbus.jpg?w=450)
 ![Task Dialog 1](http://mcoj.files.wordpress.com/2010/02/taskdialog-footer.jpg?w=450)
 ![Task Dialog 3](http://mcoj.files.wordpress.com/2010/03/taskdialog-mac2.png?w=450)
