@@ -18,5 +18,4 @@ Here are some of its features:
 ![Windows LAF Task Dialog](http://mcoj.files.wordpress.com/2012/07/windowslaf-taskdialog.png)
 ![Task Dialog 3](http://mcoj.files.wordpress.com/2010/03/taskdialog-mac2.png?w=450)
 ![Task Dialog 5](http://mcoj.files.wordpress.com/2012/07/winchoicedlg.png)
-![Task Dialog 4](http://mcoj.files.wordpress.com/2010/03/taskdialog-showexception.jpg?w=450)
 ![Windows LAF Exception Dialog](http://mcoj.files.wordpress.com/2012/07/windows-laf-exception-dialog.png)
