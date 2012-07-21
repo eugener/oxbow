@@ -31,24 +31,15 @@
 
 package org.oxbow.swingbits.table.filter;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
-
-import javax.swing.JTable;
+import javax.swing.*;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.*;
 
-import static org.oxbow.swingbits.util.CollectionUtils.*;
+import static org.oxbow.swingbits.util.CollectionUtils.isEmpty;
 
 /**
  * Partial implementation of table filter
@@ -64,7 +55,7 @@ public abstract class AbstractTableFilter<T extends JTable> implements ITableFil
     private final Set<IFilterChangeListener> listeners = Collections.synchronizedSet( new HashSet<IFilterChangeListener>());
 
     private final Map<Integer, Collection<DistinctColumnItem>> distinctItemCache =
-        Collections.synchronizedMap(new HashMap<Integer, Collection<DistinctColumnItem>>());
+            Collections.synchronizedMap(new HashMap<Integer, Collection<DistinctColumnItem>>());
 
     private final T table;
     private final TableFilterState filterState = new TableFilterState();
@@ -74,24 +65,32 @@ public abstract class AbstractTableFilter<T extends JTable> implements ITableFil
         setupDistinctItemCacheRefresh();
     }
 
+
     private void setupDistinctItemCacheRefresh() {
         clearDistinctItemCache();
-        this.table.addPropertyChangeListener("model", new PropertyChangeListener() {
+        listenForDataChange( table.getModel() );
+        listenForModelChange();
+    }
+
+    private void listenForModelChange() {
+        table.addPropertyChangeListener("model", new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent e) {
                 clearDistinctItemCache();
-                TableModel model = (TableModel) e.getNewValue();
-                if ( model != null ) {
-                    model.addTableModelListener( new TableModelListener() {
-
-                        @Override
-                        public void tableChanged(TableModelEvent e) {
-                            clearDistinctItemCache();
-                        }
-                    });
-                }
+                listenForDataChange( (TableModel) e.getNewValue() );
             }
         });
+    }
+
+    private void listenForDataChange(TableModel model) {
+        if (model != null) {
+            model.addTableModelListener(new TableModelListener() {
+                @Override
+                public void tableChanged(TableModelEvent e) {
+                    clearDistinctItemCache();
+                }
+            });
+        }
     }
 
 
