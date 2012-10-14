@@ -1,6 +1,10 @@
+[![](https://drone.io/eugener/swingbits/status.png)](https://drone.io/eugener/swingbits/latest)
+
 [![endorse](http://api.coderwall.com/eugener/endorsecount.png)](http://coderwall.com/eugener) 
 
 **SwingBits** is a collection of useful components and utilities for Java Swing Toolkit. 
+
+
 
 The documentation can be found in the [Project Wiki](https://github.com/eugener/oxbow/wiki/Table-Filtering).     
 Latest releases are available in the [Downloads](https://github.com/eugener/oxbow/downloads) 
