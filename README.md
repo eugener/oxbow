@@ -1,7 +1,5 @@
 [![](https://drone.io/eugener/swingbits/status.png)](https://drone.io/eugener/swingbits/latest)
 
-[![endorse](http://api.coderwall.com/eugener/endorsecount.png)](http://coderwall.com/eugener) 
-
 **SwingBits** is a collection of useful components and utilities for Java Swing Toolkit. 
 
 
