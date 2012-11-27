@@ -213,7 +213,7 @@ public class TaskDialog extends SwingBean {
 		HELP("help", KS_F1, false ),            // Help button that is normally on the right
 		HELP2("help2", "Help", KS_F1, false),   // Help button that on some platforms are placed on the left
 		YES("yes", KS_ENTER, true, true),       // Yes button
-		NO("yes", KS_ESCAPE, true),             // No button
+		NO("no", KS_ESCAPE, true),             // No button
 		APPLY("apply"),                         // Apply button
 		NEXT("next", true, false),              // Next or Forward Button
 		BACK("back"),                           // Previous or Back Button
