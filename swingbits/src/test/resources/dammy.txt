@@ -1,0 +1,2 @@
+This file is here only to keep its folder non-empty. 
+This is the only way to have the folder stored in Git.
