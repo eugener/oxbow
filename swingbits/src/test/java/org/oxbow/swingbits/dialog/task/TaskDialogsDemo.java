@@ -32,6 +32,7 @@
 package org.oxbow.swingbits.dialog.task;
 
 import java.awt.Toolkit;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.math.BigDecimal;
@@ -122,7 +123,7 @@ public class TaskDialogsDemo extends JPanel {
 
 		btSimple.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TaskDialog dlg = new TaskDialog(null, "Task Dialog");
+				TaskDialog dlg = new TaskDialog(getParentWindow(), "Task Dialog");
 				dlg.setInstruction("This Simple Task Dialog");
 				dlg.setText("Here is task dialog content");
 				dlg.show();
@@ -133,7 +134,7 @@ public class TaskDialogsDemo extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				TaskDialogs.inform( null, "You've won!", "The game is over with the 15:3 score");
+				TaskDialogs.inform( getParentWindow(), "You've won!", "The game is over with the 15:3 score");
 			}
 		});
 		
@@ -141,7 +142,7 @@ public class TaskDialogsDemo extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println( "Your input: " + TaskDialogs.input( null, "Enter your name", "or any other text if you prefer", "Steve Jobs" ));
+				System.out.println( "Your input: " + TaskDialogs.input( getParentWindow(), "Enter your name", "or any other text if you prefer", "Steve Jobs" ));
 			}
 		});
 
@@ -149,7 +150,7 @@ public class TaskDialogsDemo extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				TaskDialogs.isConfirmed( null, "Are you sure you want to quit?", "Please do not quit yet!");
+				TaskDialogs.isConfirmed( getParentWindow(), "Are you sure you want to quit?", "Please do not quit yet!");
 			}
 		});
 
@@ -158,7 +159,7 @@ public class TaskDialogsDemo extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int choice = TaskDialogs.radioChoice( null, "You've got selection to make", "Go ahead", 1, "Yes", "No", "May be" );
+				int choice = TaskDialogs.radioChoice( getParentWindow(), "You've got selection to make", "Go ahead", 1, "Yes", "No", "May be" );
 				System.out.println("Your choice is " + choice );
 			}
 		});
@@ -167,7 +168,7 @@ public class TaskDialogsDemo extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Collection<String> result =  TaskDialogs.build( null, "You've got selection to make", "Go ahead" ).
+				Collection<String> result =  TaskDialogs.build( getParentWindow(), "You've got selection to make", "Go ahead" ).
 				                                checkChoice( Arrays.asList("Yes", "No", "May be"), Arrays.asList("No") );
 				System.out.println("Your choice is " + result );
 			}
@@ -178,7 +179,7 @@ public class TaskDialogsDemo extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				int choice =  TaskDialogs.build(null, "What do you want to do with your game in\nprogress?", "").
+				int choice =  TaskDialogs.build(getParentWindow(), "What do you want to do with your game in\nprogress?", "").
 						      //icon( TaskDialog.StandardIcon.ERROR ).
 						      choice( 1, 
 								new CommandLink("Exit and save my game", "Save your game in progress, then exit. " +
@@ -210,6 +211,10 @@ public class TaskDialogsDemo extends JPanel {
 
 	}
 
+	private Window getParentWindow() {
+		return SwingUtilities.getWindowAncestor(this);
+	}
+	
 	private void createLayout() {
 		setLayout(new MigLayout("", "[][135px]15px[135px]15px[135px,grow]", "[pref!][20px][23px][23px][]"));
 		

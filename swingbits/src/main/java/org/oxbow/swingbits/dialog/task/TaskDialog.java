@@ -615,9 +615,10 @@ public class TaskDialog extends SwingBean {
 
 				// location is set relative to currently active window or dialog owner if no active window found
 				// this way task dialog stays on the same monitor as it's owner
-				Window window = KeyboardFocusManager.getCurrentKeyboardFocusManager().getActiveWindow();
-				if ( window == null || !window.isDisplayable() ) {
-					window = dlg.getOwner();
+				Window window = dlg.getOwner();
+				if ( window == null ) {
+					window = KeyboardFocusManager.getCurrentKeyboardFocusManager().getActiveWindow();
+					if (!window.isDisplayable()) window = null;		
 				}
 				dlg.setLocationRelativeTo( window );
 				dlg.setVisible(true);
