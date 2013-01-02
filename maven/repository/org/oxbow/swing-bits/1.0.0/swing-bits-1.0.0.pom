@@ -19,19 +19,6 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
-	<repositories>
-		<repository>
-			<id>oxbow-repository</id>
-			<url>https://github.com/eugener/oxbow/raw/master/maven/repository</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-	</repositories>	
 	
 	<build>
 		<plugins>
