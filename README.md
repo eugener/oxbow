@@ -16,16 +16,16 @@ Here are some of its features:
    
 #### Table Filtering
 
-![Table Filtering](http://posterous.com/getfile/files.posterous.com/temp-2011-02-14/qyHFuvhhnBouGlzeaJvnpbwGdFAcvudGgszbofAElhpFxoyrxkGJHBFaDdti/TableFilter_Actions.png?w=450)
+![Table Filtering](https://github.com/eugener/oxbow/wiki/images/TableFiltering-seach-actions.png)
 
 #### Task Dialogs    
 
-![Nimbus LAF Task Dialog](http://mcoj.files.wordpress.com/2012/07/nimbuslaf-taskdialog.png)
+![Nimbus LAF Task Dialog](https://github.com/eugener/oxbow/wiki/images/TaskDialog-error-metal.png)
 
-![Windows LAF Task Dialog](http://mcoj.files.wordpress.com/2012/07/windowslaf-taskdialog.png)
+![Windows LAF Task Dialog](https://github.com/eugener/oxbow/wiki/images/TaskDialog-error-win.png)
 
-![Task Dialog 3](http://mcoj.files.wordpress.com/2010/03/taskdialog-mac2.png?w=450)
+![Task Dialog 3](https://github.com/eugener/oxbow/wiki/images/TaskDialog-error-mac.png)
 
-![Task Dialog 5](http://mcoj.files.wordpress.com/2012/07/winchoicedlg.png)
+![Task Dialog 5](https://github.com/eugener/oxbow/wiki/images/TaskDialog-commandLinks-win.png)
 
-![Windows LAF Exception Dialog](http://mcoj.files.wordpress.com/2012/07/windows-laf-exception-dialog.png)
+![Windows LAF Exception Dialog](https://github.com/eugener/oxbow/wiki/images/TaskDialog-exception-win.jpg)
