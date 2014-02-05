@@ -618,7 +618,7 @@ public class TaskDialog extends SwingBean {
 				Window window = dlg.getOwner();
 				if ( window == null ) {
 					window = KeyboardFocusManager.getCurrentKeyboardFocusManager().getActiveWindow();
-					if (!window.isDisplayable()) window = null;		
+					if (window != null && !window.isDisplayable()) window = null;		
 				}
 				dlg.setLocationRelativeTo( window );
 				dlg.setVisible(true);
