@@ -47,91 +47,91 @@ import org.oxbow.swingbits.dialog.task.TaskDialog;
 
 public class MacOsContentDesign extends DefaultContentDesign {
 
-	private ICommandLinkPainter commandButtonPainter;
+    private ICommandLinkPainter commandButtonPainter;
 
-	@Override
-	public void updateUIDefaults() {
-		super.updateUIDefaults();
+    @Override
+    public void updateUIDefaults() {
+        super.updateUIDefaults();
 
-		UIManager.put( ICON_MORE_DETAILS,  createResourceIcon( "moreDetailsMac.png" ));
-		UIManager.put( ICON_FEWER_DETAILS, createResourceIcon( "fewerDetailsMac.png" ));
+        UIManager.put( ICON_MORE_DETAILS,  createResourceIcon( "moreDetailsMac.png" ));
+        UIManager.put( ICON_FEWER_DETAILS, createResourceIcon( "fewerDetailsMac.png" ));
 
-		UIManager.put( COLOR_MESSAGE_BACKGROUND,     SystemColor.CONTROL );
-		UIManager.put( COLOR_INSTRUCTION_FOREGROUND, SystemColor.TEXT_TEXT );
+        UIManager.put( COLOR_MESSAGE_BACKGROUND,     SystemColor.CONTROL );
+        UIManager.put( COLOR_INSTRUCTION_FOREGROUND, SystemColor.TEXT_TEXT );
 
-		UIManager.put( FONT_INSTRUCTION, deriveFont( "Label.font", Font.BOLD, 1f ) );
-		UIManager.put( FONT_TEXT, deriveFont( "Label.font", Font.PLAIN, .85f ) );
+        UIManager.put( FONT_INSTRUCTION, deriveFont( "Label.font", Font.BOLD, 1f ) );
+        UIManager.put( FONT_TEXT, deriveFont( "Label.font", Font.PLAIN, .85f ) );
 
-		UIManager.put( TEXT_MORE_DETAILS,  TaskDialog.makeKey("Details") );
-		UIManager.put( TEXT_FEWER_DETAILS, TaskDialog.makeKey("Details") );
+        UIManager.put( TEXT_MORE_DETAILS,  TaskDialog.makeKey("Details") );
+        UIManager.put( TEXT_FEWER_DETAILS, TaskDialog.makeKey("Details") );
 
-	}
+    }
 
-	@Override
-	public TaskDialogContent buildContent() {
+    @Override
+    public TaskDialogContent buildContent() {
 
-		TaskDialogContent content = new TaskDialogContent();
+        TaskDialogContent content = new TaskDialogContent();
 
-		content.setMinimumSize( new Dimension(200, 70));
+        content.setMinimumSize( new Dimension(200, 70));
 
-		content.lbInstruction.setFont( UIManager.getFont(IContentDesign.FONT_INSTRUCTION ));
-		content.lbInstruction.setForeground( UIManager.getColor( IContentDesign.COLOR_INSTRUCTION_FOREGROUND ));
+        content.lbInstruction.setFont( UIManager.getFont(IContentDesign.FONT_INSTRUCTION ));
+        content.lbInstruction.setForeground( UIManager.getColor( IContentDesign.COLOR_INSTRUCTION_FOREGROUND ));
 
-		content.lbText.setFont( UIManager.getFont(IContentDesign.FONT_TEXT ));
+        content.lbText.setFont( UIManager.getFont(IContentDesign.FONT_TEXT ));
 
-		content.pComponent.setOpaque(false);
+        content.pComponent.setOpaque(false);
 
-		content.removeAll();
-		content.setLayout( createMigLayout("ins dialog, hidemode 3, fill", "[]", "[][][]"));
+        content.removeAll();
+        content.setLayout( createMigLayout("ins dialog, hidemode 3, fill", "[]", "[][][]"));
 
-		// message pane
-		JPanel pMessage = new JPanel( createMigLayout( "ins 0, gapx 7, hidemode 3", "[][grow]", "[][][]"));
-		pMessage.setBackground( UIManager.getColor( IContentDesign.COLOR_MESSAGE_BACKGROUND ) );
-		pMessage.add( content.lbIcon,        "cell 0 0 0 2, aligny top");
-		pMessage.add( content.lbInstruction, "cell 1 0, growx, aligny top");
-		pMessage.add( content.lbText,        "cell 1 1, growx, aligny top");
-		pMessage.add( content.pComponent,    "cell 1 3, grow");
+        // message pane
+        JPanel pMessage = new JPanel( createMigLayout( "ins 0, gapx 7, hidemode 3", "[][grow]", "[][][]"));
+        pMessage.setBackground( UIManager.getColor( IContentDesign.COLOR_MESSAGE_BACKGROUND ) );
+        pMessage.add( content.lbIcon,        "cell 0 0 0 2, aligny top");
+        pMessage.add( content.lbInstruction, "cell 1 0, growx, aligny top");
+        pMessage.add( content.lbText,        "cell 1 1, growx, aligny top");
+        pMessage.add( content.pComponent,    "cell 1 3, grow");
 
-		content.setBackground( pMessage.getBackground());
-		content.add( pMessage, "cell 0 0");
+        content.setBackground( pMessage.getBackground());
+        content.add( pMessage, "cell 0 0");
 
-		// footer
-		content.pFooter.setLayout( new MigLayout("ins 0"));
-		content.pFooter.add( content.lbFooter, "dock center" );
+        // footer
+        content.pFooter.setLayout( new MigLayout("ins 0"));
+        content.pFooter.add( content.lbFooter, "dock center" );
 
-		content.add( content.pFooter, "cell 0 2" );
+        content.add( content.pFooter, "cell 0 2" );
 
-		// command pane
-		content.pExpandable.setBorder(
-			BorderFactory.createCompoundBorder(
-				UIManager.getBorder("InsetBorder.aquaVariant"),
-				BorderFactory.createEmptyBorder(7,7,7,7)));
-		content.pCommandPane.setLayout(
-			createMigLayout("ins 0, hidemode 3", "[pref!][grow]", "[pref!][pref!,grow][pref!][pref!]"));
-		content.pCommandPane.add( content.cbDetails,     "cell 0 0");
-		content.pCommandPane.add( content.pExpandable,   "cell 0 1 3 1, grow");
-		content.pCommandPane.add( content.pCommands,     "cell 2 2, alignx right" );
-		content.pCommandPane.add( content.cbFooterCheck, "cell 0 2");
+        // command pane
+        content.pExpandable.setBorder(
+            BorderFactory.createCompoundBorder(
+                UIManager.getBorder("InsetBorder.aquaVariant"),
+                BorderFactory.createEmptyBorder(7,7,7,7)));
+        content.pCommandPane.setLayout(
+            createMigLayout("ins 0, hidemode 3", "[pref!][grow]", "[pref!][pref!,grow][pref!][pref!]"));
+        content.pCommandPane.add( content.cbDetails,     "cell 0 0");
+        content.pCommandPane.add( content.pExpandable,   "cell 0 1 3 1, grow");
+        content.pCommandPane.add( content.pCommands,     "cell 2 2, alignx right" );
+        content.pCommandPane.add( content.cbFooterCheck, "cell 0 2");
 
-		content.add( content.pCommandPane, "cell 0 1, grow");
+        content.add( content.pCommandPane, "cell 0 1, grow");
 
-		return content;
+        return content;
 
-	}
+    }
 
 
-	@Override
-	public ICommandLinkPainter getCommandLinkPainter() {
-		if (commandButtonPainter == null) {
-			commandButtonPainter = new MacOsCommandLinkPainter();
-		}
-		return commandButtonPainter;
-	}
-	
-	@Override
-	public boolean isCommandButtonSizeLocked() {
-		return false;
-	}
+    @Override
+    public ICommandLinkPainter getCommandLinkPainter() {
+        if (commandButtonPainter == null) {
+            commandButtonPainter = new MacOsCommandLinkPainter();
+        }
+        return commandButtonPainter;
+    }
+    
+    @Override
+    public boolean isCommandButtonSizeLocked() {
+        return false;
+    }
 
 
 }

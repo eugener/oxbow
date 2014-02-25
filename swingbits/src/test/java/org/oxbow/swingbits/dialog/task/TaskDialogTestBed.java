@@ -61,190 +61,190 @@ import org.oxbow.swingbits.util.OperatingSystem;
 
 @SuppressWarnings("serial")
 public class TaskDialogTestBed extends JFrame {
-	private final JCheckBox cbDebug = new JCheckBox("Debug");
-	private final JPanel pDetails = new JPanel();
-	private final JPanel pFooter = new JPanel();
-	private final JPanel pCommons = new JPanel();
-	private final JTextField txCheckBoxText;
-	private final JTextField txFooterText;
-	private final JTextField txInstruction = new JTextField();
-	private final JTextField txTitle = new JTextField();
-	private final JComboBox cbIcon = new JComboBox();
-	private final JTextArea txText = new JTextArea();
-	private final JCheckBox cbDetailsExpanded = new JCheckBox("Expanded");
-	private final JTextField txCollapsedLabel = new JTextField("More Details");
-	private final JTextField txExpandedLabel  = new JTextField("Fewer Details");
-	private final JComboBox cbFooterIcon = new JComboBox();
-	private final JCheckBox cbFooterCheckBoxSelected = new JCheckBox("Check Box Selected");
+    private final JCheckBox cbDebug = new JCheckBox("Debug");
+    private final JPanel pDetails = new JPanel();
+    private final JPanel pFooter = new JPanel();
+    private final JPanel pCommons = new JPanel();
+    private final JTextField txCheckBoxText;
+    private final JTextField txFooterText;
+    private final JTextField txInstruction = new JTextField();
+    private final JTextField txTitle = new JTextField();
+    private final JComboBox cbIcon = new JComboBox();
+    private final JTextArea txText = new JTextArea();
+    private final JCheckBox cbDetailsExpanded = new JCheckBox("Expanded");
+    private final JTextField txCollapsedLabel = new JTextField("More Details");
+    private final JTextField txExpandedLabel  = new JTextField("Fewer Details");
+    private final JComboBox cbFooterIcon = new JComboBox();
+    private final JCheckBox cbFooterCheckBoxSelected = new JCheckBox("Check Box Selected");
 
 
-	private final JComboBox cbLaf = new JComboBox( LookAndFeel.getComboModel(lafs));
-	private final JLabel lblLookAndFeel = new JLabel("Look And Feel");
+    private final JComboBox cbLaf = new JComboBox( LookAndFeel.getComboModel(lafs));
+    private final JLabel lblLookAndFeel = new JLabel("Look And Feel");
 
 
-	public TaskDialogTestBed( int lafIndex ) {
-		setResizable(false);
+    public TaskDialogTestBed( int lafIndex ) {
+        setResizable(false);
 
-		setTitle("Task  Dialog Test Bed");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setTitle("Task  Dialog Test Bed");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		getContentPane().setLayout(new MigLayout("", "[pref!][238.00,grow][][-91.00][pref!,grow]", "[pref!,grow][pref!][][]"));
-		pCommons.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        getContentPane().setLayout(new MigLayout("", "[pref!][238.00,grow][][-91.00][pref!,grow]", "[pref!,grow][pref!][][]"));
+        pCommons.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 
-		getContentPane().add(pCommons, "cell 0 0 5 1,grow");
-		pCommons.setLayout(new MigLayout("", "[46px][352px,grow]", "[][][][48px,grow]"));
+        getContentPane().add(pCommons, "cell 0 0 5 1,grow");
+        pCommons.setLayout(new MigLayout("", "[46px][352px,grow]", "[][][][48px,grow]"));
 
-		JLabel lblTitle = new JLabel("Title");
-		lblTitle.setHorizontalAlignment(SwingConstants.TRAILING);
-		pCommons.add(lblTitle, "cell 0 0,alignx trailing");
-		txTitle.setText("Application Error");
-		pCommons.add(txTitle, "cell 1 0,growx");
+        JLabel lblTitle = new JLabel("Title");
+        lblTitle.setHorizontalAlignment(SwingConstants.TRAILING);
+        pCommons.add(lblTitle, "cell 0 0,alignx trailing");
+        txTitle.setText("Application Error");
+        pCommons.add(txTitle, "cell 1 0,growx");
 
-		JLabel lbInstruction = new JLabel("Instruction");
-		lbInstruction.setHorizontalAlignment(SwingConstants.TRAILING);
-		pCommons.add(lbInstruction, "cell 0 1,alignx trailing");
+        JLabel lbInstruction = new JLabel("Instruction");
+        lbInstruction.setHorizontalAlignment(SwingConstants.TRAILING);
+        pCommons.add(lbInstruction, "cell 0 1,alignx trailing");
 
-		txInstruction.setText("CRASH AND BURN!");
-		pCommons.add(txInstruction, "cell 1 1,growx");
+        txInstruction.setText("CRASH AND BURN!");
+        pCommons.add(txInstruction, "cell 1 1,growx");
 
-		JLabel lbIcon = new JLabel("Icon");
-		lbIcon.setHorizontalAlignment(SwingConstants.TRAILING);
-		pCommons.add(lbIcon, "cell 0 2,growx,aligny center");
+        JLabel lbIcon = new JLabel("Icon");
+        lbIcon.setHorizontalAlignment(SwingConstants.TRAILING);
+        pCommons.add(lbIcon, "cell 0 2,growx,aligny center");
 
-		pCommons.add(cbIcon, "cell 1 2,alignx left,aligny top");
+        pCommons.add(cbIcon, "cell 1 2,alignx left,aligny top");
 
-		JLabel lbText = new JLabel("Text");
-		lbText.setHorizontalAlignment(SwingConstants.TRAILING);
-		pCommons.add(lbText, "cell 0 3,growx,aligny top");
+        JLabel lbText = new JLabel("Text");
+        lbText.setHorizontalAlignment(SwingConstants.TRAILING);
+        pCommons.add(lbText, "cell 0 3,growx,aligny top");
 
-		JScrollPane scrollPane = new JScrollPane();
-		pCommons.add(scrollPane, "cell 1 3,grow");
+        JScrollPane scrollPane = new JScrollPane();
+        pCommons.add(scrollPane, "cell 1 3,grow");
 
-		txText.setText("The applicaiton has performed an illegal action.\n This action has been logged and reported.");
-		txText.setFont( txInstruction.getFont());
-		scrollPane.setViewportView(txText);
+        txText.setText("The applicaiton has performed an illegal action.\n This action has been logged and reported.");
+        txText.setFont( txInstruction.getFont());
+        scrollPane.setViewportView(txText);
 
-		pDetails.setBorder(new TitledBorder(null, " Details ", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		getContentPane().add(pDetails, "cell 0 1 5 1,grow");
-		pDetails.setLayout(new MigLayout("", "[80px][318px,grow]", "[20px][20px][23px]"));
+        pDetails.setBorder(new TitledBorder(null, " Details ", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        getContentPane().add(pDetails, "cell 0 1 5 1,grow");
+        pDetails.setLayout(new MigLayout("", "[80px][318px,grow]", "[20px][20px][23px]"));
 
-		cbDetailsExpanded.setHorizontalAlignment(SwingConstants.TRAILING);
-		pDetails.add(cbDetailsExpanded, "cell 1 2,alignx right,aligny top");
+        cbDetailsExpanded.setHorizontalAlignment(SwingConstants.TRAILING);
+        pDetails.add(cbDetailsExpanded, "cell 1 2,alignx right,aligny top");
 
-		pDetails.add(txCollapsedLabel, "cell 1 0,growx,aligny top");
+        pDetails.add(txCollapsedLabel, "cell 1 0,growx,aligny top");
 
-		JLabel lbCollapsedLabel = new JLabel("Collapsed Label");
-		lbCollapsedLabel.setHorizontalAlignment(SwingConstants.TRAILING);
-		pDetails.add(lbCollapsedLabel, "cell 0 0,growx,aligny center");
+        JLabel lbCollapsedLabel = new JLabel("Collapsed Label");
+        lbCollapsedLabel.setHorizontalAlignment(SwingConstants.TRAILING);
+        pDetails.add(lbCollapsedLabel, "cell 0 0,growx,aligny center");
 
-		JLabel lbExpandedLabel = new JLabel("Expanded Label");
-		lbExpandedLabel.setHorizontalAlignment(SwingConstants.TRAILING);
-		pDetails.add(lbExpandedLabel, "cell 0 1,growx,aligny center");
-		pDetails.add(txExpandedLabel, "cell 1 1,growx,aligny top");
+        JLabel lbExpandedLabel = new JLabel("Expanded Label");
+        lbExpandedLabel.setHorizontalAlignment(SwingConstants.TRAILING);
+        pDetails.add(lbExpandedLabel, "cell 0 1,growx,aligny center");
+        pDetails.add(txExpandedLabel, "cell 1 1,growx,aligny top");
 
-		JButton button = new JButton("Show Task Dialog");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				showTaskDialog();
-			}
+        JButton button = new JButton("Show Task Dialog");
+        button.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                showTaskDialog();
+            }
 
-		});
+        });
 
-		pFooter.setBorder(new TitledBorder(null, "Footer", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		getContentPane().add(pFooter, "cell 0 2 5 1,grow");
-		pFooter.setLayout(new MigLayout("", "[78px][231px,grow]", "[23px][20px][20px][20px]"));
+        pFooter.setBorder(new TitledBorder(null, "Footer", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        getContentPane().add(pFooter, "cell 0 2 5 1,grow");
+        pFooter.setLayout(new MigLayout("", "[78px][231px,grow]", "[23px][20px][20px][20px]"));
 
-		JLabel lbFooterText = new JLabel("Text");
-		lbFooterText.setHorizontalAlignment(SwingConstants.TRAILING);
-		pFooter.add(lbFooterText, "cell 0 0,growx,aligny center");
+        JLabel lbFooterText = new JLabel("Text");
+        lbFooterText.setHorizontalAlignment(SwingConstants.TRAILING);
+        pFooter.add(lbFooterText, "cell 0 0,growx,aligny center");
 
-		txFooterText = new JTextField();
-		txFooterText.setText("Your application chrashed because a developer forgot to write a unit test");
-		txFooterText.setColumns(10);
-		pFooter.add(txFooterText, "cell 1 0,growx,aligny top");
+        txFooterText = new JTextField();
+        txFooterText.setText("Your application chrashed because a developer forgot to write a unit test");
+        txFooterText.setColumns(10);
+        pFooter.add(txFooterText, "cell 1 0,growx,aligny top");
 
-		JLabel lbFooterIcon = new JLabel("Icon");
-		lbFooterIcon.setHorizontalAlignment(SwingConstants.TRAILING);
-		pFooter.add(lbFooterIcon, "cell 0 1,alignx right,aligny center");
+        JLabel lbFooterIcon = new JLabel("Icon");
+        lbFooterIcon.setHorizontalAlignment(SwingConstants.TRAILING);
+        pFooter.add(lbFooterIcon, "cell 0 1,alignx right,aligny center");
 
-		pFooter.add(cbFooterIcon, "cell 1 1,alignx left,aligny top");
+        pFooter.add(cbFooterIcon, "cell 1 1,alignx left,aligny top");
 
-		JLabel lbCheckBoxText = new JLabel("Check Box Text");
-		lbCheckBoxText.setHorizontalAlignment(SwingConstants.TRAILING);
-		pFooter.add(lbCheckBoxText, "cell 0 2,alignx left,aligny center");
+        JLabel lbCheckBoxText = new JLabel("Check Box Text");
+        lbCheckBoxText.setHorizontalAlignment(SwingConstants.TRAILING);
+        pFooter.add(lbCheckBoxText, "cell 0 2,alignx left,aligny center");
 
-		txCheckBoxText = new JTextField();
-		txCheckBoxText.setText("Perform this action every time");
-		txCheckBoxText.setColumns(10);
-		pFooter.add(txCheckBoxText, "cell 1 2,growx,aligny top");
+        txCheckBoxText = new JTextField();
+        txCheckBoxText.setText("Perform this action every time");
+        txCheckBoxText.setColumns(10);
+        pFooter.add(txCheckBoxText, "cell 1 2,growx,aligny top");
 
-		cbFooterCheckBoxSelected.setHorizontalAlignment(SwingConstants.TRAILING);
-		pFooter.add(cbFooterCheckBoxSelected, "cell 1 3,alignx right");
+        cbFooterCheckBoxSelected.setHorizontalAlignment(SwingConstants.TRAILING);
+        pFooter.add(cbFooterCheckBoxSelected, "cell 1 3,alignx right");
 
-		getContentPane().add(lblLookAndFeel, "cell 0 3,alignx trailing");
+        getContentPane().add(lblLookAndFeel, "cell 0 3,alignx trailing");
 
-		getContentPane().add(cbLaf, "cell 1 3,alignx left");
+        getContentPane().add(cbLaf, "cell 1 3,alignx left");
 
-				cbDebug.addActionListener( new ActionListener() {
+                cbDebug.addActionListener( new ActionListener() {
 
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						TaskDialog.setDebugMode(cbDebug.isSelected());
-					}
-				});
-				getContentPane().add(cbDebug, "cell 2 3,grow");
-		getContentPane().add(button, "cell 4 3,alignx trailing");
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        TaskDialog.setDebugMode(cbDebug.isSelected());
+                    }
+                });
+                getContentPane().add(cbDebug, "cell 2 3,grow");
+        getContentPane().add(button, "cell 4 3,alignx trailing");
 
-		cbLaf.setSelectedIndex(lafIndex);
-		cbLaf.addActionListener(new ActionListener() {
+        cbLaf.setSelectedIndex(lafIndex);
+        cbLaf.addActionListener(new ActionListener() {
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
-				SwingUtilities.invokeLater(new Runnable() {
+                SwingUtilities.invokeLater(new Runnable() {
 
-					@Override
-					public void run() {
+                    @Override
+                    public void run() {
 
-						LookAndFeel laf = (LookAndFeel) cbLaf.getSelectedItem();
+                        LookAndFeel laf = (LookAndFeel) cbLaf.getSelectedItem();
 
-						try {
-							UIManager.setLookAndFeel(laf.getName());
-							SwingUtilities.updateComponentTreeUI(TaskDialogTestBed.this);
-							TaskDialogTestBed.this.getContentPane().validate();
-//							updateIconModels();
-							TaskDialogTestBed.this.pack();
-						} catch (Throwable e) {
-							e.printStackTrace();
-						}
+                        try {
+                            UIManager.setLookAndFeel(laf.getName());
+                            SwingUtilities.updateComponentTreeUI(TaskDialogTestBed.this);
+                            TaskDialogTestBed.this.getContentPane().validate();
+//                            updateIconModels();
+                            TaskDialogTestBed.this.pack();
+                        } catch (Throwable e) {
+                            e.printStackTrace();
+                        }
 
-					}
-				});
+                    }
+                });
 
-			}
+            }
 
-		});
+        });
 
-		updateIconModels();
-		cbIcon.setSelectedIndex(3);
+        updateIconModels();
+        cbIcon.setSelectedIndex(3);
 
 
-	}
+    }
 
-	private void updateIconModels() {
-		cbIcon.setModel(new IconComboBoxModel( TaskDialog.StandardIcon.values() ));
-		cbFooterIcon.setModel(new IconComboBoxModel( TaskDialog.StandardIcon.values(), 16, 16 ));
-	}
+    private void updateIconModels() {
+        cbIcon.setModel(new IconComboBoxModel( TaskDialog.StandardIcon.values() ));
+        cbFooterIcon.setModel(new IconComboBoxModel( TaskDialog.StandardIcon.values(), 16, 16 ));
+    }
 
-	private void showTaskDialog() {
+    private void showTaskDialog() {
 
-		TaskDialog dlg = new TaskDialog( null, txTitle.getText());
+        TaskDialog dlg = new TaskDialog( null, txTitle.getText());
         dlg.setInstruction( txInstruction.getText() );
         dlg.setText(  txText.getText() );
         dlg.setIcon( (Icon)cbIcon.getSelectedItem() );
 
         dlg.getDetails().setExpandableComponent(
-        	new JLabel( Markup.toHTML("Here are some details.\n 123456789")));
+            new JLabel( Markup.toHTML("Here are some details.\n 123456789")));
 
         dlg.getDetails().setCollapsedLabel( txCollapsedLabel.getText());
         dlg.getDetails().setExpandedLabel( txExpandedLabel.getText());
@@ -258,76 +258,76 @@ public class TaskDialogTestBed extends JFrame {
 
         dlg.addPropertyListener("result", new PropertyChangeListener() {
 
-			@Override
-			public void propertyChange(PropertyChangeEvent evt) {
-				System.out.println( "Result is set to " +  evt.getNewValue());
-			}
-		});
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                System.out.println( "Result is set to " +  evt.getNewValue());
+            }
+        });
 
         dlg.show();
 
-	}
+    }
 
 
-	static abstract class TaskDialogExample implements Runnable {
+    static abstract class TaskDialogExample implements Runnable {
 
-		protected String title;
+        protected String title;
 
-		protected abstract TaskDialog getDialog();
+        protected abstract TaskDialog getDialog();
 
-		@Override
-		public String toString() {
-			if (title == null) {
-				title = getDialog().getTitle();
-			}
-			return title;
-		}
+        @Override
+        public String toString() {
+            if (title == null) {
+                title = getDialog().getTitle();
+            }
+            return title;
+        }
 
-		@Override
-		public void run() {
-			getDialog().show();
-		}
+        @Override
+        public void run() {
+            getDialog().show();
+        }
 
-	}
+    }
 
-	private static LookAndFeelInfo[] lafs = UIManager.getInstalledLookAndFeels();
+    private static LookAndFeelInfo[] lafs = UIManager.getInstalledLookAndFeels();
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 
-		System.out.println( "Running on " + OperatingSystem.getCurrent());
+        System.out.println( "Running on " + OperatingSystem.getCurrent());
 
-		int index = 0;
-		String sysLaf = UIManager.getSystemLookAndFeelClassName();
-		for( int i=0; i<lafs.length; i++) {
-			if ( lafs[i].getClassName().equals( sysLaf )) {
-				index = i;
-				break;
-			}
-		}
+        int index = 0;
+        String sysLaf = UIManager.getSystemLookAndFeelClassName();
+        for( int i=0; i<lafs.length; i++) {
+            if ( lafs[i].getClassName().equals( sysLaf )) {
+                index = i;
+                break;
+            }
+        }
 
-		try {
-			UIManager.setLookAndFeel( lafs[index].getClassName());
-		} catch (Throwable e) {
-			e.printStackTrace();
-		}
+        try {
+            UIManager.setLookAndFeel( lafs[index].getClassName());
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
 
 
-		final int lafIndex = index;
+        final int lafIndex = index;
 
-		Locale.setDefault( new Locale( "es", "ES"));
+        Locale.setDefault( new Locale( "es", "ES"));
 
-		SwingUtilities.invokeLater( new Runnable() {
+        SwingUtilities.invokeLater( new Runnable() {
 
-			@Override
-			public void run() {
+            @Override
+            public void run() {
 
-				TaskDialogTestBed testBed = new TaskDialogTestBed(lafIndex);
-				testBed.pack();
-				testBed.setLocationRelativeTo(null);
-				testBed.setVisible(true);
+                TaskDialogTestBed testBed = new TaskDialogTestBed(lafIndex);
+                testBed.pack();
+                testBed.setLocationRelativeTo(null);
+                testBed.setVisible(true);
 
-			}
-		});
+            }
+        });
 
-	}
+    }
 }

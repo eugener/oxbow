@@ -35,31 +35,31 @@ import java.awt.Color;
 
 public class WindowsCommandLinkPainter extends DefaultCommandLinkPainter {
 
-	private LinkChrome selectedChrome = new LinkChrome(
-				new Color(0xFBFBFC),
-				new Color(0xE6E6E6),
-				new Color(0xDADADA),
-				1, 7 );
-	
-	private LinkChrome armedChrome = new LinkChrome(
-			    new Color(0xFCFDFF),
-			    new Color(0xEDF5FF),
-			    new Color(0xB9D7FC),
-				1, 7 );
-	
-	private LinkChrome rolloverChrome = new LinkChrome(
-		    new Color(0xFCFDFF),
-		    new Color(0xEDF5FF),
-		    new Color(0xB9D7FC),
-			1, 7 );
-	
-	protected LinkChrome getLinkChrome( LinkState linkState ) {
-		switch( linkState ) {
-			case SELECTED: return selectedChrome;
-			case ARMED   : return armedChrome; 
-			case ROLLOVER: return rolloverChrome;
-			default      : return selectedChrome;
-		}
-	}
+    private LinkChrome selectedChrome = new LinkChrome(
+                new Color(0xFBFBFC),
+                new Color(0xE6E6E6),
+                new Color(0xDADADA),
+                1, 7 );
+    
+    private LinkChrome armedChrome = new LinkChrome(
+                new Color(0xFCFDFF),
+                new Color(0xEDF5FF),
+                new Color(0xB9D7FC),
+                1, 7 );
+    
+    private LinkChrome rolloverChrome = new LinkChrome(
+            new Color(0xFCFDFF),
+            new Color(0xEDF5FF),
+            new Color(0xB9D7FC),
+            1, 7 );
+    
+    protected LinkChrome getLinkChrome( LinkState linkState ) {
+        switch( linkState ) {
+            case SELECTED: return selectedChrome;
+            case ARMED   : return armedChrome; 
+            case ROLLOVER: return rolloverChrome;
+            default      : return selectedChrome;
+        }
+    }
 
 }

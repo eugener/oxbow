@@ -53,183 +53,183 @@ import javax.swing.event.PopupMenuListener;
 
 public abstract class PopupWindow {
 
-	private final JPopupMenu menu;
-	private Dimension defaultSize = new Dimension(100,100);
+    private final JPopupMenu menu;
+    private Dimension defaultSize = new Dimension(100,100);
 
-	public PopupWindow( boolean resizable ) {
-		menu = new ResizablePopupMenu( resizable ) {
+    public PopupWindow( boolean resizable ) {
+        menu = new ResizablePopupMenu( resizable ) {
 
-			private static final long serialVersionUID = 1L;
+            private static final long serialVersionUID = 1L;
 
-			@Override
-			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
-				if ( menu.getComponentCount() == 0 ) {
-					JComponent content = buildContent();
-					defaultSize = content.getPreferredSize();
-					
-					menu.add( content );
+            @Override
+            public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+                if ( menu.getComponentCount() == 0 ) {
+                    JComponent content = buildContent();
+                    defaultSize = content.getPreferredSize();
+                    
+                    menu.add( content );
 
-				}
-				beforeShow();
-			}
+                }
+                beforeShow();
+            }
 
-			@Override
-			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
-				beforeHide();
-			}
+            @Override
+            public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+                beforeHide();
+            }
 
-		};
-	}
+        };
+    }
 
-	public final Dimension getDefaultSize() {
-		return defaultSize;
-	}
+    public final Dimension getDefaultSize() {
+        return defaultSize;
+    }
 
-	public final Dimension getPreferredSize() {
-		return menu.getPreferredSize();
-	}
+    public final Dimension getPreferredSize() {
+        return menu.getPreferredSize();
+    }
 
-	public final void setPreferredSize( Dimension preferredSize ) {
-		menu.setPreferredSize(preferredSize);
-	}
+    public final void setPreferredSize( Dimension preferredSize ) {
+        menu.setPreferredSize(preferredSize);
+    }
 
-	/**
-	 * Override this method to add content yo the owner.
-	 * This method is only executed when owner has no subcomponents
-	 * @param owner
-	 */
-	protected abstract JComponent buildContent();
+    /**
+     * Override this method to add content yo the owner.
+     * This method is only executed when owner has no subcomponents
+     * @param owner
+     */
+    protected abstract JComponent buildContent();
 
-	/**
-	 * Shows Popup in predefined location
-	 * @param invoker
-	 * @param x
-	 * @param y
-	 */
-	public void show( Component invoker, int x, int y ) {
-		menu.show( invoker, x, y );
-	}
+    /**
+     * Shows Popup in predefined location
+     * @param invoker
+     * @param x
+     * @param y
+     */
+    public void show( Component invoker, int x, int y ) {
+        menu.show( invoker, x, y );
+    }
 
-	/**
-	 * Shows popup in predefined location
-	 * @param invoker
-	 * @param location
-	 */
-	public void show( Component invoker, Point location ) {
-		show( invoker, location.x, location.y );
-	}
+    /**
+     * Shows popup in predefined location
+     * @param invoker
+     * @param location
+     */
+    public void show( Component invoker, Point location ) {
+        show( invoker, location.x, location.y );
+    }
 
-	/**
-	 * Hides popup
-	 */
-	public final void hide() {
-		menu.setVisible(false);
-	}
+    /**
+     * Hides popup
+     */
+    public final void hide() {
+        menu.setVisible(false);
+    }
 
-	protected void beforeShow() {}
+    protected void beforeShow() {}
 
-	protected void beforeHide() {}
-	
-	
-	/**
-	 * Simple action to for the popup window.
-	 * To use - override perform method. 
-	 * 
-	 * Created on Feb 4, 2011
-	 * @author Eugene Ryzhikov
-	 *
-	 */
-	public class CommandAction extends AbstractAction {
+    protected void beforeHide() {}
+    
+    
+    /**
+     * Simple action to for the popup window.
+     * To use - override perform method. 
+     * 
+     * Created on Feb 4, 2011
+     * @author Eugene Ryzhikov
+     *
+     */
+    public class CommandAction extends AbstractAction {
 
-		private static final long serialVersionUID = 1L;
+        private static final long serialVersionUID = 1L;
 
-		public CommandAction(String name, Icon icon) {
-			super(name, icon);
-			
-			if ( icon != null ) {
-				putValue(Action.SHORT_DESCRIPTION, name);
-				putValue(Action.NAME, null);
-			}
-			
-		}
+        public CommandAction(String name, Icon icon) {
+            super(name, icon);
+            
+            if ( icon != null ) {
+                putValue(Action.SHORT_DESCRIPTION, name);
+                putValue(Action.NAME, null);
+            }
+            
+        }
 
-		public CommandAction( String name ) {
-			super(name);
-		}
+        public CommandAction( String name ) {
+            super(name);
+        }
 
-		@Override
-		public final void actionPerformed(ActionEvent e) {
-			if ( perform() ) hide();
-		}
+        @Override
+        public final void actionPerformed(ActionEvent e) {
+            if ( perform() ) hide();
+        }
 
-		/**
-		 * Preforms action
-		 * @return true if popup should be closed
-		 */
-		protected boolean perform(){
-			return true;
-		}
-	}
+        /**
+         * Preforms action
+         * @return true if popup should be closed
+         */
+        protected boolean perform(){
+            return true;
+        }
+    }
 
 }
 
 class ResizablePopupMenu extends JPopupMenu implements PopupMenuListener {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private static final int DOT_SIZE = 2;
-	private static final int DOT_START = 2;
-	private static final int DOT_STEP = 4;
+    private static final int DOT_SIZE = 2;
+    private static final int DOT_START = 2;
+    private static final int DOT_STEP = 4;
 
-	private final boolean resizable;
+    private final boolean resizable;
 
-	public ResizablePopupMenu( boolean resizable ) {
-		super();
-		this.resizable = resizable;
-		if ( resizable ) PopupMenuResizer.decorate(this);
-		addPopupMenuListener(this);
-	}
+    public ResizablePopupMenu( boolean resizable ) {
+        super();
+        this.resizable = resizable;
+        if ( resizable ) PopupMenuResizer.decorate(this);
+        addPopupMenuListener(this);
+    }
 
-	@Override
-	public void popupMenuWillBecomeVisible(PopupMenuEvent e) {}
+    @Override
+    public void popupMenuWillBecomeVisible(PopupMenuEvent e) {}
 
-	@Override
-	public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {}
+    @Override
+    public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {}
 
-	@Override
-	public  void popupMenuCanceled(PopupMenuEvent e) {}
+    @Override
+    public  void popupMenuCanceled(PopupMenuEvent e) {}
 
-	@Override
-	public void paintChildren(Graphics g) {
-		super.paintChildren(g);
-		if ( resizable ) drawResizer(g);
-	}
+    @Override
+    public void paintChildren(Graphics g) {
+        super.paintChildren(g);
+        if ( resizable ) drawResizer(g);
+    }
 
-	private void drawResizer(Graphics g) {
+    private void drawResizer(Graphics g) {
 
-		int x = getWidth()-2;
-		int y = getHeight()-2;
+        int x = getWidth()-2;
+        int y = getHeight()-2;
 
-		Graphics g2 = g.create();
-		
-		try {
-			for ( int dy = DOT_START, j = 2; j > 0; j--, dy += DOT_STEP ) {
-				for( int dx = DOT_START, i = 0; i < j; i++, dx += DOT_STEP ) {
-					drawDot( g2, x-dx, y-dy );
-				}
-			}
-		} finally {
-			g2.dispose();
-		}
+        Graphics g2 = g.create();
+        
+        try {
+            for ( int dy = DOT_START, j = 2; j > 0; j--, dy += DOT_STEP ) {
+                for( int dx = DOT_START, i = 0; i < j; i++, dx += DOT_STEP ) {
+                    drawDot( g2, x-dx, y-dy );
+                }
+            }
+        } finally {
+            g2.dispose();
+        }
 
-	};
+    };
 
-	private void drawDot( Graphics g, int x, int y) {
-		g.setColor(Color.WHITE);
-		g.fillRect( x, y, DOT_SIZE, DOT_SIZE);
-		g.setColor(Color.LIGHT_GRAY);
-		g.fillRect( x-1, y-1, DOT_SIZE, DOT_SIZE);
-	}
+    private void drawDot( Graphics g, int x, int y) {
+        g.setColor(Color.WHITE);
+        g.fillRect( x, y, DOT_SIZE, DOT_SIZE);
+        g.setColor(Color.LIGHT_GRAY);
+        g.fillRect( x-1, y-1, DOT_SIZE, DOT_SIZE);
+    }
 
 }
 
@@ -242,90 +242,90 @@ class ResizablePopupMenu extends JPopupMenu implements PopupMenuListener {
  */
 final class PopupMenuResizer extends MouseAdapter {
 
-	private final JPopupMenu menu;
+    private final JPopupMenu menu;
 
-	private static final int REZSIZE_SPOT_SIZE = 10;
+    private static final int REZSIZE_SPOT_SIZE = 10;
 
-	private Point mouseStart = new Point( Integer.MIN_VALUE, Integer.MIN_VALUE );
+    private Point mouseStart = new Point( Integer.MIN_VALUE, Integer.MIN_VALUE );
 
-	private Dimension startSize;
+    private Dimension startSize;
 
-	private boolean isResizing = false;
+    private boolean isResizing = false;
 
 
-	public static void decorate( JPopupMenu menu ) {
-		new PopupMenuResizer( menu );
-	}
+    public static void decorate( JPopupMenu menu ) {
+        new PopupMenuResizer( menu );
+    }
 
-	private PopupMenuResizer( JPopupMenu menu ) {
-		this.menu = menu;
-		this.menu.setLightWeightPopupEnabled(true);
-		menu.addMouseListener(this);
-		menu.addMouseMotionListener(this);
-	}
+    private PopupMenuResizer( JPopupMenu menu ) {
+        this.menu = menu;
+        this.menu.setLightWeightPopupEnabled(true);
+        menu.addMouseListener(this);
+        menu.addMouseMotionListener(this);
+    }
 
-	private boolean isInResizeSpot( Point point ) {
+    private boolean isInResizeSpot( Point point ) {
 
-		if ( point == null ) return false;
+        if ( point == null ) return false;
 
-		Rectangle resizeSpot = new Rectangle(
-			menu.getWidth()-REZSIZE_SPOT_SIZE,
-			menu.getHeight()-REZSIZE_SPOT_SIZE,
-			REZSIZE_SPOT_SIZE,
-			REZSIZE_SPOT_SIZE );
+        Rectangle resizeSpot = new Rectangle(
+            menu.getWidth()-REZSIZE_SPOT_SIZE,
+            menu.getHeight()-REZSIZE_SPOT_SIZE,
+            REZSIZE_SPOT_SIZE,
+            REZSIZE_SPOT_SIZE );
 
-		return resizeSpot.contains(point);
+        return resizeSpot.contains(point);
 
-	}
+    }
 
-	@Override
-	public void mouseMoved(MouseEvent e) {
+    @Override
+    public void mouseMoved(MouseEvent e) {
 
-		menu.setCursor(
-		   Cursor.getPredefinedCursor(
-			  isInResizeSpot( e.getPoint() )? Cursor.SE_RESIZE_CURSOR: Cursor.DEFAULT_CURSOR ));
-	}
+        menu.setCursor(
+           Cursor.getPredefinedCursor(
+              isInResizeSpot( e.getPoint() )? Cursor.SE_RESIZE_CURSOR: Cursor.DEFAULT_CURSOR ));
+    }
 
-	private Point toScreen( MouseEvent e ) {
-		
-		Point p = e.getPoint();
-		SwingUtilities.convertPointToScreen(p, e.getComponent());
-		return p;
-		
-	}
-	
-	@Override
-	public void mousePressed(MouseEvent e) {
-		mouseStart = toScreen(e);
-		startSize = menu.getSize();
-		isResizing = isInResizeSpot(e.getPoint());
-	}
+    private Point toScreen( MouseEvent e ) {
+        
+        Point p = e.getPoint();
+        SwingUtilities.convertPointToScreen(p, e.getComponent());
+        return p;
+        
+    }
+    
+    @Override
+    public void mousePressed(MouseEvent e) {
+        mouseStart = toScreen(e);
+        startSize = menu.getSize();
+        isResizing = isInResizeSpot(e.getPoint());
+    }
 
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		mouseStart = new Point( Integer.MIN_VALUE, Integer.MIN_VALUE );
-		isResizing = false;
-	}
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        mouseStart = new Point( Integer.MIN_VALUE, Integer.MIN_VALUE );
+        isResizing = false;
+    }
 
-	@Override
-	public void mouseDragged(MouseEvent e) {
+    @Override
+    public void mouseDragged(MouseEvent e) {
 
-		if ( !isResizing ) return;
+        if ( !isResizing ) return;
 
-		Point p = toScreen(e);
-		
-		int dx = p.x - mouseStart.x;
-		int dy = p.y - mouseStart.y;
+        Point p = toScreen(e);
+        
+        int dx = p.x - mouseStart.x;
+        int dy = p.y - mouseStart.y;
 
-		
-		Dimension minDim = menu.getMinimumSize();
-//		Dimension maxDim = menu.getMaximumSize();
-		Dimension newDim = new Dimension(startSize.width + dx, startSize.height + dy);
+        
+        Dimension minDim = menu.getMinimumSize();
+//        Dimension maxDim = menu.getMaximumSize();
+        Dimension newDim = new Dimension(startSize.width + dx, startSize.height + dy);
 
-		if ( newDim.width >= minDim.width && newDim.height >= minDim.height /*&&
-		     newDim.width <= maxDim.width && newDim.height <= maxDim.height*/	) {
-			menu.setPopupSize( newDim );
-		}
+        if ( newDim.width >= minDim.width && newDim.height >= minDim.height /*&&
+             newDim.width <= maxDim.width && newDim.height <= maxDim.height*/    ) {
+            menu.setPopupSize( newDim );
+        }
 
-	}
+    }
 }

@@ -47,24 +47,24 @@ import org.oxbow.swingbits.util.swing.Icons;
 @SuppressWarnings("serial")
 public class IconComboBoxModel extends DefaultComboBoxModel {
 
-	public IconComboBoxModel( Icon[] icons, int width, int height  ) {
-		super( scaleIcons( icons, width, height ));
-	}
-	
-	public IconComboBoxModel( Icon[] icons ) {
-		super( icons );
-	}
-	
-	private static Icon[] scaleIcons( Icon[] icons, int width, int height ) {
-		
-		Icon[] result = new Icon[ icons.length ];
-		for( int i=0; i<icons.length; i++) {
-			result[i] = icons[i] == null? null: Icons.scale(icons[i], 16, 16 );
-		}
-		
-		return result;
-		
-	}
-	
-	
+    public IconComboBoxModel( Icon[] icons, int width, int height  ) {
+        super( scaleIcons( icons, width, height ));
+    }
+    
+    public IconComboBoxModel( Icon[] icons ) {
+        super( icons );
+    }
+    
+    private static Icon[] scaleIcons( Icon[] icons, int width, int height ) {
+        
+        Icon[] result = new Icon[ icons.length ];
+        for( int i=0; i<icons.length; i++) {
+            result[i] = icons[i] == null? null: Icons.scale(icons[i], 16, 16 );
+        }
+        
+        return result;
+        
+    }
+    
+    
 }

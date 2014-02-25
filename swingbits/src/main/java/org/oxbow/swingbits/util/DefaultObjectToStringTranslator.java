@@ -32,11 +32,11 @@
 
 package org.oxbow.swingbits.util;
 
-public class DefaultObjectToStringTranslator implements	IObjectToStringTranslator {
+public class DefaultObjectToStringTranslator implements    IObjectToStringTranslator {
 
-	@Override
-	public String translate(Object obj) {
-		return obj == null? "": obj.toString().toLowerCase();
-	}
+    @Override
+    public String translate(Object obj) {
+        return obj == null? "": obj.toString().toLowerCase();
+    }
 
 }

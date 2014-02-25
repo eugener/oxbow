@@ -55,121 +55,121 @@ import org.oxbow.swingbits.util.IValueWrapper;
  */
 public class DefaultCheckListModel<T> extends AbstractListModel implements ICheckListModel<T> {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private final List<T> data = new ArrayList<T>();
-	private final Set<T> checks = new HashSet<T>();
+    private final List<T> data = new ArrayList<T>();
+    private final Set<T> checks = new HashSet<T>();
 
-	public static IObjectToStringTranslator DEFAULT_TRANSLATOR = new DefaultObjectToStringTranslator();
-	private List<T> filteredData = null;
+    public static IObjectToStringTranslator DEFAULT_TRANSLATOR = new DefaultObjectToStringTranslator();
+    private List<T> filteredData = null;
 
-	public DefaultCheckListModel( Collection<? extends T> data ) {
+    public DefaultCheckListModel( Collection<? extends T> data ) {
 
-		if ( data == null ) return;
-		for (T object : data) {
-			this.data.add( object );
-			checks.clear();
-		}
-	}
+        if ( data == null ) return;
+        for (T object : data) {
+            this.data.add( object );
+            checks.clear();
+        }
+    }
 
-	public DefaultCheckListModel( T... data ) {
-		this( Arrays.asList( data ));
-	}
+    public DefaultCheckListModel( T... data ) {
+        this( Arrays.asList( data ));
+    }
 
-	/* (non-Javadoc)
-	 * @see org.oxbow.swingbits.list.ICheckListModel#getSize()
-	 */
-	@Override
-	public int getSize() {
-		return data().size();
-	}
+    /* (non-Javadoc)
+     * @see org.oxbow.swingbits.list.ICheckListModel#getSize()
+     */
+    @Override
+    public int getSize() {
+        return data().size();
+    }
 
-	private List<T> data() {
-		return filteredData == null? data: filteredData;
-	}
-
-
-	/* (non-Javadoc)
-	 * @see org.oxbow.swingbits.list.ICheckListModel#getElementAt(int)
-	 */
-	@Override
-	public Object getElementAt(int index) {
-		return data().get(index);
-	}
-
-	/* (non-Javadoc)
-	 * @see org.oxbow.swingbits.list.ICheckListModel#isChecked(int)
-	 */
-	@Override
-	public boolean isCheckedIndex( int index ) {
-		return checks.contains( data().get(index));
-	}
-
-	/* (non-Javadoc)
-	 * @see org.oxbow.swingbits.list.ICheckListModel#setChecked(int, boolean)
-	 */
-	@Override
-	public void setCheckedIndex( int index, boolean value ) {
-		T o = data().get(index);
-		if ( value ) checks.add(o); else checks.remove(o);
-		fireContentsChanged(this, index, index);
-	}
-
-	/* (non-Javadoc)
-	 * @see org.oxbow.swingbits.list.ICheckListModel#getChecked()
-	 */
-	@Override
-	public Collection<T> getCheckedItems() {
-		List<T> items = new ArrayList<T>(checks);
-		items.retainAll(data());
-		return Collections.unmodifiableList( items );
-	}
-
-	/* (non-Javadoc)
-	 * @see org.oxbow.swingbits.list.ICheckListModel#setChecked(java.util.Collection)
-	 */
-	@Override
-	public void setCheckedItems( Collection<T> items ) {
-
-//		if ( CollectionUtils.isEmpty(items))  return;
-
-		List<T> correctedItems = new ArrayList<T>(items);
-		correctedItems.retainAll(data());
-
-		checks.clear();
-		checks.addAll( correctedItems );
-		fireContentsChanged(this, 0, checks.size()-1);
+    private List<T> data() {
+        return filteredData == null? data: filteredData;
+    }
 
 
-	}
+    /* (non-Javadoc)
+     * @see org.oxbow.swingbits.list.ICheckListModel#getElementAt(int)
+     */
+    @Override
+    public Object getElementAt(int index) {
+        return data().get(index);
+    }
 
-	public void filter( String filter, IObjectToStringTranslator translator, CheckListFilterType filterType ) {
+    /* (non-Javadoc)
+     * @see org.oxbow.swingbits.list.ICheckListModel#isChecked(int)
+     */
+    @Override
+    public boolean isCheckedIndex( int index ) {
+        return checks.contains( data().get(index));
+    }
 
-		if ( filter == null || filter.trim().length() == 0 ) {
-			filteredData = null;
-		} else {
+    /* (non-Javadoc)
+     * @see org.oxbow.swingbits.list.ICheckListModel#setChecked(int, boolean)
+     */
+    @Override
+    public void setCheckedIndex( int index, boolean value ) {
+        T o = data().get(index);
+        if ( value ) checks.add(o); else checks.remove(o);
+        fireContentsChanged(this, index, index);
+    }
 
-			CheckListFilterType ft = filterType == null? CheckListFilterType.CONTAINS: filterType;
+    /* (non-Javadoc)
+     * @see org.oxbow.swingbits.list.ICheckListModel#getChecked()
+     */
+    @Override
+    public Collection<T> getCheckedItems() {
+        List<T> items = new ArrayList<T>(checks);
+        items.retainAll(data());
+        return Collections.unmodifiableList( items );
+    }
 
-			IObjectToStringTranslator t = translator == null? DEFAULT_TRANSLATOR: translator;
-			String f = filter.toLowerCase();
+    /* (non-Javadoc)
+     * @see org.oxbow.swingbits.list.ICheckListModel#setChecked(java.util.Collection)
+     */
+    @Override
+    public void setCheckedItems( Collection<T> items ) {
 
-			List<T> fData = new ArrayList<T>();
+//        if ( CollectionUtils.isEmpty(items))  return;
 
-			Object value;
-			for( T o: data ) {
-				//if ( t.translate(o).startsWith(f)) {
-				value = o instanceof IValueWrapper? ((IValueWrapper<?>)o).getValue(): o;
-				if ( ft.include(t.translate(value), f)) {
-					fData.add(o);
-				}
-			}
-			filteredData = fData;
-		}
+        List<T> correctedItems = new ArrayList<T>(items);
+        correctedItems.retainAll(data());
 
-		fireContentsChanged( this, 0, data.size()-1);
+        checks.clear();
+        checks.addAll( correctedItems );
+        fireContentsChanged(this, 0, checks.size()-1);
 
-	}
+
+    }
+
+    public void filter( String filter, IObjectToStringTranslator translator, CheckListFilterType filterType ) {
+
+        if ( filter == null || filter.trim().length() == 0 ) {
+            filteredData = null;
+        } else {
+
+            CheckListFilterType ft = filterType == null? CheckListFilterType.CONTAINS: filterType;
+
+            IObjectToStringTranslator t = translator == null? DEFAULT_TRANSLATOR: translator;
+            String f = filter.toLowerCase();
+
+            List<T> fData = new ArrayList<T>();
+
+            Object value;
+            for( T o: data ) {
+                //if ( t.translate(o).startsWith(f)) {
+                value = o instanceof IValueWrapper? ((IValueWrapper<?>)o).getValue(): o;
+                if ( ft.include(t.translate(value), f)) {
+                    fData.add(o);
+                }
+            }
+            filteredData = fData;
+        }
+
+        fireContentsChanged( this, 0, data.size()-1);
+
+    }
 
 
 }

@@ -46,53 +46,53 @@ import javax.swing.ImageIcon;
  */
 public final class Icons  {
 
-	private Icons() {}
+    private Icons() {}
 
-	/**
-	 * Converts any icon to image
-	 * @param icon icon to convert
-	 * @return resulted image
-	 */
-	public static final Image asImage( Icon icon ) {
+    /**
+     * Converts any icon to image
+     * @param icon icon to convert
+     * @return resulted image
+     */
+    public static final Image asImage( Icon icon ) {
 
-		if ( icon == null ) throw new IllegalArgumentException("The icon should not be null");
+        if ( icon == null ) throw new IllegalArgumentException("The icon should not be null");
 
-		if ( icon instanceof ImageIcon ) return ((ImageIcon)icon).getImage();
-		
-		int w = icon.getIconWidth() == 0? 1: icon.getIconWidth();
-		int h = icon.getIconHeight() == 0? 1: icon.getIconHeight();
+        if ( icon instanceof ImageIcon ) return ((ImageIcon)icon).getImage();
+        
+        int w = icon.getIconWidth() == 0? 1: icon.getIconWidth();
+        int h = icon.getIconHeight() == 0? 1: icon.getIconHeight();
 
-		Image image = new BufferedImage( w, h, BufferedImage.TYPE_INT_ARGB);
-		icon.paintIcon( null, image.getGraphics(), 0, 0 );
-		return image;
+        Image image = new BufferedImage( w, h, BufferedImage.TYPE_INT_ARGB);
+        icon.paintIcon( null, image.getGraphics(), 0, 0 );
+        return image;
 
-	}
+    }
 
 
-	/**
-	 * Converts any icon to an image with specified width and height
-	 * @param icon icon to convert
-	 * @param newWidth new image width
-	 * @param newHeight new image height
-	 * @return resulted image
-	 */
-	public static final Image asImage( Icon icon, int newWidth,  int newHeight ) {
+    /**
+     * Converts any icon to an image with specified width and height
+     * @param icon icon to convert
+     * @param newWidth new image width
+     * @param newHeight new image height
+     * @return resulted image
+     */
+    public static final Image asImage( Icon icon, int newWidth,  int newHeight ) {
 
-		return asImage( icon ).getScaledInstance( newWidth, newHeight, Image.SCALE_SMOOTH );
-	}
+        return asImage( icon ).getScaledInstance( newWidth, newHeight, Image.SCALE_SMOOTH );
+    }
 
-	/**
-	 * Scales any icon to specified width and height
-	 * @param icon icon to scale
-	 * @param newWidth new icon width
-	 * @param newHeight new icon height
-	 * @return resulting icon
-	 */
-	public static final Icon scale( Icon icon, int newWidth, int newHeight ) {
+    /**
+     * Scales any icon to specified width and height
+     * @param icon icon to scale
+     * @param newWidth new icon width
+     * @param newHeight new icon height
+     * @return resulting icon
+     */
+    public static final Icon scale( Icon icon, int newWidth, int newHeight ) {
 
-		return new ImageIcon( asImage( icon, newWidth, newHeight ));
+        return new ImageIcon( asImage( icon, newWidth, newHeight ));
 
-	}
+    }
 
 
 }

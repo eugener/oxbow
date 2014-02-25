@@ -38,6 +38,6 @@ import javax.swing.JComponent;
 
 public interface IActionContainerBuilder<T extends JComponent> {
 
-	T build( Collection<Action> actions );
+    T build( Collection<Action> actions );
 
 }

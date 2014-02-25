@@ -39,7 +39,7 @@ import java.io.InputStream;
  * ByteArrayInputStream implementation that does not synchronize methods.
  */
 public class FastByteArrayInputStream extends InputStream {
-	
+    
     /**
      * Our byte buffer
      */

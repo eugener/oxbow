@@ -39,17 +39,17 @@ import org.oxbow.swingbits.util.OperatingSystem;
 
 public class ContentDesignFactory {
 
-	private ContentDesignFactory() {}
+    private ContentDesignFactory() {}
 
-	public static final IContentDesign getDesignByOperatingSystem() {
+    public static final IContentDesign getDesignByOperatingSystem() {
 
-		switch( OperatingSystem.getCurrent() ) {
-			case MACOS  : return new MacOsContentDesign();
-			case LINUX  : return new LinuxContentDesign();
-			case WINDOWS: return new WindowsContentDesign();
-			default   : return new DefaultContentDesign();
-		}
-		
-	}
-	
+        switch( OperatingSystem.getCurrent() ) {
+            case MACOS  : return new MacOsContentDesign();
+            case LINUX  : return new LinuxContentDesign();
+            case WINDOWS: return new WindowsContentDesign();
+            default   : return new DefaultContentDesign();
+        }
+        
+    }
+    
 }
