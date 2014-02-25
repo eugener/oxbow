@@ -83,7 +83,7 @@ public interface ITableFilter<T extends JTable> extends Serializable {
 	}
 
 	void addChangeListener( IFilterChangeListener listener );
-	void removeChnageListener( IFilterChangeListener listener );
+	void removeChangeListener( IFilterChangeListener listener );
 
 	/**
 	 * Clear the filter
