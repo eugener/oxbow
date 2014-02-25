@@ -35,93 +35,93 @@ import org.oxbow.swingbits.dialog.task.design.TaskDialogContent;
 
 public interface IContentDesign {
 
-	
-	static final String ICON_INFO     = "OptionPane.informationIcon";
-	static final String ICON_QUESTION = "OptionPane.questionIcon";
-	static final String ICON_WARNING  = "OptionPane.warningIcon";
-	static final String ICON_ERROR    = "OptionPane.errorIcon";
-	
+    
+    static final String ICON_INFO     = "OptionPane.informationIcon";
+    static final String ICON_QUESTION = "OptionPane.questionIcon";
+    static final String ICON_WARNING  = "OptionPane.warningIcon";
+    static final String ICON_ERROR    = "OptionPane.errorIcon";
+    
 
-	/**
-	 * UIDefaults key for task dialog "fewer details" icon
-	 */
-	static final String ICON_FEWER_DETAILS = "TaskDialog.fewerDetailsIcon";
+    /**
+     * UIDefaults key for task dialog "fewer details" icon
+     */
+    static final String ICON_FEWER_DETAILS = "TaskDialog.fewerDetailsIcon";
 
-	
-	/**
-	 * UIDefaults key for task dialog "more details" icon
-	 */
-	static final String ICON_MORE_DETAILS  = "TaskDialog.moreDetailsIcon";
+    
+    /**
+     * UIDefaults key for task dialog "more details" icon
+     */
+    static final String ICON_MORE_DETAILS  = "TaskDialog.moreDetailsIcon";
 
-	
-	/**
-	 * UIDefaults key for task dialog command link icon
-	 */
-	static final String ICON_COMMAND_LINK  = "TaskDialog.commandLinkIcon";
+    
+    /**
+     * UIDefaults key for task dialog command link icon
+     */
+    static final String ICON_COMMAND_LINK  = "TaskDialog.commandLinkIcon";
 
-	
-	/**
-	 * UIDefaults key for task dialog message background color
-	 */
-	static final String COLOR_MESSAGE_BACKGROUND = "TaskDialog.messageBackground";
+    
+    /**
+     * UIDefaults key for task dialog message background color
+     */
+    static final String COLOR_MESSAGE_BACKGROUND = "TaskDialog.messageBackground";
 
-	
-	/**
-	 * UIDefaults key for task dialog instruction foreground color
-	 */
-	static final String COLOR_INSTRUCTION_FOREGROUND = "TaskDialog.instructionForeground";
+    
+    /**
+     * UIDefaults key for task dialog instruction foreground color
+     */
+    static final String COLOR_INSTRUCTION_FOREGROUND = "TaskDialog.instructionForeground";
 
-	
-	/**
-	 * UIDefaults key for task dialog instruction font
-	 */
-	static final String FONT_INSTRUCTION = "TaskDialog.instructionFont";
-	
-	
-	/**
-	 * UIDefaults key for task dialog text font
-	 */
-	static final String FONT_TEXT = "TaskDialog.textFont";
+    
+    /**
+     * UIDefaults key for task dialog instruction font
+     */
+    static final String FONT_INSTRUCTION = "TaskDialog.instructionFont";
+    
+    
+    /**
+     * UIDefaults key for task dialog text font
+     */
+    static final String FONT_TEXT = "TaskDialog.textFont";
 
-	
-	/**
-	 * UIDefaults key for "More Details" label 
-	 */
-	static final String TEXT_MORE_DETAILS = "TaskDialog.moreDetailsText";
+    
+    /**
+     * UIDefaults key for "More Details" label 
+     */
+    static final String TEXT_MORE_DETAILS = "TaskDialog.moreDetailsText";
 
-	
-	/**
-	 * UIDefaults key for "Fewer Details" label
-	 */
-	static final String TEXT_FEWER_DETAILS = "TaskDialog.fewerDetailsText";
+    
+    /**
+     * UIDefaults key for "Fewer Details" label
+     */
+    static final String TEXT_FEWER_DETAILS = "TaskDialog.fewerDetailsText";
 
-	
-	
-	
-	/**
-	 *  Updates UIDefaults with appropriate design settings 
-	 */
-	void updateUIDefaults();
-	
-	
-	/**
-	 * Builds and returns contents of task dialog  
-	 * @return
-	 */
-	TaskDialogContent buildContent();
-	
-	
-	/**
-	 * Returns true if command buttons are locked ( should have the same size )
-	 * @return
-	 */
-	boolean isCommandButtonSizeLocked();
-	
-	
-	/**
-	 * Returns command link painter
-	 * @return
-	 */
-	ICommandLinkPainter getCommandLinkPainter();
+    
+    
+    
+    /**
+     *  Updates UIDefaults with appropriate design settings 
+     */
+    void updateUIDefaults();
+    
+    
+    /**
+     * Builds and returns contents of task dialog  
+     * @return
+     */
+    TaskDialogContent buildContent();
+    
+    
+    /**
+     * Returns true if command buttons are locked ( should have the same size )
+     * @return
+     */
+    boolean isCommandButtonSizeLocked();
+    
+    
+    /**
+     * Returns command link painter
+     * @return
+     */
+    ICommandLinkPainter getCommandLinkPainter();
 
 }

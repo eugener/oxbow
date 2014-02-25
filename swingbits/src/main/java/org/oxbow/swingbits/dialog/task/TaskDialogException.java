@@ -33,21 +33,21 @@ package org.oxbow.swingbits.dialog.task;
 
 public class TaskDialogException extends RuntimeException {
 
-	private static final long serialVersionUID = -5131344050183401993L;
+    private static final long serialVersionUID = -5131344050183401993L;
 
-	public TaskDialogException() {
-	}
+    public TaskDialogException() {
+    }
 
-	public TaskDialogException(String message) {
-		super(message);
-	}
+    public TaskDialogException(String message) {
+        super(message);
+    }
 
-	public TaskDialogException(Throwable cause) {
-		super(cause);
-	}
+    public TaskDialogException(Throwable cause) {
+        super(cause);
+    }
 
-	public TaskDialogException(String message, Throwable cause) {
-		super(message, cause);
-	}
+    public TaskDialogException(String message, Throwable cause) {
+        super(message, cause);
+    }
 
 }

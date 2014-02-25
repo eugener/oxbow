@@ -33,5 +33,5 @@ package org.oxbow.swingbits.table.filter;
 
 public interface IFilterChangeListener {
 
-	void filterChanged( ITableFilter<?> filter );
+    void filterChanged( ITableFilter<?> filter );
 }

@@ -36,88 +36,88 @@ import java.awt.Font;
 
 public final class Markup {
 
-	private static final String HTML_START = "<html>";
-	private static final String HTML_END   = "</html>";
-	private static final String HTML_BREAK = "<br>";
+    private static final String HTML_START = "<html>";
+    private static final String HTML_END   = "</html>";
+    private static final String HTML_BREAK = "<br>";
 
-	private Markup() {}
+    private Markup() {}
 
-	public static final String toHex( Color color ) {
-		color = color == null ? Color.BLACK: color;
-		String rgb = Integer.toHexString(color.getRGB());
-		return rgb.substring(2, rgb.length());
-	}
+    public static final String toHex( Color color ) {
+        color = color == null ? Color.BLACK: color;
+        String rgb = Integer.toHexString(color.getRGB());
+        return rgb.substring(2, rgb.length());
+    }
 
-	/**
-	 * Converts string to simple &lt;HTML&gt; presentation.<br>
-	 * Replaces EOLs with &lt;BR&gt; tags
-	 * @param s
-	 * @param finalize if true wraps text with &lt;HTML&gt; tags
-	 * @return
-	 */
-	public final static String toHTML( String s, boolean finalize ) {
+    /**
+     * Converts string to simple &lt;HTML&gt; presentation.<br>
+     * Replaces EOLs with &lt;BR&gt; tags
+     * @param s
+     * @param finalize if true wraps text with &lt;HTML&gt; tags
+     * @return
+     */
+    public final static String toHTML( String s, boolean finalize ) {
 
-		s = s == null? "": s.replaceAll("\n", HTML_BREAK);
-		String tmp = s.trim().toLowerCase();
+        s = s == null? "": s.replaceAll("\n", HTML_BREAK);
+        String tmp = s.trim().toLowerCase();
 
-		StringBuilder sb = new StringBuilder(s);
+        StringBuilder sb = new StringBuilder(s);
 
-		if ( finalize ) {
-			if ( !tmp.startsWith(HTML_START)) sb.insert(0, HTML_START);
-			if ( !tmp.endsWith(HTML_END))     sb.append( HTML_END );
-		}
+        if ( finalize ) {
+            if ( !tmp.startsWith(HTML_START)) sb.insert(0, HTML_START);
+            if ( !tmp.endsWith(HTML_END))     sb.append( HTML_END );
+        }
 
-		return sb.toString();
-	}
+        return sb.toString();
+    }
 
-	/**
-	 * Converts string to simple &lt;HTML&gt; presentation.<br>
-	 * Replaces EOLs with &lt;BR&gt; tags, wraps text with &lt;HTML&gt; tags
-	 * @param s
-	 * @return
-	 */
-	public final static String toHTML( String s ) {
-		return toHTML( s, true );
-	}
+    /**
+     * Converts string to simple &lt;HTML&gt; presentation.<br>
+     * Replaces EOLs with &lt;BR&gt; tags, wraps text with &lt;HTML&gt; tags
+     * @param s
+     * @return
+     */
+    public final static String toHTML( String s ) {
+        return toHTML( s, true );
+    }
 
-	/**
-	 * Converts font to CSS style
-	 * @param font
-	 * @return CSS style as string
-	 */
-	public final static String toCSS( Font font ) {
+    /**
+     * Converts font to CSS style
+     * @param font
+     * @return CSS style as string
+     */
+    public final static String toCSS( Font font ) {
 
-		return String.format( "font-family: \"%s\"; %s; %s;",
-				  font.getFamily(),
-				  toSizeCSS(font),
-				  toStyleCSS(font) );
+        return String.format( "font-family: \"%s\"; %s; %s;",
+                  font.getFamily(),
+                  toSizeCSS(font),
+                  toStyleCSS(font) );
 
-	}
+    }
 
-	public final static String toSizeCSS( Font font ) {
-		//TODO: use Toolkit.getDefaultToolkit().getScreenResolution() to calculate font size in pixels
+    public final static String toSizeCSS( Font font ) {
+        //TODO: use Toolkit.getDefaultToolkit().getScreenResolution() to calculate font size in pixels
 
-		return String.format( "font-size: %fpx", font.getSize() * .75); // converts to pixels with standard DPI
-	}
+        return String.format( "font-size: %fpx", font.getSize() * .75); // converts to pixels with standard DPI
+    }
 
-	public final static String toStyleCSS( Font font ) {
+    public final static String toStyleCSS( Font font ) {
 
-		switch ( font.getStyle() ) {
-			case Font.ITALIC: return "font-style : italic";
-			case Font.BOLD  : return "font-weight: bold";
-			default         : return "font-weight: normal";
+        switch ( font.getStyle() ) {
+            case Font.ITALIC: return "font-style : italic";
+            case Font.BOLD  : return "font-weight: bold";
+            default         : return "font-weight: normal";
 
-		}
+        }
 
-	}
+    }
 
-	/**
-	 * Converts color to CSS style
-	 * @param color
-	 * @return CSS style as string
-	 */
-	public final static String toCSS( Color color ) {
-		return  String.format( "color: #%s;", toHex(color));
-	}
+    /**
+     * Converts color to CSS style
+     * @param color
+     * @return CSS style as string
+     */
+    public final static String toCSS( Color color ) {
+        return  String.format( "color: #%s;", toHex(color));
+    }
 
 }

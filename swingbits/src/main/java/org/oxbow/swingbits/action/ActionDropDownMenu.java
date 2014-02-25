@@ -52,40 +52,40 @@ import org.oxbow.swingbits.util.swing.CompoundIcon;
  */
 class ActionDropDownMenu extends AbstractAction {
 
-	private static final long serialVersionUID = 1L;
-	private static final Icon DROPDOWN_ICON =  new ImageIcon( ActionDropDownMenu.class.getResource("dropdown.png"));
+    private static final long serialVersionUID = 1L;
+    private static final Icon DROPDOWN_ICON =  new ImageIcon( ActionDropDownMenu.class.getResource("dropdown.png"));
 
-	private JPopupMenu menu = null;
-	private final ActionGroup action;
+    private JPopupMenu menu = null;
+    private final ActionGroup action;
 
-	/**
-	 * Action will create a pop up menu out of give ActionGroup
-	 * @param actionGroup
-	 */
-	public ActionDropDownMenu( ActionGroup actionGroup ) {
-		super( actionGroup.getName(), createIcon(actionGroup));
-		this.action = actionGroup;
-	}
+    /**
+     * Action will create a pop up menu out of give ActionGroup
+     * @param actionGroup
+     */
+    public ActionDropDownMenu( ActionGroup actionGroup ) {
+        super( actionGroup.getName(), createIcon(actionGroup));
+        this.action = actionGroup;
+    }
 
-	private static Icon createIcon( ActionGroup action ) {
-		Icon mainIcon = action.getIcon();
-		return mainIcon == null? DROPDOWN_ICON: new CompoundIcon(mainIcon, DROPDOWN_ICON);
-	}
-	
-	@Override
-	public void actionPerformed(ActionEvent e) {
+    private static Icon createIcon( ActionGroup action ) {
+        Icon mainIcon = action.getIcon();
+        return mainIcon == null? DROPDOWN_ICON: new CompoundIcon(mainIcon, DROPDOWN_ICON);
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
 
-		if ( !( e.getSource() instanceof Component ) ||
-			 action == null || action.isEmpty() ||
-			 !action.isEnabled() ) return;
+        if ( !( e.getSource() instanceof Component ) ||
+             action == null || action.isEmpty() ||
+             !action.isEnabled() ) return;
 
-		if ( menu == null ) {
-			menu = ActionContainerBuilderFactory.getPopupMenuBuilder().build(action);
-		}
+        if ( menu == null ) {
+            menu = ActionContainerBuilderFactory.getPopupMenuBuilder().build(action);
+        }
 
-		Component cmpt = (Component) e.getSource();
-		menu.show( cmpt , 0, cmpt.getHeight() );
+        Component cmpt = (Component) e.getSource();
+        menu.show( cmpt , 0, cmpt.getHeight() );
 
-	}
+    }
 
 }

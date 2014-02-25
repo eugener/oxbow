@@ -40,27 +40,27 @@ import org.oxbow.swingbits.dialog.task.ICommandLinkPainter;
 
 public class WindowsContentDesign extends DefaultContentDesign {
 
-	@Override
-	public void updateUIDefaults() {
+    @Override
+    public void updateUIDefaults() {
 
-		super.updateUIDefaults();
+        super.updateUIDefaults();
 
-		UIManager.put( COLOR_INSTRUCTION_FOREGROUND, new Color(0x0033A0)); 
+        UIManager.put( COLOR_INSTRUCTION_FOREGROUND, new Color(0x0033A0)); 
 
-		Font fontBase =  new Font("Segoe UI", 0, 11);
-		UIManager.put( FONT_INSTRUCTION, 
-			fontBase.deriveFont( fontBase.getStyle(), fontBase.getSize2D() * 1.4f ) );
-		
-	}
-	
-	
-	@Override
-	public ICommandLinkPainter getCommandLinkPainter() {
-		if (commandButtonPainter == null) {
-			commandButtonPainter = new WindowsCommandLinkPainter();
-		}
-		return commandButtonPainter;
-	}	
-	
-	
+        Font fontBase =  new Font("Segoe UI", 0, 11);
+        UIManager.put( FONT_INSTRUCTION, 
+            fontBase.deriveFont( fontBase.getStyle(), fontBase.getSize2D() * 1.4f ) );
+        
+    }
+    
+    
+    @Override
+    public ICommandLinkPainter getCommandLinkPainter() {
+        if (commandButtonPainter == null) {
+            commandButtonPainter = new WindowsCommandLinkPainter();
+        }
+        return commandButtonPainter;
+    }    
+    
+    
 }

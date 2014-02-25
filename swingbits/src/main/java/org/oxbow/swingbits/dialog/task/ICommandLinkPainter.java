@@ -37,7 +37,7 @@ import javax.swing.JComponent;
 
 public interface ICommandLinkPainter {
 
-	void prepareSource( JComponent source );
-	void paint(Graphics g, JComponent source );
-	
+    void prepareSource( JComponent source );
+    void paint(Graphics g, JComponent source );
+    
 }

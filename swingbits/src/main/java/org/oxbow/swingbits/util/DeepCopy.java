@@ -45,48 +45,48 @@ import org.oxbow.swingbits.util.copy.FastByteArrayOutputStream;
  */
 public class DeepCopy {
 
-	/**
-	 * Creates deep copy of the object.
-	 * @param originalObject object to copy
-	 * @return copy of originalObject
-	 * @throws DeepCopyException if operation cannot be performed
-	 */
-	public static final <T extends Serializable> T copy( T originalObject ) {
-    	return DeepCopy.<T>restore( (FastByteArrayInputStream) store( originalObject ).getInputStream() );
+    /**
+     * Creates deep copy of the object.
+     * @param originalObject object to copy
+     * @return copy of originalObject
+     * @throws DeepCopyException if operation cannot be performed
+     */
+    public static final <T extends Serializable> T copy( T originalObject ) {
+        return DeepCopy.<T>restore( (FastByteArrayInputStream) store( originalObject ).getInputStream() );
     }
 
     public static final <T extends Serializable> FastByteArrayOutputStream store( T obj ) {
 
-    	try {
+        try {
 
-	    	FastByteArrayOutputStream fbos = new FastByteArrayOutputStream();
-	        ObjectOutputStream out = new ObjectOutputStream(fbos);
-	        out.writeObject( obj );
-	        out.flush();
-	        out.close();
+            FastByteArrayOutputStream fbos = new FastByteArrayOutputStream();
+            ObjectOutputStream out = new ObjectOutputStream(fbos);
+            out.writeObject( obj );
+            out.flush();
+            out.close();
 
-	        return fbos;
+            return fbos;
 
-	    } catch( Throwable ex ) {
+        } catch( Throwable ex ) {
 
-	  	    throw new DeepCopyException("An " + obj.getClass().getSimpleName() + " cannot be serialized. The reason: " + ex.getLocalizedMessage(), ex);
-	    }
+              throw new DeepCopyException("An " + obj.getClass().getSimpleName() + " cannot be serialized. The reason: " + ex.getLocalizedMessage(), ex);
+        }
 
     }
 
     @SuppressWarnings("unchecked")
-	public static final <T extends Serializable> T restore( FastByteArrayInputStream  stream) {
+    public static final <T extends Serializable> T restore( FastByteArrayInputStream  stream) {
 
-    	try {
+        try {
 
-	    	ObjectInputStream in = new ObjectInputStream(stream);
-	        return (T) in.readObject();
+            ObjectInputStream in = new ObjectInputStream(stream);
+            return (T) in.readObject();
 
-	    } catch( Throwable ex ) {
+        } catch( Throwable ex ) {
 
-	  	    throw new DeepCopyException("An object cannot be deserizalized. The reason: " + ex.getLocalizedMessage(), ex);
+              throw new DeepCopyException("An object cannot be deserizalized. The reason: " + ex.getLocalizedMessage(), ex);
 
-	    }
+        }
 
     }
 

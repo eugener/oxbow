@@ -49,95 +49,95 @@ import javax.imageio.ImageIO;
 
 public class Screenshot {
 
-	private final BufferedImage image;
+    private final BufferedImage image;
 
 
-	/**
+    /**
      * Creates an image containing pixels read from the screen.  This image does
      * not include the mouse cursor.
-	 * @param screenRect Rect to capture in screen coordinates
-	 * @return captured screenshot
-     * @throws 	IllegalArgumentException if <code>screenRect</code> width and height are not greater than zero
-     * @throws 	SecurityException if <code>readDisplayPixels</code> permission is not granted
-	 * @throws AWTException
+     * @param screenRect Rect to capture in screen coordinates
+     * @return captured screenshot
+     * @throws     IllegalArgumentException if <code>screenRect</code> width and height are not greater than zero
+     * @throws     SecurityException if <code>readDisplayPixels</code> permission is not granted
+     * @throws AWTException
      * @see     SecurityManager#checkPermission
-     * @see 	AWTPermission
-	 */
-	public static final Screenshot capture( Rectangle screenRect ) throws AWTException {
-		return new Screenshot( getRobot().createScreenCapture( screenRect ));
-	}
+     * @see     AWTPermission
+     */
+    public static final Screenshot capture( Rectangle screenRect ) throws AWTException {
+        return new Screenshot( getRobot().createScreenCapture( screenRect ));
+    }
 
-	public static final Screenshot capture( int width, int height ) throws AWTException {
-		return capture( new Rectangle( width, height ));
-	}
+    public static final Screenshot capture( int width, int height ) throws AWTException {
+        return capture( new Rectangle( width, height ));
+    }
 
-	
-	private static Robot robot;
+    
+    private static Robot robot;
 
-	private synchronized static Robot getRobot() throws AWTException {
+    private synchronized static Robot getRobot() throws AWTException {
 
-		if ( robot == null ) robot = new Robot();
-		return robot;
+        if ( robot == null ) robot = new Robot();
+        return robot;
 
-	}
+    }
 
-	private Screenshot( BufferedImage image ) {
-		this.image = image;
-	}
+    private Screenshot( BufferedImage image ) {
+        this.image = image;
+    }
 
-	/**
-	 * Returns the image screenshot is based on
-	 */
-	public Image getImage() {
-		return image;
-	}
+    /**
+     * Returns the image screenshot is based on
+     */
+    public Image getImage() {
+        return image;
+    }
 
 
-	/**
+    /**
      * Writes an image using an arbitrary <code>ImageWriter</code>
      * that supports the given format to a <code>File</code>.  If
      * there is already a <code>File</code> present, its contents are
      * discarded.
-	 * @param formatName a <code>String</code> containg the informal name of the format.
-	 * @param output a <code>File</code> to be written to
-	 *
-	 * if an error occurs during writing.
-	 *
+     * @param formatName a <code>String</code> containg the informal name of the format.
+     * @param output a <code>File</code> to be written to
+     *
+     * if an error occurs during writing.
+     *
      * @exception IllegalArgumentException if any parameter is <code>null</code>.
-	 * @throws IOException if an error occurs during writing.
-	 */
-	public boolean store( String formatName, File output ) throws IOException {
-		return ImageIO.write( image, formatName, output );
-	}
-	
-	/**
-	 * Retrieves screen information as a list of display modes, 
-	 * which includes screen dimensions, bit depth and refresh rate
-	 * @return
-	 */
-	public static final List<DisplayMode> getDisplayInfo() {
-		
-		List<DisplayMode> result = new ArrayList<DisplayMode>();
-		for (GraphicsDevice gs:  GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()) {
-			result.add( gs.getDisplayMode());
-		}
-		return result;
-		
-	}
+     * @throws IOException if an error occurs during writing.
+     */
+    public boolean store( String formatName, File output ) throws IOException {
+        return ImageIO.write( image, formatName, output );
+    }
+    
+    /**
+     * Retrieves screen information as a list of display modes, 
+     * which includes screen dimensions, bit depth and refresh rate
+     * @return
+     */
+    public static final List<DisplayMode> getDisplayInfo() {
+        
+        List<DisplayMode> result = new ArrayList<DisplayMode>();
+        for (GraphicsDevice gs:  GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()) {
+            result.add( gs.getDisplayMode());
+        }
+        return result;
+        
+    }
 
 
-//	public static void main(String[] args) {
+//    public static void main(String[] args) {
 //
-//		try {
-//			System.out.println("taking screenshot...");
-//			
-//			DisplayMode dm = getDisplayInfo().get(0);
-//			Screenshot.capture( dm.getWidth(), dm.getHeight()).store( "jpg", new File("C:/home/imageTest.jpg") );
-//		} catch (Throwable e) {
-//			e.printStackTrace();
-//		}
+//        try {
+//            System.out.println("taking screenshot...");
+//            
+//            DisplayMode dm = getDisplayInfo().get(0);
+//            Screenshot.capture( dm.getWidth(), dm.getHeight()).store( "jpg", new File("C:/home/imageTest.jpg") );
+//        } catch (Throwable e) {
+//            e.printStackTrace();
+//        }
 //
-//	}
+//    }
 
 
 }

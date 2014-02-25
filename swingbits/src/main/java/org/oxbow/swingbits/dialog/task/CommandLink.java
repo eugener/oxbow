@@ -38,67 +38,67 @@ import org.oxbow.swingbits.dialog.task.TaskDialog.CommandTag;
 
 public class CommandLink implements TaskDialog.Command {
 
-	private final String instruction;
-	private final String text;
-	private final Icon icon;
+    private final String instruction;
+    private final String text;
+    private final Icon icon;
 
-	public CommandLink( Icon icon, String instruction, String text ) {
-		this.instruction = instruction;
-		this.text = text;
-		this.icon = icon;
-	}
-	
-	public CommandLink( String instruction, String text ) {
-		this( null, instruction, text );
-	}
+    public CommandLink( Icon icon, String instruction, String text ) {
+        this.instruction = instruction;
+        this.text = text;
+        this.icon = icon;
+    }
+    
+    public CommandLink( String instruction, String text ) {
+        this( null, instruction, text );
+    }
 
-	public String getInstruction() {
-		return instruction;
-	}
+    public String getInstruction() {
+        return instruction;
+    }
 
-	public String getText() {
-		return text;
-	};
-	
-	public Icon getIcon() {
-		return icon;
-	}
+    public String getText() {
+        return text;
+    };
+    
+    public Icon getIcon() {
+        return icon;
+    }
 
-	
-	
-	@Override
-	public String getTitle() {
-		return instruction;
-	}
+    
+    
+    @Override
+    public String getTitle() {
+        return instruction;
+    }
 
-	@Override
-	public CommandTag getTag() {
-		return null;
-	}
+    @Override
+    public CommandTag getTag() {
+        return null;
+    }
 
-	@Override
-	public String getDescription() {
-		return text;
-	}
+    @Override
+    public String getDescription() {
+        return text;
+    }
 
-	@Override
-	public boolean isClosing() {
-		return true;
-	}
+    @Override
+    public boolean isClosing() {
+        return true;
+    }
 
-	@Override
-	public int getWaitInterval() {
-		return 0;
-	}
+    @Override
+    public int getWaitInterval() {
+        return 0;
+    }
 
-	@Override
-	public boolean isEnabled(boolean validationResult) {
-		return true;
-	}
+    @Override
+    public boolean isEnabled(boolean validationResult) {
+        return true;
+    }
 
-	@Override
-	public KeyStroke getKeyStroke() {
-		return null;
-	}
+    @Override
+    public KeyStroke getKeyStroke() {
+        return null;
+    }
 
 }

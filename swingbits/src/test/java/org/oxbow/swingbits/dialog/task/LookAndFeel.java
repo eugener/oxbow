@@ -37,33 +37,33 @@ import javax.swing.UIManager.LookAndFeelInfo;
 
 class LookAndFeel {
 
-	private final LookAndFeelInfo info;
-	private final boolean isSystem;
+    private final LookAndFeelInfo info;
+    private final boolean isSystem;
 
-	public static final DefaultComboBoxModel getComboModel( LookAndFeelInfo[] lafs ) {
+    public static final DefaultComboBoxModel getComboModel( LookAndFeelInfo[] lafs ) {
 
-		LookAndFeel[] arr = new LookAndFeel[ lafs.length ];
-		for( int i=0; i<lafs.length; i++ ) arr[i] = new LookAndFeel( lafs[i]);
-		return new DefaultComboBoxModel( arr );
-	}
+        LookAndFeel[] arr = new LookAndFeel[ lafs.length ];
+        for( int i=0; i<lafs.length; i++ ) arr[i] = new LookAndFeel( lafs[i]);
+        return new DefaultComboBoxModel( arr );
+    }
 
 
-	public LookAndFeel( LookAndFeelInfo info ) {
-		this.info = info;
-		this.isSystem = info.getClassName().equals(UIManager.getSystemLookAndFeelClassName());;
-	}
+    public LookAndFeel( LookAndFeelInfo info ) {
+        this.info = info;
+        this.isSystem = info.getClassName().equals(UIManager.getSystemLookAndFeelClassName());;
+    }
 
-	@Override
-	public String toString() {
-		return info.getName();
-	}
+    @Override
+    public String toString() {
+        return info.getName();
+    }
 
-	public String getName() {
-		return info.getClassName();
-	}
+    public String getName() {
+        return info.getClassName();
+    }
 
-	public boolean isSystem() {
-		return isSystem;
-	}
+    public boolean isSystem() {
+        return isSystem;
+    }
 
 }

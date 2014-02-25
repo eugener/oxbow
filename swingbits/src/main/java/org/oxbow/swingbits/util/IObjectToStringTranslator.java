@@ -33,6 +33,6 @@ package org.oxbow.swingbits.util;
 
 public interface IObjectToStringTranslator {
 
-	String translate( Object obj );
-	
+    String translate( Object obj );
+    
 }

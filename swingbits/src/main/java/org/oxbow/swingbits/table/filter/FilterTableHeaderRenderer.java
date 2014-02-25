@@ -51,53 +51,53 @@ import org.oxbow.swingbits.util.swing.CompoundIcon;
  */
 class FilterTableHeaderRenderer extends TableHeaderRenderer {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private ImageIcon icon;
-	private final ITableFilter<?> tableFilter;
-	private boolean rendererInit = true;
-	private int originalHorizontalTextPosition;
+    private ImageIcon icon;
+    private final ITableFilter<?> tableFilter;
+    private boolean rendererInit = true;
+    private int originalHorizontalTextPosition;
 
-	public FilterTableHeaderRenderer( ITableFilter<?> tableFilter ) {
-		this.tableFilter = tableFilter;
-	}
-	
-	private Icon getFilterIcon() {
+    public FilterTableHeaderRenderer( ITableFilter<?> tableFilter ) {
+        this.tableFilter = tableFilter;
+    }
+    
+    private Icon getFilterIcon() {
 
-		if (icon == null) {
-			icon = new ImageIcon( getClass().getResource("funnel.png"));
-			icon = new ImageIcon( icon.getImage().getScaledInstance( 12, 12, Image.SCALE_SMOOTH  ));
-		}
-		return icon;
+        if (icon == null) {
+            icon = new ImageIcon( getClass().getResource("funnel.png"));
+            icon = new ImageIcon( icon.getImage().getScaledInstance( 12, 12, Image.SCALE_SMOOTH  ));
+        }
+        return icon;
 
-	}
+    }
 
-	@Override
-	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
-			boolean hasFocus, int row, int column) {
-		
+    @Override
+    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
+            boolean hasFocus, int row, int column) {
+        
         final JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
         if ( rendererInit ) {
-        	originalHorizontalTextPosition = label.getHorizontalTextPosition();
-        	rendererInit = false;
+            originalHorizontalTextPosition = label.getHorizontalTextPosition();
+            rendererInit = false;
         }
         
         int modelColumn =  table.convertColumnIndexToModel(column);
         if ( tableFilter.isFiltered(modelColumn) ) {
-        	
-        	Icon originalIcon = label.getIcon();
-        	if ( originalIcon == null ) {
-        	  label.setIcon( getFilterIcon() ); 	
-        	} else {
-        	  label.setIcon( new CompoundIcon( getFilterIcon(), originalIcon ) );
+            
+            Icon originalIcon = label.getIcon();
+            if ( originalIcon == null ) {
+              label.setIcon( getFilterIcon() );     
+            } else {
+              label.setIcon( new CompoundIcon( getFilterIcon(), originalIcon ) );
             }
             label.setHorizontalTextPosition( JLabel.TRAILING );
             
         } else {
-        	label.setHorizontalTextPosition( originalHorizontalTextPosition );
+            label.setHorizontalTextPosition( originalHorizontalTextPosition );
         }
         
         return label;
-	}
+    }
 
 }

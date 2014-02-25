@@ -50,35 +50,35 @@ import javax.swing.SwingUtilities;
  *
  */
 final class CheckListEditor extends MouseAdapter {
-	@Override
-	public void mouseClicked(MouseEvent e) {
+    @Override
+    public void mouseClicked(MouseEvent e) {
 
-		if (!SwingUtilities.isLeftMouseButton(e)) return;
+        if (!SwingUtilities.isLeftMouseButton(e)) return;
 
-		JList list = (JList) e.getSource();
-		if ( !list.isEnabled() || (!(list.getModel() instanceof ICheckListModel<?>))) return;
+        JList list = (JList) e.getSource();
+        if ( !list.isEnabled() || (!(list.getModel() instanceof ICheckListModel<?>))) return;
 
-		int index = list.locationToIndex(e.getPoint());
-		if (index < 0) return;
+        int index = list.locationToIndex(e.getPoint());
+        if (index < 0) return;
 
-		Rectangle bounds = list.getCellBounds(index, index);
+        Rectangle bounds = list.getCellBounds(index, index);
 
-		if ( bounds.contains(e.getPoint()) ) {
-			
-			@SuppressWarnings("unchecked")
-			ICheckListModel<Object> model = (ICheckListModel<Object>) list.getModel();
-			
-			if ( e.getClickCount() > 1 ) {
-				// clear all and check selected for more then 1 clicks
-				model.setCheckedItems( Arrays.asList( model.getElementAt(index)));
-			} else {
-				// simple toggle for 1 click
-				model.setCheckedIndex(index, !model.isCheckedIndex(index));
-			}
-			e.consume();
-		}
+        if ( bounds.contains(e.getPoint()) ) {
+            
+            @SuppressWarnings("unchecked")
+            ICheckListModel<Object> model = (ICheckListModel<Object>) list.getModel();
+            
+            if ( e.getClickCount() > 1 ) {
+                // clear all and check selected for more then 1 clicks
+                model.setCheckedItems( Arrays.asList( model.getElementAt(index)));
+            } else {
+                // simple toggle for 1 click
+                model.setCheckedIndex(index, !model.isCheckedIndex(index));
+            }
+            e.consume();
+        }
 
-	}
-	
+    }
+    
 }
 

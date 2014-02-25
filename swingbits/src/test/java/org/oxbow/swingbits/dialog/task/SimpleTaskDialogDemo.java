@@ -44,19 +44,19 @@ import javax.swing.UIManager;
 
 public class SimpleTaskDialogDemo {
 
-	public static void main( String[] args ) {
+    public static void main( String[] args ) {
 
         SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
-                	
-                	try {
-    					UIManager.setLookAndFeel( UIManager.getSystemLookAndFeelClassName());
-    				} catch (Throwable e) {
-    					e.printStackTrace();
-    				}
-                	
-                	
+                    
+                    try {
+                        UIManager.setLookAndFeel( UIManager.getSystemLookAndFeelClassName());
+                    } catch (Throwable e) {
+                        e.printStackTrace();
+                    }
+                    
+                    
                         final String title = "Exit";
                         final String instruction = "Exiting TaskDialog";
                         final String text = "Are you sure you want to exit ?";
@@ -104,5 +104,5 @@ public class SimpleTaskDialogDemo {
         });
 
 }
-	
+    
 }

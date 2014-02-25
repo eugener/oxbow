@@ -36,9 +36,9 @@ import javax.swing.ButtonModel;
 
 public class CommandLinkButtonGroup extends ButtonGroup {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Override
+    @Override
     public void setSelected(ButtonModel model, boolean selected) {
         if (model == null) return;
         if (selected) {
@@ -49,5 +49,5 @@ public class CommandLinkButtonGroup extends ButtonGroup {
             }
         }
     }
-	
+    
 }

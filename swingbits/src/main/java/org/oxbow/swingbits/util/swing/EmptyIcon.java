@@ -43,62 +43,62 @@ import java.awt.geom.RoundRectangle2D;
 import javax.swing.Icon;
 
 public class EmptyIcon implements Icon {
-	
-	private final int size;
-	private boolean paintImage;
-	
-	public static final EmptyIcon visible( int size ) {
-		return new EmptyIcon(size, true);
-	}
+    
+    private final int size;
+    private boolean paintImage;
+    
+    public static final EmptyIcon visible( int size ) {
+        return new EmptyIcon(size, true);
+    }
 
-	public static final EmptyIcon hidden() {
-		return new EmptyIcon(0, false); 
-	}
-	
-	private EmptyIcon( int size, boolean paintImage ) {
-		this.size = Math.abs(size == 0? 1: size); // needs at least 1px to copy images (see Icons class)
-		this.paintImage = paintImage;
-	}
-	
-	@Override
-	public int getIconHeight() {
-		return size;
-	}
+    public static final EmptyIcon hidden() {
+        return new EmptyIcon(0, false); 
+    }
+    
+    private EmptyIcon( int size, boolean paintImage ) {
+        this.size = Math.abs(size == 0? 1: size); // needs at least 1px to copy images (see Icons class)
+        this.paintImage = paintImage;
+    }
+    
+    @Override
+    public int getIconHeight() {
+        return size;
+    }
 
-	@Override
-	public int getIconWidth() {
-		return size;
-	}
+    @Override
+    public int getIconWidth() {
+        return size;
+    }
 
-	@Override
-	public void paintIcon(Component c, Graphics g, int x, int y) {
+    @Override
+    public void paintIcon(Component c, Graphics g, int x, int y) {
 
-		if ( paintImage && size > 2 ) {
-		
-			 Graphics2D g2 = (Graphics2D)g;
-			 g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        if ( paintImage && size > 2 ) {
+        
+             Graphics2D g2 = (Graphics2D)g;
+             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-			 int radius = size / 3;
-			 RoundRectangle2D r = new RoundRectangle2D.Float(x, y, size-1, size-1, radius, radius );
-			 
-			 g2.setColor( new Color( 255, 255, 0, 127) );
-			 g2.fill(r);
-			 
-			 g2.setStroke( new BasicStroke(3));
-			 g2.setColor(Color.RED);
-			 g2.draw(r);
-			 
-			 Point center = new Point( x+size/2, y+size/2 );
-			 
-			 int d = size / 4;
-			 int xad = center.x-d;
-			 int xsd = center.x+d;
-			 int yad = center.y+d;
-			 int ysd = center.y-d;
-			 g2.drawLine( xad, ysd, xsd, yad );
-			 g2.drawLine( xad, yad, xsd, ysd );
-		
-		}
+             int radius = size / 3;
+             RoundRectangle2D r = new RoundRectangle2D.Float(x, y, size-1, size-1, radius, radius );
+             
+             g2.setColor( new Color( 255, 255, 0, 127) );
+             g2.fill(r);
+             
+             g2.setStroke( new BasicStroke(3));
+             g2.setColor(Color.RED);
+             g2.draw(r);
+             
+             Point center = new Point( x+size/2, y+size/2 );
+             
+             int d = size / 4;
+             int xad = center.x-d;
+             int xsd = center.x+d;
+             int yad = center.y+d;
+             int ysd = center.y-d;
+             g2.drawLine( xad, ysd, xsd, yad );
+             g2.drawLine( xad, yad, xsd, ysd );
+        
+        }
 
-	}
+    }
 }

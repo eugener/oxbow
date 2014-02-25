@@ -40,36 +40,36 @@ import org.oxbow.swingbits.dialog.task.ICommandLinkPainter;
 
 public class LinuxContentDesign extends DefaultContentDesign {
 
-	@Override
-	public void updateUIDefaults() {
+    @Override
+    public void updateUIDefaults() {
 
-		super.updateUIDefaults();
+        super.updateUIDefaults();
 
-		if ( UIManager.getIcon( ICON_ERROR ) == null ) {
-			UIManager.put( ICON_ERROR,    createResourceIcon( "linux_error.png" ));
-			UIManager.put( ICON_INFO,     createResourceIcon( "linux_info.png" ));
-			UIManager.put( ICON_QUESTION, createResourceIcon( "linux_question.png" ));
-			UIManager.put( ICON_WARNING,  createResourceIcon( "linux_warning.png" ));
-		}
-		
-		UIManager.put( COLOR_MESSAGE_BACKGROUND,     SystemColor.CONTROL );
-		UIManager.put( COLOR_INSTRUCTION_FOREGROUND, SystemColor.textHighlight );
+        if ( UIManager.getIcon( ICON_ERROR ) == null ) {
+            UIManager.put( ICON_ERROR,    createResourceIcon( "linux_error.png" ));
+            UIManager.put( ICON_INFO,     createResourceIcon( "linux_info.png" ));
+            UIManager.put( ICON_QUESTION, createResourceIcon( "linux_question.png" ));
+            UIManager.put( ICON_WARNING,  createResourceIcon( "linux_warning.png" ));
+        }
+        
+        UIManager.put( COLOR_MESSAGE_BACKGROUND,     SystemColor.CONTROL );
+        UIManager.put( COLOR_INSTRUCTION_FOREGROUND, SystemColor.textHighlight );
 
-		
-		UIManager.put( FONT_INSTRUCTION, deriveFont( "Label.font", Font.BOLD, 1.07f ) );
-		UIManager.put( FONT_TEXT, deriveFont( "Label.font", Font.PLAIN, .85f ) );
+        
+        UIManager.put( FONT_INSTRUCTION, deriveFont( "Label.font", Font.BOLD, 1.07f ) );
+        UIManager.put( FONT_TEXT, deriveFont( "Label.font", Font.PLAIN, .85f ) );
 
-		
-	}
-	
-	ICommandLinkPainter commandButtonPainter;
+        
+    }
+    
+    ICommandLinkPainter commandButtonPainter;
 
-	@Override
-	public ICommandLinkPainter getCommandLinkPainter() {
-		if (commandButtonPainter == null) {
-			commandButtonPainter = new MacOsCommandLinkPainter();
-		}
-		return commandButtonPainter;
-	}
-	
+    @Override
+    public ICommandLinkPainter getCommandLinkPainter() {
+        if (commandButtonPainter == null) {
+            commandButtonPainter = new MacOsCommandLinkPainter();
+        }
+        return commandButtonPainter;
+    }
+    
 }

@@ -43,34 +43,34 @@ import java.beans.PropertyChangeSupport;
  */
 public class SwingBean {
 
-	private final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
+    private final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
 
 
-	public void addPropertyListener( PropertyChangeListener pl ) {
-		propertyChangeSupport.addPropertyChangeListener(pl);
-	}
+    public void addPropertyListener( PropertyChangeListener pl ) {
+        propertyChangeSupport.addPropertyChangeListener(pl);
+    }
 
-	public void addPropertyListener( String propertyName, PropertyChangeListener pl ) {
-		propertyChangeSupport.addPropertyChangeListener( propertyName, pl );
-	}
+    public void addPropertyListener( String propertyName, PropertyChangeListener pl ) {
+        propertyChangeSupport.addPropertyChangeListener( propertyName, pl );
+    }
 
-	public void removePropertyListener( PropertyChangeListener pl ) {
-		propertyChangeSupport.removePropertyChangeListener(pl);
-	}
+    public void removePropertyListener( PropertyChangeListener pl ) {
+        propertyChangeSupport.removePropertyChangeListener(pl);
+    }
 
-	public void removePropertyListener( String propertyName, PropertyChangeListener pl ) {
-		propertyChangeSupport.removePropertyChangeListener( propertyName, pl );
-	}
-	
-	
-	protected abstract class Property<T> extends BeanProperty<T> {
-		public Property( String propertyName, boolean forceChange ) {
-			super( propertyChangeSupport, propertyName, forceChange );
-		}
-		
-		public Property( String propertyName ) {
-			super( propertyChangeSupport, propertyName );
-		}
-	}
+    public void removePropertyListener( String propertyName, PropertyChangeListener pl ) {
+        propertyChangeSupport.removePropertyChangeListener( propertyName, pl );
+    }
+    
+    
+    protected abstract class Property<T> extends BeanProperty<T> {
+        public Property( String propertyName, boolean forceChange ) {
+            super( propertyChangeSupport, propertyName, forceChange );
+        }
+        
+        public Property( String propertyName ) {
+            super( propertyChangeSupport, propertyName );
+        }
+    }
 
 }

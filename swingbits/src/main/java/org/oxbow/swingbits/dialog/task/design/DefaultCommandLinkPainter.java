@@ -46,117 +46,117 @@ import org.oxbow.swingbits.dialog.task.IContentDesign;
 
 public class DefaultCommandLinkPainter implements ICommandLinkPainter {
 
-	protected enum LinkState {
-		SELECTED,
-		ARMED, 
-		ROLLOVER
-	}
-	
-	private Color messageBackground = normalize(
-			UIManager.getColor( IContentDesign.COLOR_MESSAGE_BACKGROUND ));
-	private Color instructionForeground = normalize(
-			UIManager.getColor( IContentDesign.COLOR_INSTRUCTION_FOREGROUND ));
-	
+    protected enum LinkState {
+        SELECTED,
+        ARMED, 
+        ROLLOVER
+    }
+    
+    private Color messageBackground = normalize(
+            UIManager.getColor( IContentDesign.COLOR_MESSAGE_BACKGROUND ));
+    private Color instructionForeground = normalize(
+            UIManager.getColor( IContentDesign.COLOR_INSTRUCTION_FOREGROUND ));
+    
 
-	private LinkChrome selectedChrome = new LinkChrome(
-				Color.LIGHT_GRAY.brighter(),
-				Color.GRAY.brighter(),
-				Color.LIGHT_GRAY,
-				5, 5 );
-	
-	private LinkChrome armedChrome = new LinkChrome(
-			    messageBackground,
-			    instructionForeground,
-			    instructionForeground,
-				3, 5 );
-	
-	private LinkChrome rolloverChrome = new LinkChrome(
-			messageBackground,
-			instructionForeground,
-			instructionForeground,
-			6, 5 );
-	
-	protected LinkChrome getLinkChrome( LinkState linkState ) {
-		switch( linkState ) {
-			case SELECTED: return selectedChrome;
-			case ARMED   : return armedChrome; 
-			case ROLLOVER: return rolloverChrome;
-			default      : return selectedChrome;
-		}
-	}
-	
-	@Override
-	public void prepareSource(JComponent source) {
-		
-		if ( source instanceof AbstractButton ) {
+    private LinkChrome selectedChrome = new LinkChrome(
+                Color.LIGHT_GRAY.brighter(),
+                Color.GRAY.brighter(),
+                Color.LIGHT_GRAY,
+                5, 5 );
+    
+    private LinkChrome armedChrome = new LinkChrome(
+                messageBackground,
+                instructionForeground,
+                instructionForeground,
+                3, 5 );
+    
+    private LinkChrome rolloverChrome = new LinkChrome(
+            messageBackground,
+            instructionForeground,
+            instructionForeground,
+            6, 5 );
+    
+    protected LinkChrome getLinkChrome( LinkState linkState ) {
+        switch( linkState ) {
+            case SELECTED: return selectedChrome;
+            case ARMED   : return armedChrome; 
+            case ROLLOVER: return rolloverChrome;
+            default      : return selectedChrome;
+        }
+    }
+    
+    @Override
+    public void prepareSource(JComponent source) {
+        
+        if ( source instanceof AbstractButton ) {
 
-			AbstractButton button = (AbstractButton)source;
-			
-			button.setOpaque(false);
-			button.setBorderPainted(false);
-			button.setContentAreaFilled(false);
-			button.setFocusPainted(false);
-		
-		}
-	}
-	
-	
-	@Override
-	public void paint(Graphics g, JComponent source) {
+            AbstractButton button = (AbstractButton)source;
+            
+            button.setOpaque(false);
+            button.setBorderPainted(false);
+            button.setContentAreaFilled(false);
+            button.setFocusPainted(false);
+        
+        }
+    }
+    
+    
+    @Override
+    public void paint(Graphics g, JComponent source) {
 
-		if ( !(source instanceof AbstractButton) ) return;
+        if ( !(source instanceof AbstractButton) ) return;
 
-		Graphics2D g2 = (Graphics2D) g.create();
-		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-		RenderingHints.VALUE_ANTIALIAS_ON);
-			
-		AbstractButton button = (AbstractButton)source;
+        Graphics2D g2 = (Graphics2D) g.create();
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+        RenderingHints.VALUE_ANTIALIAS_ON);
+            
+        AbstractButton button = (AbstractButton)source;
 
-		if ( button.isSelected() ) {
-			getLinkChrome(LinkState.SELECTED).draw(button, g2);
-		} 
-		if ( button.getModel().isArmed() ) {
-			getLinkChrome(LinkState.ARMED).draw(button, g2);
-		} else if ( button.getModel().isRollover()) {
-			getLinkChrome(LinkState.ROLLOVER).draw(button, g2);
-		}
-		
-		g2.dispose();
-	}
-	
-	protected Color normalize( Color color ) {
-		return color == null ? Color.BLACK: color;
-	}
-	
-	protected static class LinkChrome {
+        if ( button.isSelected() ) {
+            getLinkChrome(LinkState.SELECTED).draw(button, g2);
+        } 
+        if ( button.getModel().isArmed() ) {
+            getLinkChrome(LinkState.ARMED).draw(button, g2);
+        } else if ( button.getModel().isRollover()) {
+            getLinkChrome(LinkState.ROLLOVER).draw(button, g2);
+        }
+        
+        g2.dispose();
+    }
+    
+    protected Color normalize( Color color ) {
+        return color == null ? Color.BLACK: color;
+    }
+    
+    protected static class LinkChrome {
 
-		private Color startColor;
-		private Color endColor;
-		private Color borderColor;
-		int gradientHeightFactor;
-		int arcSize;
-		
-		public LinkChrome( Color startColor, Color endColor, Color borderColor, int gradientHeightFactor, int arcSize ) {
-			this.startColor = startColor;
-			this.endColor = endColor;
-			this.borderColor = borderColor;
-			this.gradientHeightFactor = gradientHeightFactor;
-			this.arcSize = arcSize;
-		}
-		
-		public void draw( AbstractButton button, Graphics2D g ) {
+        private Color startColor;
+        private Color endColor;
+        private Color borderColor;
+        int gradientHeightFactor;
+        int arcSize;
+        
+        public LinkChrome( Color startColor, Color endColor, Color borderColor, int gradientHeightFactor, int arcSize ) {
+            this.startColor = startColor;
+            this.endColor = endColor;
+            this.borderColor = borderColor;
+            this.gradientHeightFactor = gradientHeightFactor;
+            this.arcSize = arcSize;
+        }
+        
+        public void draw( AbstractButton button, Graphics2D g ) {
 
-			GradientPaint paint = new GradientPaint(
-					0, 0,  startColor,
-					0, button.getHeight()*gradientHeightFactor, endColor );
+            GradientPaint paint = new GradientPaint(
+                    0, 0,  startColor,
+                    0, button.getHeight()*gradientHeightFactor, endColor );
 
-			g.setPaint( paint );
-			g.fillRoundRect(0,0, button.getWidth()-1, button.getHeight()-1, arcSize, arcSize);
-			g.setColor( borderColor );
-			g.drawRoundRect(0,0, button.getWidth()-1, button.getHeight()-1, arcSize, arcSize);
+            g.setPaint( paint );
+            g.fillRoundRect(0,0, button.getWidth()-1, button.getHeight()-1, arcSize, arcSize);
+            g.setColor( borderColor );
+            g.drawRoundRect(0,0, button.getWidth()-1, button.getHeight()-1, arcSize, arcSize);
 
-		}
-		
-	}
+        }
+        
+    }
 
 }

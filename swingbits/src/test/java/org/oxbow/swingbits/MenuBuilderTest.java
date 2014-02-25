@@ -32,100 +32,100 @@ public class MenuBuilderTest implements Runnable {
 
 public static void main(String[] args) {
 
-		try {
-			UIManager.setLookAndFeel( UIManager.getSystemLookAndFeelClassName());
-		} catch (Throwable e) {
-			e.printStackTrace();
-		}
+        try {
+            UIManager.setLookAndFeel( UIManager.getSystemLookAndFeelClassName());
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
 
-		SwingUtilities.invokeLater( new MenuBuilderTest() );
+        SwingUtilities.invokeLater( new MenuBuilderTest() );
 
-	}
+    }
 
-	@Override
-	public void run() {
+    @Override
+    public void run() {
 
-		final JFrame f = new JFrame("Swing Table Filter Test");
-		f.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-		f.setPreferredSize( new Dimension( 1000, 600 ));
+        final JFrame f = new JFrame("Swing Table Filter Test");
+        f.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+        f.setPreferredSize( new Dimension( 1000, 600 ));
 
-		Icon icon = new ImageIcon( getClass().getResource("pin_blue.png"));
+        Icon icon = new ImageIcon( getClass().getResource("pin_blue.png"));
 
-		Collection<Action> actions = actions(
+        Collection<Action> actions = actions(
 
-			collapsedGroup("Group 1", icon).actions(
-					new XCheckAction("Action 1.1", icon),
-					collapsedGroup( "Group 1.1", icon).actions(
-						new EmptyAction("Action 1.1.1", icon),
-						new EmptyAction("Action 1.1.2"),
-						new EmptyAction("Action 1.1.3")
-					),
-					expandedGroup( "Group 1.2", icon).actions(
-						new XRadioAction("Action 1.2.1"),
-						new XRadioAction("Action 1.2.2", icon),
-						new XRadioAction("Action 1.2.3")
-					),
-					separator(),
-					new XCheckAction("Action 1.2", icon)),
-			collapsedGroup("Group 2", icon),
-			collapsedGroup("Group 3"),
-			new XCheckAction("Action 4", icon)
+            collapsedGroup("Group 1", icon).actions(
+                    new XCheckAction("Action 1.1", icon),
+                    collapsedGroup( "Group 1.1", icon).actions(
+                        new EmptyAction("Action 1.1.1", icon),
+                        new EmptyAction("Action 1.1.2"),
+                        new EmptyAction("Action 1.1.3")
+                    ),
+                    expandedGroup( "Group 1.2", icon).actions(
+                        new XRadioAction("Action 1.2.1"),
+                        new XRadioAction("Action 1.2.2", icon),
+                        new XRadioAction("Action 1.2.3")
+                    ),
+                    separator(),
+                    new XCheckAction("Action 1.2", icon)),
+            collapsedGroup("Group 2", icon),
+            collapsedGroup("Group 3"),
+            new XCheckAction("Action 4", icon)
 
-		);
+        );
 
-		final JMenuBar mbar = ActionContainerBuilderFactory.getMenuBarBuilder().build(actions);
-		final JPopupMenu menu = ActionContainerBuilderFactory.getPopupMenuBuilder().build(actions);
-		final JToolBar toolbar = ActionContainerBuilderFactory.getToolBarBuilder().build(actions);
+        final JMenuBar mbar = ActionContainerBuilderFactory.getMenuBarBuilder().build(actions);
+        final JPopupMenu menu = ActionContainerBuilderFactory.getPopupMenuBuilder().build(actions);
+        final JToolBar toolbar = ActionContainerBuilderFactory.getToolBarBuilder().build(actions);
 
-		f.setJMenuBar(mbar);
-		JPanel content = (JPanel) f.getContentPane();
-		content.setLayout( new BorderLayout());
-		content.add( toolbar, BorderLayout.NORTH);
-		content.addMouseListener( new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				menu.show(f, e.getX(), e.getY() );
-			}
-		});
+        f.setJMenuBar(mbar);
+        JPanel content = (JPanel) f.getContentPane();
+        content.setLayout( new BorderLayout());
+        content.add( toolbar, BorderLayout.NORTH);
+        content.addMouseListener( new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                menu.show(f, e.getX(), e.getY() );
+            }
+        });
 
-		f.pack();
-		f.setLocationRelativeTo(null);
-		f.setVisible(true);
+        f.pack();
+        f.setLocationRelativeTo(null);
+        f.setVisible(true);
 
-	}
-	
-	@SuppressWarnings("serial")
-	public static class EmptyAction extends AbstractAction {
-		
-		public EmptyAction( String name, Icon icon ) { super( name, icon ); }
-		public EmptyAction( String name ) { super( name ); }
-		
-		@Override
-		public void actionPerformed(ActionEvent e) {}
+    }
+    
+    @SuppressWarnings("serial")
+    public static class EmptyAction extends AbstractAction {
+        
+        public EmptyAction( String name, Icon icon ) { super( name, icon ); }
+        public EmptyAction( String name ) { super( name ); }
+        
+        @Override
+        public void actionPerformed(ActionEvent e) {}
 
-	}
+    }
 
-	@SuppressWarnings("serial")
-	@CheckAction
-	public static final class XCheckAction extends EmptyAction {
+    @SuppressWarnings("serial")
+    @CheckAction
+    public static final class XCheckAction extends EmptyAction {
 
-		public XCheckAction(String name, Icon icon) {
-			super(name, icon);
-		}
-		public XCheckAction( String name ) { super( name ); }
-		
-	}
+        public XCheckAction(String name, Icon icon) {
+            super(name, icon);
+        }
+        public XCheckAction( String name ) { super( name ); }
+        
+    }
 
 
-	@SuppressWarnings("serial")
-	@RadioAction
-	public static final class XRadioAction extends EmptyAction {
+    @SuppressWarnings("serial")
+    @RadioAction
+    public static final class XRadioAction extends EmptyAction {
 
-		public XRadioAction(String name, Icon icon) {
-			super(name, icon);
-		}
-		public XRadioAction( String name ) { super( name ); }
-		
-	}
-	
+        public XRadioAction(String name, Icon icon) {
+            super(name, icon);
+        }
+        public XRadioAction( String name ) { super( name ); }
+        
+    }
+    
 }
