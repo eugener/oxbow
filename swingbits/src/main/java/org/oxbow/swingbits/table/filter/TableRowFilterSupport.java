@@ -76,11 +76,11 @@ public final class TableRowFilterSupport {
 
 	/**
 	 * Comlumn filter list is searchable
-	 * @param serachable
+	 * @param searchable
 	 * @return
 	 */
-	public TableRowFilterSupport searchable( boolean serachable) {
-		this.searchable = serachable;
+	public TableRowFilterSupport searchable( boolean searchable ) {
+		this.searchable = searchable;
 		return this;
 	}
 
