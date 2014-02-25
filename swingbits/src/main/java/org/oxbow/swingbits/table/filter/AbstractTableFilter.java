@@ -120,7 +120,7 @@ public abstract class AbstractTableFilter<T extends JTable> implements ITableFil
 	}
 
 	@Override
-	public final void removeChnageListener( IFilterChangeListener listener ) {
+	public final void removeChangeListener( IFilterChangeListener listener ) {
 		if ( listener != null ) listeners.remove(listener);
 	}
 
