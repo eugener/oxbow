@@ -121,7 +121,7 @@ public class DefaultCheckListModel<T> extends AbstractListModel implements IChec
 	@Override
 	public Collection<T> getCheckedItems() {
 		List<T> items = new ArrayList<T>(checks);
-		items.retainAll(data);
+		items.retainAll(data());
 		return Collections.unmodifiableList( items );
 	}
 
@@ -134,7 +134,7 @@ public class DefaultCheckListModel<T> extends AbstractListModel implements IChec
 //		if ( CollectionUtils.isEmpty(items))  return;
 
 		List<T> correctedItems = new ArrayList<T>(items);
-		correctedItems.retainAll(data);
+		correctedItems.retainAll(data());
 
 		checks.clear();
 		checks.addAll( correctedItems );
