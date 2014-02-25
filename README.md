@@ -1,4 +1,5 @@
 [![](https://drone.io/eugener/swingbits/status.png)](https://drone.io/eugener/swingbits/latest)
+[![Build Status](https://travis-ci.org/eugener/oxbow.png?branch=master)](https://travis-ci.org/eugener/oxbow)
 
 **SwingBits** is a collection of useful components and utilities for Java Swing Toolkit. 
   
