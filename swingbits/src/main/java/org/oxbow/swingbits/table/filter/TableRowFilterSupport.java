@@ -40,11 +40,13 @@ import javax.swing.JTable;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
+import org.oxbow.swingbits.list.CheckListFilterType;
 import org.oxbow.swingbits.util.IObjectToStringTranslator;
 
 public final class TableRowFilterSupport {
 
 	private boolean searchable = false;
+	private CheckListFilterType searchType = CheckListFilterType.CONTAINS;
 	private IObjectToStringTranslator translator;
 	private final ITableFilter<?> filter;
 	private boolean actionsVisible = true;
@@ -89,6 +91,11 @@ public final class TableRowFilterSupport {
 		return this;
 	}
 
+	public TableRowFilterSupport searchType( CheckListFilterType searchType ) {
+		this.searchType = searchType;
+		return this;
+	}
+
 	public TableRowFilterSupport useTableRenderers( boolean value ) {
 		this.useTableRenderers = value;
 		return this;
@@ -101,6 +108,7 @@ public final class TableRowFilterSupport {
 		filterPopup.setActionsVisible(actionsVisible);
 		filterPopup.setSearchable(searchable);
 		filterPopup.setSearchTranslator(translator);
+		filterPopup.setSearchType(searchType);
 		filterPopup.setUseTableRenderers( useTableRenderers );
 
 		setupTableHeader();

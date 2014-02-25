@@ -85,6 +85,7 @@ class TableFilterColumnPopup extends PopupWindow implements MouseListener {
 	    
 	    private final ITableFilter<?> filter;
 		private boolean searchable;
+		private CheckListFilterType searchType = CheckListFilterType.CONTAINS;
 		private IObjectToStringTranslator translator;
 		private boolean actionsVisible = true;
 		private boolean useTableRenderers = false;
@@ -120,7 +121,7 @@ class TableFilterColumnPopup extends PopupWindow implements MouseListener {
 				public void changedUpdate(DocumentEvent e) { perform(e);}
 				
 				private void perform(DocumentEvent e) {
-					filterList.filter(searchField.getText(), translator, CheckListFilterType.CONTAINS );
+					filterList.filter(searchField.getText(), translator, searchType );
 				}
 				
 			});
@@ -133,6 +134,10 @@ class TableFilterColumnPopup extends PopupWindow implements MouseListener {
 		
 		public void setSearchTranslator( IObjectToStringTranslator tranlsator ) {
 			this.translator = tranlsator;
+		}
+
+		public void setSearchType( CheckListFilterType searchType ) {
+			this.searchType = searchType;
 		}
 		
 		public void setActionsVisible(boolean actionsVisible) {
