@@ -159,7 +159,7 @@ public class TaskDialogTestBed extends JFrame {
         pFooter.add(lbFooterText, "cell 0 0,growx,aligny center");
 
         txFooterText = new JTextField();
-        txFooterText.setText("Your application chrashed because a developer forgot to write a unit test");
+        txFooterText.setText("Your application crashed because a developer forgot to write a unit test");
         txFooterText.setColumns(10);
         pFooter.add(txFooterText, "cell 1 0,growx,aligny top");
 
