@@ -34,7 +34,7 @@ formatting  standards:
   disadvantages of your proposed changes.
 * Before starting to work on a major contribution, discuss your idea
   with existing Oxbow contributorsto avoid wasting time on things that have no chance of
-  getting merged into Contiki.
+  getting merged into Oxbow.
 
 
 
