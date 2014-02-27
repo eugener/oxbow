@@ -41,12 +41,13 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
 import org.oxbow.swingbits.list.CheckListFilterType;
+import org.oxbow.swingbits.list.IListFilter;
 import org.oxbow.swingbits.util.IObjectToStringTranslator;
 
 public final class TableRowFilterSupport {
 
     private boolean searchable = false;
-    private CheckListFilterType searchType = CheckListFilterType.CONTAINS;
+    private IListFilter searchFilter = CheckListFilterType.CONTAINS;
     private IObjectToStringTranslator translator;
     private final ITableFilter<?> filter;
     private boolean actionsVisible = true;
@@ -86,13 +87,13 @@ public final class TableRowFilterSupport {
         return this;
     }
 
-    public TableRowFilterSupport searchTransalator( IObjectToStringTranslator translator ) {
-        this.translator = translator;
+    public TableRowFilterSupport searchFilter(IListFilter searchFilter) {
+        this.searchFilter = searchFilter;
         return this;
     }
 
-    public TableRowFilterSupport searchType( CheckListFilterType searchType ) {
-        this.searchType = searchType;
+    public TableRowFilterSupport searchTransalator( IObjectToStringTranslator translator ) {
+        this.translator = translator;
         return this;
     }
 
@@ -107,8 +108,8 @@ public final class TableRowFilterSupport {
         filterPopup.setEnabled(true);
         filterPopup.setActionsVisible(actionsVisible);
         filterPopup.setSearchable(searchable);
+        filterPopup.setSearchFilter(searchFilter);
         filterPopup.setSearchTranslator(translator);
-        filterPopup.setSearchType(searchType);
         filterPopup.setUseTableRenderers( useTableRenderers );
 
         setupTableHeader();

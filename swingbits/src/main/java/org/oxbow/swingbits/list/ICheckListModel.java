@@ -69,9 +69,9 @@ public interface ICheckListModel<T> extends ListModel{
     
     /**
      * Allows filtered view. Setting empty or null filter will clear filter and show all items
-     * @param filter filter string
+     * @param pattern the pattern the filter will match on
      * @param translator object to string translator to aid the search
      */
-    void filter( String filter, IObjectToStringTranslator translator, CheckListFilterType filterType );
+    void filter( String pattern, IObjectToStringTranslator translator, IListFilter listFilter );
 
 }
