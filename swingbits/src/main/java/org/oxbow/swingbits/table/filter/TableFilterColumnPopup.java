@@ -64,6 +64,7 @@ import org.oxbow.swingbits.list.CheckList;
 import org.oxbow.swingbits.list.CheckListFilterType;
 import org.oxbow.swingbits.list.DefaultCheckListModel;
 import org.oxbow.swingbits.list.ICheckListModel;
+import org.oxbow.swingbits.list.IListFilter;
 import org.oxbow.swingbits.misc.JSearchTextField;
 import org.oxbow.swingbits.popup.PopupWindow;
 import org.oxbow.swingbits.util.CollectionUtils;
@@ -85,7 +86,7 @@ class TableFilterColumnPopup extends PopupWindow implements MouseListener {
         
         private final ITableFilter<?> filter;
         private boolean searchable;
-        private CheckListFilterType searchType = CheckListFilterType.CONTAINS;
+        private IListFilter searchFilter = CheckListFilterType.CONTAINS;
         private IObjectToStringTranslator translator;
         private boolean actionsVisible = true;
         private boolean useTableRenderers = false;
@@ -121,7 +122,7 @@ class TableFilterColumnPopup extends PopupWindow implements MouseListener {
                 public void changedUpdate(DocumentEvent e) { perform(e);}
                 
                 private void perform(DocumentEvent e) {
-                    filterList.filter(searchField.getText(), translator, searchType );
+                    filterList.filter(searchField.getText(), translator, searchFilter);
                 }
                 
             });
@@ -136,8 +137,8 @@ class TableFilterColumnPopup extends PopupWindow implements MouseListener {
             this.translator = tranlsator;
         }
 
-        public void setSearchType( CheckListFilterType searchType ) {
-            this.searchType = searchType;
+        public void setSearchFilter(IListFilter searchFilter) {
+            this.searchFilter = searchFilter;
         }
         
         public void setActionsVisible(boolean actionsVisible) {

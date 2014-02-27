@@ -2,15 +2,15 @@ package org.oxbow.swingbits.list;
 
 import java.util.regex.PatternSyntaxException;
 
-public enum CheckListFilterType {
+public enum CheckListFilterType implements IListFilter {
 
     STARTS_WITH {
         
         @Override
-        public boolean include( String element, String filter ) {
+        public boolean include( String element, String pattern ) {
             
-            if ( element == null || filter == null ) return false;
-            return element.startsWith(filter);
+            if ( element == null || pattern == null ) return false;
+            return element.startsWith(pattern);
             
         }
         
@@ -19,10 +19,10 @@ public enum CheckListFilterType {
     CONTAINS {
     
         @Override
-        public boolean include( String element, String filter ) {
+        public boolean include( String element, String pattern ) {
             
-            if ( element == null || filter == null ) return false;
-            return element.contains(filter);
+            if ( element == null || pattern == null ) return false;
+            return element.contains(pattern);
             
         }
         
@@ -31,11 +31,11 @@ public enum CheckListFilterType {
     REGEX {
 
         @Override
-        public boolean include( String element, String filter ) {
+        public boolean include( String element, String pattern ) {
 
-            if ( element == null || filter == null ) return false;
+            if ( element == null || pattern == null ) return false;
             try {
-                return element.matches(filter);
+                return element.matches(pattern);
             } catch (PatternSyntaxException e) {
                 return false;
             }
@@ -43,7 +43,5 @@ public enum CheckListFilterType {
         }
 
     };
-    
-    public abstract boolean include( String element, String filter );
-    
+
 }

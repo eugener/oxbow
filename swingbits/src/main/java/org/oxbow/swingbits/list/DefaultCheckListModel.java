@@ -143,16 +143,16 @@ public class DefaultCheckListModel<T> extends AbstractListModel implements IChec
 
     }
 
-    public void filter( String filter, IObjectToStringTranslator translator, CheckListFilterType filterType ) {
+    public void filter( String pattern, IObjectToStringTranslator translator, IListFilter listFilter ) {
 
-        if ( filter == null || filter.trim().length() == 0 ) {
+        if ( pattern == null || pattern.trim().length() == 0 ) {
             filteredData = null;
         } else {
 
-            CheckListFilterType ft = filterType == null? CheckListFilterType.CONTAINS: filterType;
+            IListFilter filter = listFilter == null? CheckListFilterType.CONTAINS: listFilter;
 
             IObjectToStringTranslator t = translator == null? DEFAULT_TRANSLATOR: translator;
-            String f = filter.toLowerCase();
+            String p = pattern.toLowerCase();
 
             List<T> fData = new ArrayList<T>();
 
@@ -160,7 +160,7 @@ public class DefaultCheckListModel<T> extends AbstractListModel implements IChec
             for( T o: data ) {
                 //if ( t.translate(o).startsWith(f)) {
                 value = o instanceof IValueWrapper? ((IValueWrapper<?>)o).getValue(): o;
-                if ( ft.include(t.translate(value), f)) {
+                if ( filter.include(t.translate(value), p)) {
                     fData.add(o);
                 }
             }

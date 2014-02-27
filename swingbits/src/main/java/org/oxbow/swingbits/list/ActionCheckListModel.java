@@ -181,8 +181,8 @@ public class ActionCheckListModel<T> implements ICheckListModel<T> {
     }
 
     @Override
-    public void filter(String filter, IObjectToStringTranslator translator, CheckListFilterType filterType) {
-        originalModel.filter(filter, translator, filterType);
+    public void filter(String pattern, IObjectToStringTranslator translator, IListFilter listFilter) {
+        originalModel.filter(pattern, translator, listFilter);
     }
 
 }

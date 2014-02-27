@@ -156,11 +156,11 @@ public class CheckList<T> {
     
     /**
      * Filters list view without losing actual data
-     * @param filter
+     * @param pattern
      * @param translator
      */
-    public void filter( String filter, IObjectToStringTranslator translator, CheckListFilterType filterType ) {
-        getModel().filter(filter, translator, filterType);
+    public void filter( String pattern, IObjectToStringTranslator translator, IListFilter listFilter ) {
+        getModel().filter(pattern, translator, listFilter);
     }
     
     public void toggleIndex( int index ) {
