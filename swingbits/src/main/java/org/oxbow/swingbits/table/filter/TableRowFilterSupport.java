@@ -37,6 +37,7 @@ import java.beans.PropertyChangeListener;
 import java.util.Collections;
 
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
@@ -51,6 +52,7 @@ public final class TableRowFilterSupport {
     private IObjectToStringTranslator translator;
     private final ITableFilter<?> filter;
     private boolean actionsVisible = true;
+    private int filterIconPlacement = SwingConstants.LEADING;
     private boolean useTableRenderers = false;
 
     private TableRowFilterSupport( ITableFilter<?> filter ) {
@@ -74,6 +76,25 @@ public final class TableRowFilterSupport {
      */
     public TableRowFilterSupport actions( boolean visible ) {
         this.actionsVisible = visible;
+        return this;
+    }
+
+    /**
+     * Set the placement of the filter icon with respect to the existing icon
+     * in the column label.
+     *
+     * @param filterIconPlacement either SwingConstants.LEADING or
+     *         SwingConstants.TRAILING.
+     * @return this
+     */
+    public TableRowFilterSupport filterIconPlacement(int filterIconPlacement) {
+        if (filterIconPlacement != SwingConstants.LEADING &&
+                filterIconPlacement != SwingConstants.TRAILING) {
+            throw new UnsupportedOperationException("The filter icon " +         
+                    "placement can only take the values of " +                   
+                    "SwingConstants.LEADING or SwingConstants.TRAILING");
+        }
+        this.filterIconPlacement = filterIconPlacement;
         return this;
     }
 
@@ -151,7 +172,8 @@ public final class TableRowFilterSupport {
 
         JTable table =  filter.getTable();
 
-        FilterTableHeaderRenderer headerRenderer = new FilterTableHeaderRenderer(filter);
+        FilterTableHeaderRenderer headerRenderer =
+                new FilterTableHeaderRenderer(filter, filterIconPlacement);
         filter.modelChanged( newModel );
 
         for( TableColumn c:  Collections.list( table.getColumnModel().getColumns()) ) {
