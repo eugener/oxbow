@@ -32,12 +32,14 @@
 package org.oxbow.swingbits.table.filter;
 
 import java.awt.Component;
+import java.awt.ComponentOrientation;
 import java.awt.Image;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
 
 import org.oxbow.swingbits.table.TableHeaderRenderer;
 import org.oxbow.swingbits.util.swing.CompoundIcon;
@@ -54,12 +56,21 @@ class FilterTableHeaderRenderer extends TableHeaderRenderer {
     private static final long serialVersionUID = 1L;
 
     private ImageIcon icon;
+    private final int filterIconPlacement;
     private final ITableFilter<?> tableFilter;
-    private boolean rendererInit = true;
-    private int originalHorizontalTextPosition;
 
-    public FilterTableHeaderRenderer( ITableFilter<?> tableFilter ) {
+    
+    public FilterTableHeaderRenderer(ITableFilter<?> tableFilter,
+            int filterIconPlacement) {
         this.tableFilter = tableFilter;
+        this.filterIconPlacement = filterIconPlacement;
+
+        if (this.filterIconPlacement != SwingConstants.LEADING &&
+                this.filterIconPlacement != SwingConstants.TRAILING) {
+            throw new UnsupportedOperationException("The filter icon " +
+                    "placement can only take the values of " +
+                    "SwingConstants.LEADING or SwingConstants.TRAILING");
+        }
     }
     
     private Icon getFilterIcon() {
@@ -77,24 +88,31 @@ class FilterTableHeaderRenderer extends TableHeaderRenderer {
             boolean hasFocus, int row, int column) {
         
         final JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-        if ( rendererInit ) {
-            originalHorizontalTextPosition = label.getHorizontalTextPosition();
-            rendererInit = false;
-        }
-        
+
         int modelColumn =  table.convertColumnIndexToModel(column);
-        if ( tableFilter.isFiltered(modelColumn) ) {
-            
-            Icon originalIcon = label.getIcon();
-            if ( originalIcon == null ) {
-              label.setIcon( getFilterIcon() );     
+        if (tableFilter.isFiltered(modelColumn)) {
+            Icon oldIcon = label.getIcon();
+            Icon newIcon = null;
+            if (oldIcon == null) {
+                newIcon = getFilterIcon();     
             } else {
-              label.setIcon( new CompoundIcon( getFilterIcon(), originalIcon ) );
+                ComponentOrientation orientation =
+                        label.getComponentOrientation();
+                if (ComponentOrientation.RIGHT_TO_LEFT.equals(orientation)) {
+                    if (filterIconPlacement == SwingConstants.LEADING) {
+                        newIcon = new CompoundIcon(oldIcon, getFilterIcon());
+                    } else {
+                        newIcon = new CompoundIcon(getFilterIcon(), oldIcon);
+                    }
+                } else {
+                    if (filterIconPlacement == SwingConstants.LEADING) {
+                        newIcon = new CompoundIcon(getFilterIcon(), oldIcon);
+                    } else {
+                        newIcon = new CompoundIcon(oldIcon, getFilterIcon());
+                    }
+                }
             }
-            label.setHorizontalTextPosition( JLabel.TRAILING );
-            
-        } else {
-            label.setHorizontalTextPosition( originalHorizontalTextPosition );
+            label.setIcon(newIcon);
         }
         
         return label;
