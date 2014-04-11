@@ -31,7 +31,7 @@ formatting  standards:
 >* Write a descriptive pull request message. Explain the advantages and
   disadvantages of your proposed changes.
 >* Before starting to work on a major contribution, discuss your idea
-  with existing Oxbow contributorsto avoid wasting time on things that have no chance of
+  with existing Oxbow contributors to avoid wasting time on things that have no chance of
   getting merged into Oxbow.
 
 
