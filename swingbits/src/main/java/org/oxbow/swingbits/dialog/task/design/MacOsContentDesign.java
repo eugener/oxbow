@@ -56,8 +56,8 @@ public class MacOsContentDesign extends DefaultContentDesign {
         UIManager.put( ICON_MORE_DETAILS,  createResourceIcon( "moreDetailsMac.png" ));
         UIManager.put( ICON_FEWER_DETAILS, createResourceIcon( "fewerDetailsMac.png" ));
 
-        UIManager.put( COLOR_MESSAGE_BACKGROUND,     SystemColor.CONTROL );
-        UIManager.put( COLOR_INSTRUCTION_FOREGROUND, SystemColor.TEXT_TEXT );
+        UIManager.put( COLOR_MESSAGE_BACKGROUND,     SystemColor.control );
+        UIManager.put( COLOR_INSTRUCTION_FOREGROUND, SystemColor.textText );
 
         UIManager.put( FONT_INSTRUCTION, deriveFont( "Label.font", Font.BOLD, 1f ) );
         UIManager.put( FONT_TEXT, deriveFont( "Label.font", Font.PLAIN, .85f ) );
