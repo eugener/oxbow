@@ -52,7 +52,7 @@ public class LinuxContentDesign extends DefaultContentDesign {
             UIManager.put( ICON_WARNING,  createResourceIcon( "linux_warning.png" ));
         }
         
-        UIManager.put( COLOR_MESSAGE_BACKGROUND,     SystemColor.CONTROL );
+        UIManager.put( COLOR_MESSAGE_BACKGROUND,     SystemColor.control );
         UIManager.put( COLOR_INSTRUCTION_FOREGROUND, SystemColor.textHighlight );
 
         
