@@ -41,6 +41,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.swing.JTable;
 import javax.swing.event.TableModelEvent;
@@ -142,21 +143,12 @@ public abstract class AbstractTableFilter<T extends JTable> implements ITableFil
     }
 
     private Collection<DistinctColumnItem> collectDistinctColumnItems( int column ) {
-        Set<DistinctColumnItem> set = new HashSet<DistinctColumnItem>(); // to collect unique items
-        int nullIndex = -1;
+        Set<DistinctColumnItem> result = new TreeSet<DistinctColumnItem>(); // to collect unique items
         for( int row=0; row<table.getModel().getRowCount(); row++) {
             Object value = table.getModel().getValueAt( row, column);
-            // adding null to TreeSet will produce NPE, just remember we had it
-            if ( value == null ) {
-                nullIndex = row;
-            } else {
-                set.add( new DistinctColumnItem(value, row ));
-            }
+            result.add(new DistinctColumnItem(value, row));
         }
-        List<DistinctColumnItem> result = new ArrayList<DistinctColumnItem>(set);
-        if ( nullIndex >= 0 ) result.add(0, new DistinctColumnItem(null, nullIndex)); // add null to resulting collection if we had it
-
-        return trySort(result);
+        return result;
     }
 
     @Override
