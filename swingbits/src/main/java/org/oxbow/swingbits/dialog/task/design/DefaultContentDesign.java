@@ -190,7 +190,7 @@ public class DefaultContentDesign implements IContentDesign {
 
     protected static final void putUIDefaultIfAbsent(String key, Object value) {
         if (!UIManager.getDefaults().containsKey( key )) {
-            UIManager.put( key, value );
+            UIManager.put( key, value ); // uses getDefaults()
         }
     }
 }
