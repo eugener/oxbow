@@ -51,20 +51,22 @@ public class MacOsContentDesign extends DefaultContentDesign {
 
     @Override
     public void updateUIDefaults() {
+
+        putUIDefaultIfAbsent( ICON_MORE_DETAILS,  createResourceIcon( "moreDetailsMac.png" ));
+        putUIDefaultIfAbsent( ICON_FEWER_DETAILS, createResourceIcon( "fewerDetailsMac.png" ));
+
+        putUIDefaultIfAbsent( COLOR_MESSAGE_BACKGROUND,     SystemColor.control );
+        putUIDefaultIfAbsent( COLOR_INSTRUCTION_FOREGROUND, SystemColor.textText );
+
+        putUIDefaultIfAbsent( FONT_INSTRUCTION, deriveFont( "Label.font", Font.BOLD, 1f ) );
+        putUIDefaultIfAbsent( FONT_TEXT, deriveFont( "Label.font", Font.PLAIN, .85f ) );
+
+        putUIDefaultIfAbsent( TEXT_MORE_DETAILS,  TaskDialog.makeKey("Details") );
+        putUIDefaultIfAbsent( TEXT_FEWER_DETAILS, TaskDialog.makeKey("Details") );
+
+        // now set other UIDefaults
         super.updateUIDefaults();
-
-        UIManager.put( ICON_MORE_DETAILS,  createResourceIcon( "moreDetailsMac.png" ));
-        UIManager.put( ICON_FEWER_DETAILS, createResourceIcon( "fewerDetailsMac.png" ));
-
-        UIManager.put( COLOR_MESSAGE_BACKGROUND,     SystemColor.control );
-        UIManager.put( COLOR_INSTRUCTION_FOREGROUND, SystemColor.textText );
-
-        UIManager.put( FONT_INSTRUCTION, deriveFont( "Label.font", Font.BOLD, 1f ) );
-        UIManager.put( FONT_TEXT, deriveFont( "Label.font", Font.PLAIN, .85f ) );
-
-        UIManager.put( TEXT_MORE_DETAILS,  TaskDialog.makeKey("Details") );
-        UIManager.put( TEXT_FEWER_DETAILS, TaskDialog.makeKey("Details") );
-
+        
     }
 
     @Override
