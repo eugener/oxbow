@@ -43,22 +43,20 @@ public class LinuxContentDesign extends DefaultContentDesign {
     @Override
     public void updateUIDefaults() {
 
+        putUIDefaultIfAbsent( ICON_ERROR,    createResourceIcon( "linux_error.png" ));
+        putUIDefaultIfAbsent( ICON_INFO,     createResourceIcon( "linux_info.png" ));
+        putUIDefaultIfAbsent( ICON_QUESTION, createResourceIcon( "linux_question.png" ));
+        putUIDefaultIfAbsent( ICON_WARNING,  createResourceIcon( "linux_warning.png" ));
+        
+        putUIDefaultIfAbsent( COLOR_MESSAGE_BACKGROUND,     SystemColor.control );
+        putUIDefaultIfAbsent( COLOR_INSTRUCTION_FOREGROUND, SystemColor.textHighlight );
+
+        
+        putUIDefaultIfAbsent( FONT_INSTRUCTION, deriveFont( "Label.font", Font.BOLD, 1.07f ) );
+        putUIDefaultIfAbsent( FONT_TEXT, deriveFont( "Label.font", Font.PLAIN, .85f ) );
+
+        // now set other UIDefaults
         super.updateUIDefaults();
-
-        if ( UIManager.getIcon( ICON_ERROR ) == null ) {
-            UIManager.put( ICON_ERROR,    createResourceIcon( "linux_error.png" ));
-            UIManager.put( ICON_INFO,     createResourceIcon( "linux_info.png" ));
-            UIManager.put( ICON_QUESTION, createResourceIcon( "linux_question.png" ));
-            UIManager.put( ICON_WARNING,  createResourceIcon( "linux_warning.png" ));
-        }
-        
-        UIManager.put( COLOR_MESSAGE_BACKGROUND,     SystemColor.control );
-        UIManager.put( COLOR_INSTRUCTION_FOREGROUND, SystemColor.textHighlight );
-
-        
-        UIManager.put( FONT_INSTRUCTION, deriveFont( "Label.font", Font.BOLD, 1.07f ) );
-        UIManager.put( FONT_TEXT, deriveFont( "Label.font", Font.PLAIN, .85f ) );
-
         
     }
     

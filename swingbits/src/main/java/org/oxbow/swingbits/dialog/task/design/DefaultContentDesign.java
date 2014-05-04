@@ -54,19 +54,19 @@ public class DefaultContentDesign implements IContentDesign {
     @Override
     public void updateUIDefaults() {
 
-        UIManager.put( ICON_MORE_DETAILS,  createResourceIcon( "moreDetails.png" ));
-        UIManager.put( ICON_FEWER_DETAILS, createResourceIcon( "fewerDetails.png" ));
+        putUIDefaultIfAbsent( ICON_MORE_DETAILS,  createResourceIcon( "moreDetails.png" ));
+        putUIDefaultIfAbsent( ICON_FEWER_DETAILS, createResourceIcon( "fewerDetails.png" ));
 
-        UIManager.put( ICON_COMMAND_LINK, createResourceIcon( "arrowGreenRight.png"));
+        putUIDefaultIfAbsent( ICON_COMMAND_LINK, createResourceIcon( "arrowGreenRight.png"));
 
-        UIManager.put( COLOR_MESSAGE_BACKGROUND,     SystemColor.window );
-        UIManager.put( COLOR_INSTRUCTION_FOREGROUND, SystemColor.textHighlight.darker() ); 
+        putUIDefaultIfAbsent( COLOR_MESSAGE_BACKGROUND,     SystemColor.window );
+        putUIDefaultIfAbsent( COLOR_INSTRUCTION_FOREGROUND, SystemColor.textHighlight.darker() ); 
         
-        UIManager.put( FONT_INSTRUCTION, deriveFont( "Label.font", null, 1.4f ) );
-        UIManager.put( FONT_TEXT, deriveFont( "Label.font", null, 1f ) );
+        putUIDefaultIfAbsent( FONT_INSTRUCTION, deriveFont( "Label.font", null, 1.4f ) );
+        putUIDefaultIfAbsent( FONT_TEXT, deriveFont( "Label.font", null, 1f ) );
 
-        UIManager.put( TEXT_MORE_DETAILS,  TaskDialog.makeKey("MoreDetails") );
-        UIManager.put( TEXT_FEWER_DETAILS, TaskDialog.makeKey("FewerDetails") );
+        putUIDefaultIfAbsent( TEXT_MORE_DETAILS,  TaskDialog.makeKey("MoreDetails") );
+        putUIDefaultIfAbsent( TEXT_FEWER_DETAILS, TaskDialog.makeKey("FewerDetails") );
 
     }
 
@@ -188,5 +188,9 @@ public class DefaultContentDesign implements IContentDesign {
 
     }
 
-
+    protected static final void putUIDefaultIfAbsent(String key, Object value) {
+        if (!UIManager.getDefaults().containsKey( key )) {
+            UIManager.put( key, value ); // uses getDefaults()
+        }
+    }
 }
