@@ -57,18 +57,20 @@ public class DefaultCheckListModel<T> extends AbstractListModel implements IChec
 
     private static final long serialVersionUID = 1L;
 
-    private final List<T> data = new ArrayList<T>();
-    private final Set<T> checks = new HashSet<T>();
-
     public static IObjectToStringTranslator DEFAULT_TRANSLATOR = new DefaultObjectToStringTranslator();
-    private List<T> filteredData = null;
+
+    private Set<T> checks = new HashSet<T>();
+    private final List<T> dataList = new ArrayList<T>();
+    private final Set<T> dataSet = new HashSet<T>();
+    private List<T> filteredDataList = null;
+    private Set<T> filteredDataSet = null;
 
     public DefaultCheckListModel( Collection<? extends T> data ) {
 
         if ( data == null ) return;
         for (T object : data) {
-            this.data.add( object );
-            checks.clear();
+            dataList.add(object);
+            dataSet.add(object);
         }
     }
 
@@ -81,20 +83,23 @@ public class DefaultCheckListModel<T> extends AbstractListModel implements IChec
      */
     @Override
     public int getSize() {
-        return data().size();
+        return dataList().size();
     }
 
-    private List<T> data() {
-        return filteredData == null? data: filteredData;
+    private List<T> dataList() {
+        return filteredDataList == null ? dataList : filteredDataList;
     }
 
+    private Set<T> dataSet() {
+        return filteredDataSet == null ? dataSet : filteredDataSet;
+    }
 
     /* (non-Javadoc)
      * @see org.oxbow.swingbits.list.ICheckListModel#getElementAt(int)
      */
     @Override
     public Object getElementAt(int index) {
-        return data().get(index);
+        return dataList().get(index);
     }
 
     /* (non-Javadoc)
@@ -102,7 +107,7 @@ public class DefaultCheckListModel<T> extends AbstractListModel implements IChec
      */
     @Override
     public boolean isCheckedIndex( int index ) {
-        return checks.contains( data().get(index));
+        return checks.contains(dataList().get(index));
     }
 
     /* (non-Javadoc)
@@ -110,7 +115,7 @@ public class DefaultCheckListModel<T> extends AbstractListModel implements IChec
      */
     @Override
     public void setCheckedIndex( int index, boolean value ) {
-        T o = data().get(index);
+        T o = dataList().get(index);
         if ( value ) checks.add(o); else checks.remove(o);
         fireContentsChanged(this, index, index);
     }
@@ -121,7 +126,7 @@ public class DefaultCheckListModel<T> extends AbstractListModel implements IChec
     @Override
     public Collection<T> getCheckedItems() {
         List<T> items = new ArrayList<T>(checks);
-        items.retainAll(data());
+        items.retainAll(dataSet());
         return Collections.unmodifiableList( items );
     }
 
@@ -130,23 +135,17 @@ public class DefaultCheckListModel<T> extends AbstractListModel implements IChec
      */
     @Override
     public void setCheckedItems( Collection<T> items ) {
-
-//        if ( CollectionUtils.isEmpty(items))  return;
-
-        List<T> correctedItems = new ArrayList<T>(items);
-        correctedItems.retainAll(data());
-
-        checks.clear();
-        checks.addAll( correctedItems );
+        Set<T> correctedItems = new HashSet<T>(items);
+        correctedItems.retainAll(dataSet());
+        checks = correctedItems;
         fireContentsChanged(this, 0, checks.size()-1);
-
-
     }
 
     public void filter( String pattern, IObjectToStringTranslator translator, IListFilter listFilter ) {
 
         if ( pattern == null || pattern.trim().length() == 0 ) {
-            filteredData = null;
+            filteredDataList = null;
+            filteredDataSet = null;
         } else {
 
             IListFilter filter = listFilter == null? CheckListFilterType.CONTAINS: listFilter;
@@ -154,20 +153,23 @@ public class DefaultCheckListModel<T> extends AbstractListModel implements IChec
             IObjectToStringTranslator t = translator == null? DEFAULT_TRANSLATOR: translator;
             String p = pattern.toLowerCase();
 
-            List<T> fData = new ArrayList<T>();
+            List<T> fDataList = new ArrayList<T>();
+            Set<T> fDataSet = new HashSet<T>();
 
             Object value;
-            for( T o: data ) {
+            for (T o : dataList) {
                 //if ( t.translate(o).startsWith(f)) {
                 value = o instanceof IValueWrapper? ((IValueWrapper<?>)o).getValue(): o;
                 if ( filter.include(t.translate(value), p)) {
-                    fData.add(o);
+                    fDataList.add(o);
+                    fDataSet.add(o);
                 }
             }
-            filteredData = fData;
+            filteredDataList = fDataList;
+            filteredDataSet = fDataSet;
         }
 
-        fireContentsChanged( this, 0, data.size()-1);
+        fireContentsChanged(this, 0, dataList.size() - 1);
 
     }
 
