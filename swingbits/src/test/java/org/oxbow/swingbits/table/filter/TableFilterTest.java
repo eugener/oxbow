@@ -34,6 +34,11 @@ package org.oxbow.swingbits.table.filter;
 
 import java.awt.Component;
 import java.awt.Dimension;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
@@ -81,23 +86,37 @@ public class TableFilterTest implements Runnable {
     }
     
     private JTable buildTable() {
-        JTable table = TableRowFilterSupport.forTable(new JTable()).actions(true).searchable(true).useTableRenderers(true).apply();
+    	TableRowFilterSupport tblRowFilSup = TableRowFilterSupport.forTable(new JTable());
+        JTable table = tblRowFilSup.actions(true).searchable(true).useTableRenderers(true).apply();
         table.setModel( new DefaultTableModel(data, colNames) );
         table.getColumnModel().getColumn(0).setCellRenderer(new TestRenderer());
+        
+        Map<Integer, Set<DistinctColumnItem>> columnFilters = new HashMap<Integer, Set<DistinctColumnItem>>();
+        Set<DistinctColumnItem> col = new HashSet<DistinctColumnItem>();
+		col.add(new DistinctColumnItem("aaa333", 0));
+		col.add(new DistinctColumnItem("aaa444", 0));
+		columnFilters.put(Integer.valueOf(0), col);
+		
+		col = new HashSet<DistinctColumnItem>();
+		col.add(new DistinctColumnItem(Boolean.TRUE, 0));
+		columnFilters.put(Integer.valueOf(3), col);
+        
+		tblRowFilSup.applyColumnFilters(columnFilters);
+        
         return table;
     }
     
-    private static final int ITEM_COUNT = 2000;
+    private static final int ITEM_COUNT = 5;
 
-    public static Object[] colNames = { "A123", "B123", "C123" };
+    public static Object[] colNames = { "A123", "B123", "C123", "D123" };
 
     public static Object[][] sample = {
 
-        { "aaa444", 123.2, "ccc333" },
-        {    null,  88888888,    null },
-        { "aaa333", 12344, "ccc222" },
-        { "aaa333", 67456.34534, "ccc111" },
-        { "aaa111", 78427.33, "ccc444" }
+        { "aaa444", 123.2, "ccc333", true },
+        {    null,  88888888,    null, true },
+        { "aaa333", 12344, "ccc222", true },
+        { "aaa333", 67456.34534, "ccc111", false },
+        { "aaa111", 78427.33, "ccc444", null }
 
     };
 

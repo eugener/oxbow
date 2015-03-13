@@ -46,7 +46,9 @@ public class DistinctColumnItem implements Comparable<DistinctColumnItem>, IValu
     }
 
     public Object getValue() {
-        return value;
+    	if (this.value instanceof Boolean) return this.value.toString();
+    	
+        return this.value;
     }
 
     public int getRow() {
