@@ -46,7 +46,7 @@ public class DistinctColumnItem implements Comparable<DistinctColumnItem>, IValu
     }
 
     public Object getValue() {
-        return this.value;
+        return value;
     }
 
     public int getRow() {
