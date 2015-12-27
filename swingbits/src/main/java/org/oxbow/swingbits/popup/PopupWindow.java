@@ -299,8 +299,6 @@ final class PopupMenuResizer extends MouseAdapter {
 
         if ( !isResizing ) return;
 
-        System.out.println(e);
-
         Point p = toScreen(e);
         
         int dx = p.x - mouseStart.x;
