@@ -31,6 +31,8 @@
 
 package org.oxbow.swingbits.popup;
 
+import org.oxbow.swingbits.util.OperatingSystem;
+
 import javax.swing.*;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
@@ -311,16 +313,17 @@ final class PopupMenuResizer extends MouseAdapter {
 
         if ( newDim.width >= minDim.width && newDim.height >= minDim.height /*&&
              newDim.width <= maxDim.width && newDim.height <= maxDim.height*/    ) {
-//            menu.setPopupSize( newDim );
-            resizeMenu(newDim);
+            if (OperatingSystem.getCurrent() == OperatingSystem.WINDOWS ) {
+                menu.setPopupSize(newDim); // has flicker, but works on Windows
+            } else {
+                // no flicker, but seems to have issues on Windows
+                final Window window = (Window) menu.getTopLevelAncestor();
+//              window.pack();
+                window.setSize(newDim);
+//              window.validate();
+            }
         }
 
     }
 
-    private void resizeMenu(Dimension dim) {
-        final Window window = (Window) menu.getTopLevelAncestor();
-//        window.pack();
-        window.setSize(dim);
-//        window.validate();
-    }
 }
