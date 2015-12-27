@@ -31,25 +31,13 @@
 
 package org.oxbow.swingbits.popup;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Point;
-import java.awt.Rectangle;
+import javax.swing.*;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.Icon;
-import javax.swing.JComponent;
-import javax.swing.JPopupMenu;
-import javax.swing.SwingUtilities;
-import javax.swing.event.PopupMenuEvent;
-import javax.swing.event.PopupMenuListener;
 
 public abstract class PopupWindow {
 
@@ -324,8 +312,16 @@ final class PopupMenuResizer extends MouseAdapter {
 
         if ( newDim.width >= minDim.width && newDim.height >= minDim.height /*&&
              newDim.width <= maxDim.width && newDim.height <= maxDim.height*/    ) {
-            menu.setPopupSize( newDim );
+            //menu.setPopupSize( newDim );
+            resizeMenu(newDim);
         }
 
+    }
+
+    private void resizeMenu(Dimension dim) {
+        final Window window = (Window) menu.getTopLevelAncestor();
+        window.pack();
+        window.setSize(dim);
+        window.validate();
     }
 }
