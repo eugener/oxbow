@@ -84,7 +84,6 @@ public abstract class PopupWindow {
     /**
      * Override this method to add content yo the owner.
      * This method is only executed when owner has no subcomponents
-     * @param owner
      */
     protected abstract JComponent buildContent();
 
@@ -300,6 +299,8 @@ final class PopupMenuResizer extends MouseAdapter {
 
         if ( !isResizing ) return;
 
+        System.out.println(e);
+
         Point p = toScreen(e);
         
         int dx = p.x - mouseStart.x;
@@ -312,7 +313,7 @@ final class PopupMenuResizer extends MouseAdapter {
 
         if ( newDim.width >= minDim.width && newDim.height >= minDim.height /*&&
              newDim.width <= maxDim.width && newDim.height <= maxDim.height*/    ) {
-            //menu.setPopupSize( newDim );
+//            menu.setPopupSize( newDim );
             resizeMenu(newDim);
         }
 
@@ -320,8 +321,8 @@ final class PopupMenuResizer extends MouseAdapter {
 
     private void resizeMenu(Dimension dim) {
         final Window window = (Window) menu.getTopLevelAncestor();
-        window.pack();
+//        window.pack();
         window.setSize(dim);
-        window.validate();
+//        window.validate();
     }
 }
