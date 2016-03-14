@@ -1,8 +1,6 @@
 language: java
 before_script: cd swingbits
 jdk:
-- openjdk7
-- oraclejdk7
 - oraclejdk8
 env:
   global:
@@ -10,4 +8,4 @@ env:
     secure: X64bW5KnVimUm0NLlOw2nMMxIcpd3Dh1fA6VkDUUqBLFPk4vNZTr5mUQ4s4KrGr+lVticEftduNwlbtFtCNLPs7loxB1HTTbfBEvk9vfX1t6omK2YyDUPXfIFkzxGhFRIspuXx6CDQRtWImp91NPNE4Hu7xPpKWEttW/9mPCP/k=
 
 after_success:
-    mvn deploy --settings deploy-settings.xml -DskipTests=true -B
+  mvn deploy --settings deploy-settings.xml -DskipTests=true -B
