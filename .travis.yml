@@ -1,11 +1,9 @@
 language: java
 before_script: cd swingbits
+script: mvn deploy --settings deploy-settings.xml
 jdk:
 - oraclejdk8
 env:
   global:
-    secure: "gHnWTn0Vp+gVZ+7nX7BKWWpZakMqvDShaAiHPsB5dWCpi53MxrxAjL34JjwlGXWmD0igmb9bM3wXC/oC8LRyvzr3EqXjpER2ka4DVzh3fNFOwnl8cW0VKJqzwFhr7B4YZ97WGS/MgZ46OnkonV/BGBOeV7XqDTtSezUn7/1YtPI="
-    secure: "X64bW5KnVimUm0NLlOw2nMMxIcpd3Dh1fA6VkDUUqBLFPk4vNZTr5mUQ4s4KrGr+lVticEftduNwlbtFtCNLPs7loxB1HTTbfBEvk9vfX1t6omK2YyDUPXfIFkzxGhFRIspuXx6CDQRtWImp91NPNE4Hu7xPpKWEttW/9mPCP/k="
-
-script:
-  mvn deploy --settings deploy-settings.xml
+  - secure: YxhQo3hQnG3cXcXioSl2u3HGlzfmUTuB1jJCSL6E4+c+yN2MAhUfeXWrmVRpFbkvwtCfXugfVOrpjnvR9z58ASTa2H7jzxqw2Cl6lEKww/++SGgpTrn/ygDuPiAYJTH+GEm4AQCAEy226qctrXdlS675uCCHw/Zd3082tJI1iu8=
+  - secure: WxMbcit/FwjP/xtJUCZtlDSD2HM2YcU7ZVjJDnAvCPi4Sv8lVcj/ZbPU5wvQbQAPAnpberdSNXoaMeMqDCkHdXkrDjIdU6ogAOiTiGj8IT1MmOAjQInCEcDmTfZljPrAOHitmhV7a9Dz8sd8bA//A8oDIGBcgFOAnigpiGL8aEw=
