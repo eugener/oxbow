@@ -1,7 +1,13 @@
 language: java
 before_script: cd swingbits
-
 jdk:
-  - openjdk7
-  - oraclejdk7
-  - oraclejdk8
+- openjdk7
+- oraclejdk7
+- oraclejdk8
+env:
+  global:
+    secure: gHnWTn0Vp+gVZ+7nX7BKWWpZakMqvDShaAiHPsB5dWCpi53MxrxAjL34JjwlGXWmD0igmb9bM3wXC/oC8LRyvzr3EqXjpER2ka4DVzh3fNFOwnl8cW0VKJqzwFhr7B4YZ97WGS/MgZ46OnkonV/BGBOeV7XqDTtSezUn7/1YtPI=
+    secure: X64bW5KnVimUm0NLlOw2nMMxIcpd3Dh1fA6VkDUUqBLFPk4vNZTr5mUQ4s4KrGr+lVticEftduNwlbtFtCNLPs7loxB1HTTbfBEvk9vfX1t6omK2YyDUPXfIFkzxGhFRIspuXx6CDQRtWImp91NPNE4Hu7xPpKWEttW/9mPCP/k=
+
+after_success:
+    mvn deploy --settings deploy-settings.xml -DskipTests=true -B
