@@ -1,4 +1,3 @@
-[![](https://drone.io/eugener/swingbits/status.png)](https://drone.io/eugener/swingbits/latest)
 [![Build Status](https://travis-ci.org/eugener/oxbow.png?branch=master)](https://travis-ci.org/eugener/oxbow)
 [![Coverage Status](https://coveralls.io/repos/eugener/oxbow/badge.png)](https://coveralls.io/r/eugener/oxbow)
 
