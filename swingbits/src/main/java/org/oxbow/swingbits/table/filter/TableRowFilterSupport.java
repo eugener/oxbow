@@ -35,6 +35,8 @@ package org.oxbow.swingbits.table.filter;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Collections;
+import java.util.Map;
+import java.util.Set;
 
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
@@ -191,6 +193,17 @@ public final class TableRowFilterSupport {
         });
 
 
+    }
+    
+    public void applyColumnFilters(Map<Integer, Set<DistinctColumnItem>> columnFilters) {
+
+        if ( columnFilters == null ) return;
+        
+        Set<Integer> keys = columnFilters.keySet();
+        for ( Integer key : keys) {
+        	Set<DistinctColumnItem> checked = columnFilters.get(key);
+        	this.filter.apply(key, checked);        	
+        }
     }
 
 
