@@ -801,7 +801,7 @@ public class TaskDialog extends SwingBean {
      * @return
      */
     public String getString( String text ) {
-        return text.startsWith(I18N_PREFIX)? getLocalizedString(text.substring(I18N_PREFIX.length())) : text;
+        return text != null && text.startsWith(I18N_PREFIX)? getLocalizedString(text.substring(I18N_PREFIX.length())) : text;
     }
 
     
