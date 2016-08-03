@@ -32,16 +32,14 @@
 
 package org.oxbow.swingbits.table.filter;
 
-import java.awt.Component;
-import java.awt.Dimension;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
-import javax.swing.BorderFactory;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
+import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
@@ -70,19 +68,47 @@ public class TableFilterTest implements Runnable {
         f.setPreferredSize( new Dimension( 1000, 600 ));
         
         JPanel p = (JPanel) f.getContentPane();
+        p.setLayout(new BorderLayout());
         p.setBorder( BorderFactory.createEmptyBorder(5, 5, 5, 5));
         final JTable table = buildTable();
-        p.add( new JScrollPane( table ));
+        p.add( new JScrollPane( table ), BorderLayout.CENTER);
+        JToolBar toolbar = new JToolBar();
+        p.add(toolbar, BorderLayout.NORTH);
+
+        JButton button =  new JButton();
+        toolbar.add( new AbstractAction("Apply Filter") {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                Map<Integer,Set<DistinctColumnItem>> filterValues = new HashMap<Integer,Set<DistinctColumnItem>>();
+                filterValues.put( 1, new HashSet<DistinctColumnItem>() );
+                filter.applyColumnFilters( filterValues );
+            }
+        });
+
         
         f.pack();
         f.setLocationRelativeTo(null);
         f.setVisible(true);
         
     }
-    
+
+    private TableRowFilterSupport filter;
+
     private JTable buildTable() {
-        JTable table = TableRowFilterSupport.forTable(new JTable()).actions(true).searchable(true).useTableRenderers(true).apply();
-        table.setModel( new DefaultTableModel(data, colNames) );
+        filter = TableRowFilterSupport.forTable(new JTable())
+                                             .onFilterChange(new IFilterChangeListener() {
+                                                 @Override
+                                                 public void filterChanged(ITableFilter<?> filter) {
+                                                     System.out.println("Filter Changed");
+                                                 }
+                                             })
+                                            .actions(true)
+                                            .searchable(true)
+                                            .useTableRenderers(true);
+        JTable table = filter.apply();
+                table.setModel( new DefaultTableModel(data, colNames) );
         table.getColumnModel().getColumn(0).setCellRenderer(new TestRenderer());
         return table;
     }

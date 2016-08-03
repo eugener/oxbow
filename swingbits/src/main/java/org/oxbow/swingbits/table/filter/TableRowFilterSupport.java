@@ -35,6 +35,8 @@ package org.oxbow.swingbits.table.filter;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Collections;
+import java.util.Map;
+import java.util.Set;
 
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
@@ -99,7 +101,7 @@ public final class TableRowFilterSupport {
     }
 
     /**
-     * Comlumn filter list is searchable
+     * Column filter list is searchable
      * @param searchable
      * @return
      */
@@ -120,6 +122,11 @@ public final class TableRowFilterSupport {
 
     public TableRowFilterSupport useTableRenderers( boolean value ) {
         this.useTableRenderers = value;
+        return this;
+    }
+
+    public TableRowFilterSupport onFilterChange(IFilterChangeListener listener) {
+        this.filter.addChangeListener( listener );
         return this;
     }
 
@@ -153,20 +160,18 @@ public final class TableRowFilterSupport {
 
         // make sure that search component is reset after table model changes
         setupHeaderRenderers(table.getModel(), true );
-//        table.addPropertyChangeListener("model", new PropertyChangeListener() {
-//
-//            public void propertyChange(PropertyChangeEvent evt) {
-//
-//                FilterTableHeaderRenderer headerRenderer = new FilterTableHeaderRenderer(filter);
-//                filter.modelChanged((TableModel) evt.getNewValue());
-//
-//                for( TableColumn c:  Collections.list( filter.getTable().getColumnModel().getColumns()) ) {
-//                    c.setHeaderRenderer( headerRenderer );
-//                }
-//            }}
-//
-//        );
     }
+
+    public void applyColumnFilters(Map<Integer, Set<DistinctColumnItem>> columnFilters) {
+
+        if ( columnFilters == null ) return;
+
+        for ( Integer key : columnFilters.keySet()) {
+            Set<DistinctColumnItem> checked = columnFilters.get(key);
+            this.filter.apply(key, checked);
+        }
+    }
+
 
     private void setupHeaderRenderers( TableModel newModel, boolean fullSetup ) {
 
@@ -189,7 +194,6 @@ public final class TableRowFilterSupport {
             }
 
         });
-
 
     }
 
