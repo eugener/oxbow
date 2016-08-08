@@ -1,0 +1,53 @@
+apply plugin: 'base'
+
+group = 'org.oxbow'
+version = '1.2.1'
+
+
+repositories {
+    maven {
+        url "https://oss.sonatype.org/content/repositories/snapshots/"
+    }
+    maven {
+        url "https://oss.sonatype.org/content/repositories/releases"
+    }
+    jcenter()
+    mavenCentral()
+}
+
+apply plugin: 'java'
+apply plugin: 'maven'
+//apply plugin: 'com.github.ben-manes.versions'
+apply from: rootProject.file('mavenPublish.gradle')
+
+
+configurations {
+    published
+}
+
+if (JavaVersion.current().isJava8Compatible()) {
+    allprojects {
+        tasks.withType(Javadoc) {
+            options.addStringOption('Xdoclint:none', '-quiet')
+        }
+    }
+}
+
+dependencies{
+    compile 'com.miglayout:miglayout:3.7.4'
+    testCompile 'junit:junit:4.8.2'
+}
+
+task sourceJar(type: Jar) {
+    from sourceSets.main.allSource
+    classifier = 'sources'
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    from javadoc.destinationDir
+    classifier = 'javadoc'
+}
+
+artifacts {
+    archives sourceJar, javadocJar
+}
