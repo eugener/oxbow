@@ -39,6 +39,7 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.swing.JTable;
+import javax.swing.ListCellRenderer;
 import javax.swing.SwingConstants;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
@@ -56,6 +57,7 @@ public final class TableRowFilterSupport {
     private boolean actionsVisible = true;
     private int filterIconPlacement = SwingConstants.LEADING;
     private boolean useTableRenderers = false;
+    private ListCellRenderer renderer = null;
 
     private TableRowFilterSupport( ITableFilter<?> filter ) {
         if ( filter == null ) throw new NullPointerException();
@@ -130,6 +132,14 @@ public final class TableRowFilterSupport {
         return this;
     }
 
+    public ListCellRenderer getRenderer() {
+        return renderer;
+    }
+
+    public void setCheckListRenderer(ListCellRenderer renderer) {
+        this.renderer = renderer;
+    }
+    
     public JTable apply() {
 
         final TableFilterColumnPopup filterPopup = new TableFilterColumnPopup(filter);
@@ -139,7 +149,8 @@ public final class TableRowFilterSupport {
         filterPopup.setSearchFilter(searchFilter);
         filterPopup.setSearchTranslator(translator);
         filterPopup.setUseTableRenderers( useTableRenderers );
-
+        filterPopup.setCellRenderer(renderer);
+        
         setupTableHeader();
 
         return filter.getTable();

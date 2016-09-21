@@ -40,6 +40,7 @@ import java.util.Collection;
 import javax.swing.AbstractAction;
 import javax.swing.JList;
 import javax.swing.KeyStroke;
+import javax.swing.ListCellRenderer;
 import javax.swing.ListSelectionModel;
 
 import org.oxbow.swingbits.util.IObjectToStringTranslator;
@@ -72,6 +73,10 @@ public class CheckList<T> {
             return new CheckList<T>(list);
         }
         
+        public <T> CheckList<T> build(CheckListRenderer customRenderer) {
+            return new CheckList<T>(list, customRenderer);
+        }
+        
     }
     
     
@@ -90,6 +95,18 @@ public class CheckList<T> {
         
         setupKeyboardActions(list);
 
+    }
+    
+    
+    private CheckList(JList list, CheckListRenderer customRenderer) {
+        if (list == null) throw new NullPointerException();
+        this.list = list;
+        this.list.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        
+        if ( !isEditorAttached() ) list.addMouseListener(checkBoxEditor);
+        this.list.setCellRenderer(customRenderer);
+        
+        setupKeyboardActions(list);
     }
 
     @SuppressWarnings("serial")
@@ -168,6 +185,10 @@ public class CheckList<T> {
             ICheckListModel<T> model = getModel();
             model.setCheckedIndex(index, !model.isCheckedIndex(index));
         }
+    }
+    
+    public void setCellRenderer(ListCellRenderer renderer) {
+        list.setCellRenderer(renderer);
     }
     
 }

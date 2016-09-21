@@ -52,6 +52,7 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
+import javax.swing.ListCellRenderer;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.event.DocumentEvent;
@@ -147,6 +148,10 @@ class TableFilterColumnPopup extends PopupWindow implements MouseListener {
         
         public void setUseTableRenderers(boolean reuseRenderers) {
             this.useTableRenderers = reuseRenderers;
+        }
+        
+        public void setCellRenderer(ListCellRenderer renderer) {
+            this.filterList.setCellRenderer(renderer);
         }
 
         private void setupTableHeader() {
