@@ -136,7 +136,7 @@ public final class TableRowFilterSupport {
         return renderer;
     }
 
-    public void setCheckListRenderer(ListCellRenderer renderer) {
+    public void checkListRenderer(ListCellRenderer renderer) {
         this.renderer = renderer;
     }
     

@@ -100,12 +100,14 @@ public class CheckList<T> {
     
     private CheckList(JList list, CheckListRenderer customRenderer) {
         if (list == null) throw new NullPointerException();
+        if (customRenderer == null) throw new NullPointerException();
+        
         this.list = list;
         this.list.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         
         if ( !isEditorAttached() ) list.addMouseListener(checkBoxEditor);
-        this.list.setCellRenderer(customRenderer);
-        
+
+        setCellRenderer(customRenderer);        
         setupKeyboardActions(list);
     }
 
