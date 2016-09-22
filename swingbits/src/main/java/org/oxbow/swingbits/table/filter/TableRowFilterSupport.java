@@ -136,8 +136,9 @@ public final class TableRowFilterSupport {
         return renderer;
     }
 
-    public void checkListRenderer(ListCellRenderer renderer) {
+    public TableRowFilterSupport checkListRenderer(ListCellRenderer renderer) {
         this.renderer = renderer;
+        return this;
     }
     
     public JTable apply() {
