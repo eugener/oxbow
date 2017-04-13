@@ -389,7 +389,7 @@ public final class TaskDialogs {
 				models.add(btn.getModel());
 				buttons.add(btn);
 				bGroup.add(btn);
-				p.add(btn, new CC().gapBottom("8"));
+				p.add(btn, new CC().growX().gapBottom("8"));
 			}
 
             if ( defaultChoice >= 0 && defaultChoice < choices.size()) {
