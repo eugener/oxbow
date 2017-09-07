@@ -2,10 +2,6 @@
 [![Coverage Status](https://coveralls.io/repos/eugener/oxbow/badge.png)](https://coveralls.io/r/eugener/oxbow)
 
 **SwingBits** is a collection of useful components and utilities for Java Swing Toolkit. 
-  
-**Download latest releases:**
-  [SwingBits v0.5.0](http://oxbow.googlecode.com/files/swing-bits-0.5.0.zip) and
-  [TaskDialogs v1.3.5](http://oxbow.googlecode.com/files/task-dialog-1.3.5.zip)
 
 The documentation can be found in the [Project Wiki](https://github.com/eugener/oxbow/wiki/_pages).   
 
