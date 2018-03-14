@@ -42,6 +42,7 @@ import java.beans.PropertyChangeListener;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -90,6 +91,7 @@ class TableFilterColumnPopup extends PopupWindow implements MouseListener {
         private IObjectToStringTranslator translator;
         private boolean actionsVisible = true;
         private boolean useTableRenderers = false;
+        ResourceBundle bundle = ResourceBundle.getBundle( "task-dialog" ); // NOI18N
 
         public TableFilterColumnPopup( ITableFilter<?> filter ) {
 
@@ -169,7 +171,7 @@ class TableFilterColumnPopup extends PopupWindow implements MouseListener {
             toolbar.setFloatable(false);
             toolbar.setOpaque(false);
             toolbar.add( new PopupWindow.CommandAction(
-                    "Clear all column filters", 
+                    bundle.getString( "Clear_ALL_COLUMN_FILTERS" ),
                     new ImageIcon(getClass().getResource("funnel_delete.png"))) {
                 @Override
                 protected boolean perform() {
@@ -180,14 +182,14 @@ class TableFilterColumnPopup extends PopupWindow implements MouseListener {
             
             commands.add(Box.createHorizontalGlue());
             
-            commands.add( new JButton( new PopupWindow.CommandAction("Apply"){
+            commands.add( new JButton( new PopupWindow.CommandAction(bundle.getString("Apply")){
                 @Override
                 protected boolean perform() {
                     return applyColumnFilter();
                 }})
              );
             commands.add( Box.createHorizontalStrut(5) );
-            commands.add( new JButton( new PopupWindow.CommandAction("Cancel")));
+            commands.add( new JButton( new PopupWindow.CommandAction(bundle.getString("Cancel"))));
             commands.setBorder( BorderFactory.createEmptyBorder(3, 0, 3, 0));
             commands.setBackground(UIManager.getColor("Panel.background"));
             commands.setOpaque(true);
