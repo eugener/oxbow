@@ -381,16 +381,16 @@ public final class TaskDialogs {
             final List<CommandLinkButton> buttons = new ArrayList<CommandLinkButton>();
 
             CommandLinkButton btn;
-			final JPanel p = new JPanel(new MigLayout(new LC().flowY().noGrid()));
-			p.setOpaque(false);
-			for (final CommandLink link : choices)
-			{
-				btn = new CommandLinkButton(link, TaskDialog.getDesign().getCommandLinkPainter());
-				models.add(btn.getModel());
-				buttons.add(btn);
-				bGroup.add(btn);
-				p.add(btn, new CC().growX().gapBottom("8"));
-			}
+            final JPanel p = new JPanel(new MigLayout(new LC().flowY().noGrid().fillX()));
+            p.setOpaque(false);
+            for (final CommandLink link : choices)
+            {
+                btn = new CommandLinkButton(link, TaskDialog.getDesign().getCommandLinkPainter());
+                models.add(btn.getModel());
+                buttons.add(btn);
+                bGroup.add(btn);
+                p.add(btn, new CC().growX().gapBottom("8"));
+            }
 
             if ( defaultChoice >= 0 && defaultChoice < choices.size()) {
                 bGroup.setSelected(models.get(defaultChoice), true);
