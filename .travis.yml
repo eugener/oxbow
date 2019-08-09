@@ -4,6 +4,7 @@ before_script: cd swingbits
 script: mvn test -B
 jdk:
 - oraclejdk8
+dist: trusty
 #env:
 #  global:
 #  - secure: YxhQo3hQnG3cXcXioSl2u3HGlzfmUTuB1jJCSL6E4+c+yN2MAhUfeXWrmVRpFbkvwtCfXugfVOrpjnvR9z58ASTa2H7jzxqw2Cl6lEKww/++SGgpTrn/ygDuPiAYJTH+GEm4AQCAEy226qctrXdlS675uCCHw/Zd3082tJI1iu8=
