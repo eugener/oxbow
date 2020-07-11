@@ -32,37 +32,37 @@ Here are some of its features:
 The maven pom file:
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>TestJTable</groupId>
-	<artifactId>TestJTable</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<build>
-		<sourceDirectory>src</sourceDirectory>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.0</version>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
-	<dependencies>
-		<dependency>
-			<groupId>org.swinglabs.swingx</groupId>
-			<artifactId>swingx-all</artifactId>
-			<version>1.6.5-1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.bidib.org.oxbow</groupId>
-			<artifactId>swingbits</artifactId>
-			<version>1.2.2</version>
-		</dependency>
-	</dependencies>
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>TestJTable</groupId>
+    <artifactId>TestJTable</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <build>
+        <sourceDirectory>src</sourceDirectory>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.0</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <dependencies>
+        <dependency>
+            <groupId>org.swinglabs.swingx</groupId>
+            <artifactId>swingx-all</artifactId>
+            <version>1.6.5-1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.bidib.org.oxbow</groupId>
+            <artifactId>swingbits</artifactId>
+            <version>1.2.2</version>
+        </dependency>
+    </dependencies>
 </project>
 ```
 
