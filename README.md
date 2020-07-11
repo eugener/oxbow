@@ -73,6 +73,7 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableModel;
 
 import org.jdesktop.swingx.JXTable;
 import org.jdesktop.swingx.decorator.HighlighterFactory;
@@ -86,7 +87,7 @@ public class FilterTable extends JFrame {
 	public FilterTable() {
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Object rows[][] = {
+		Object rows[][] = {
                 {"AMZN", "Amazon", 41.28},
                 {"EBAY", "eBay", 41.57},
                 {"GOOG", "Google", 388.33},
@@ -98,8 +99,9 @@ public class FilterTable extends JFrame {
                 {"VOD",  "Vodafone Group", 26.02},
                 {"YHOO", "Yahoo!", 37.69}
               };
-        Object columns[] = { "Symbol", "Name", "Price" };
-		JXTable table = new JXTable(rows, columns);
+		Object columns[] = { "Symbol", "Name", "Price" };
+		DefaultTableModel model = new DefaultTableModel(rows, columns);
+		JXTable table = new JXTable(model);
 		table.setColumnControlVisible(true);
 		table.setHighlighters(HighlighterFactory.createSimpleStriping());
 		table.setEditable(false);
