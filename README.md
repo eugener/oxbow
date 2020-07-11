@@ -82,38 +82,37 @@ import org.oxbow.swingbits.table.filter.TableRowFilterSupport;
 
 public class FilterTable extends JFrame {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	public FilterTable() {
-		setLayout(new BorderLayout());
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Object rows[][] = {
-                {"AMZN", "Amazon", 41.28},
-                {"EBAY", "eBay", 41.57},
-                {"GOOG", "Google", 388.33},
-                {"MSFT", "Microsoft", 26.56},
-                {"NOK", "Nokia Corp", 17.13},
-                {"ORCL", "Oracle Corp.", 12.52},
-                {"SUNW", "Sun Microsystems", 3.86},
-                {"TWX",  "Time Warner", 17.66},
-                {"VOD",  "Vodafone Group", 26.02},
-                {"YHOO", "Yahoo!", 37.69}
-        	};
-		Object columns[] = { "Symbol", "Name", "Price" };
-		DefaultTableModel model = new DefaultTableModel(rows, columns);
-		JXTable table = new JXTable(model);
-		table.setColumnControlVisible(true);
-		table.setHighlighters(HighlighterFactory.createSimpleStriping());
-		table.setEditable(false);
-		TableRowFilterSupport.forTable(table).actions(true).searchable(true).checkListRenderer(new CheckListRenderer()).apply();
-		add(new JScrollPane(table));
-		setSize(300, 250);
-		setVisible(true);
-	}
+    public FilterTable() {
+        setLayout(new BorderLayout());
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Object rows[][] = {
+                { "AMZN", "Amazon", 41.28 },
+                { "EBAY", "eBay", 41.57 },
+                { "GOOG", "Google", 388.33 },
+                { "MSFT", "Microsoft", 26.56 },
+                { "NOK", "Nokia Corp", 17.13 },
+                { "ORCL", "Oracle Corp.", 12.52 },
+                { "SUNW", "Sun Microsystems", 3.86 },
+                { "TWX", "Time Warner", 17.66 },
+                { "VOD", "Vodafone Group", 26.02 },
+                { "YHOO", "Yahoo!", 37.69 } };
+        Object columns[] = { "Symbol", "Name", "Price" };
+        DefaultTableModel model = new DefaultTableModel(rows, columns);
+        JXTable table = new JXTable(model);
+        table.setColumnControlVisible(true);
+        table.setHighlighters(HighlighterFactory.createSimpleStriping());
+        table.setEditable(false);
+        TableRowFilterSupport.forTable(table).actions(true).searchable(true).checkListRenderer(new CheckListRenderer()).apply();
+        add(new JScrollPane(table));
+        setSize(300, 250);
+        setVisible(true);
+    }
 
-	public static void main(String args[]) {
-		SwingUtilities.invokeLater(() -> new FilterTable());
-	}
+    public static void main(String args[]) {
+        SwingUtilities.invokeLater(() -> new FilterTable());
+    }
 }
  ```
  
