@@ -98,7 +98,7 @@ public class FilterTable extends JFrame {
                 {"TWX",  "Time Warner", 17.66},
                 {"VOD",  "Vodafone Group", 26.02},
                 {"YHOO", "Yahoo!", 37.69}
-              };
+        	};
 		Object columns[] = { "Symbol", "Name", "Price" };
 		DefaultTableModel model = new DefaultTableModel(rows, columns);
 		JXTable table = new JXTable(model);
