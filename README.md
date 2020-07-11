@@ -78,28 +78,27 @@ import org.jdesktop.swingx.JXTable;
 import org.jdesktop.swingx.decorator.HighlighterFactory;
 import org.oxbow.swingbits.list.CheckListRenderer;
 import org.oxbow.swingbits.table.filter.TableRowFilterSupport;
- 
- public class FilterTable extends JFrame{
+
+public class FilterTable extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
 	public FilterTable() {
-		 setLayout(new BorderLayout());
-         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-         Object rows[][] = {
-           {"AMZN", "Amazon", 41.28},
-           {"EBAY", "eBay", 41.57},
-           {"GOOG", "Google", 388.33},
-           {"MSFT", "Microsoft", 26.56},
-           {"NOK", "Nokia Corp", 17.13},
-           {"ORCL", "Oracle Corp.", 12.52},
-           {"SUNW", "Sun Microsystems", 3.86},
-           {"TWX",  "Time Warner", 17.66},
-           {"VOD",  "Vodafone Group", 26.02},
-           {"YHOO", "Yahoo!", 37.69}
-         };
-		Object columns[] = { "Symbol", "Name", "Price" };
-
+		setLayout(new BorderLayout());
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Object rows[][] = {
+                {"AMZN", "Amazon", 41.28},
+                {"EBAY", "eBay", 41.57},
+                {"GOOG", "Google", 388.33},
+                {"MSFT", "Microsoft", 26.56},
+                {"NOK", "Nokia Corp", 17.13},
+                {"ORCL", "Oracle Corp.", 12.52},
+                {"SUNW", "Sun Microsystems", 3.86},
+                {"TWX",  "Time Warner", 17.66},
+                {"VOD",  "Vodafone Group", 26.02},
+                {"YHOO", "Yahoo!", 37.69}
+              };
+        Object columns[] = { "Symbol", "Name", "Price" };
 		JXTable table = new JXTable(rows, columns);
 		table.setColumnControlVisible(true);
 		table.setHighlighters(HighlighterFactory.createSimpleStriping());
@@ -113,6 +112,6 @@ import org.oxbow.swingbits.table.filter.TableRowFilterSupport;
 	public static void main(String args[]) {
 		SwingUtilities.invokeLater(() -> new FilterTable());
 	}
- }
+}
  ```
  
