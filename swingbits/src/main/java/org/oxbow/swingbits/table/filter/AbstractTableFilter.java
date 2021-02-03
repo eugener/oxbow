@@ -59,6 +59,8 @@ public abstract class AbstractTableFilter<T extends JTable> implements ITableFil
 
     private final T table;
     private final TableFilterState filterState = new TableFilterState();
+    
+    private boolean autoclean;
 
     public AbstractTableFilter( T table ) {
         this.table = table;
@@ -88,6 +90,11 @@ public abstract class AbstractTableFilter<T extends JTable> implements ITableFil
                 @Override
                 public void tableChanged(TableModelEvent e) {
                     clearDistinctItemCache();
+                    
+                    if (autoclean && table.getModel().getRowCount() == 0) {
+                    	clear();
+                    }
+                    
                 }
             });
         }
@@ -168,6 +175,11 @@ public abstract class AbstractTableFilter<T extends JTable> implements ITableFil
 
     public void setFilterState(int column, Collection<DistinctColumnItem> values ) {
         filterState.setValues(column, values);
+    }
+    
+    @Override
+    public void setAutoClean(boolean autoclean) {
+    	this.autoclean = autoclean;
     }
 
     public void clear() {
