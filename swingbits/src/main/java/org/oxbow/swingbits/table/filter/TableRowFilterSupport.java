@@ -117,8 +117,8 @@ public final class TableRowFilterSupport {
      * @return
      */
     public TableRowFilterSupport autoclean( boolean autoclean ) {
-    	this.autoclean = autoclean;
-    	return this;
+        this.autoclean = autoclean;
+        return this;
     }
 
     public TableRowFilterSupport searchFilter(IListFilter searchFilter) {

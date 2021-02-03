@@ -91,8 +91,8 @@ public class TableFilterTest implements Runnable {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-            	DefaultTableModel modelo = (DefaultTableModel) table.getModel();
-            	modelo.setRowCount(0);
+                DefaultTableModel modelo = (DefaultTableModel) table.getModel();
+                modelo.setRowCount(0);
             }
         });
 
@@ -106,7 +106,7 @@ public class TableFilterTest implements Runnable {
     private TableRowFilterSupport filter;
 
     private JTable buildTable() {
-    	 
+
         filter = TableRowFilterSupport.forTable(new JTable(new DefaultTableModel(data, colNames)))
                                              .onFilterChange(new IFilterChangeListener() {
                                                  @Override
