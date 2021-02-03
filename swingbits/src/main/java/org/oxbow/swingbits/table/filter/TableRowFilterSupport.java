@@ -56,6 +56,7 @@ public final class TableRowFilterSupport {
     private boolean actionsVisible = true;
     private int filterIconPlacement = SwingConstants.LEADING;
     private boolean useTableRenderers = false;
+    private boolean autoclean = false;
 
     private TableRowFilterSupport( ITableFilter<?> filter ) {
         if ( filter == null ) throw new NullPointerException();
@@ -109,6 +110,16 @@ public final class TableRowFilterSupport {
         this.searchable = searchable;
         return this;
     }
+    
+    /**
+     * Set flag to clear all filters automatically if model row count is 0
+     * @param autoclean
+     * @return
+     */
+    public TableRowFilterSupport autoclean( boolean autoclean ) {
+        this.autoclean = autoclean;
+        return this;
+    }
 
     public TableRowFilterSupport searchFilter(IListFilter searchFilter) {
         this.searchFilter = searchFilter;
@@ -141,7 +152,9 @@ public final class TableRowFilterSupport {
         filterPopup.setUseTableRenderers( useTableRenderers );
 
         setupTableHeader();
-
+        
+        filter.setAutoClean(autoclean);
+        
         return filter.getTable();
     }
 
