@@ -87,6 +87,15 @@ public class TableFilterTest implements Runnable {
             }
         });
 
+        toolbar.add( new AbstractAction("Clear Table") {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DefaultTableModel modelo = (DefaultTableModel) table.getModel();
+                modelo.setRowCount(0);
+            }
+        });
+
         
         f.pack();
         f.setLocationRelativeTo(null);
@@ -97,7 +106,8 @@ public class TableFilterTest implements Runnable {
     private TableRowFilterSupport filter;
 
     private JTable buildTable() {
-        filter = TableRowFilterSupport.forTable(new JTable())
+
+        filter = TableRowFilterSupport.forTable(new JTable(new DefaultTableModel(data, colNames)))
                                              .onFilterChange(new IFilterChangeListener() {
                                                  @Override
                                                  public void filterChanged(ITableFilter<?> filter) {
@@ -106,9 +116,11 @@ public class TableFilterTest implements Runnable {
                                              })
                                             .actions(true)
                                             .searchable(true)
-                                            .useTableRenderers(true);
+                                            .useTableRenderers(true)
+                                            .autoclean(true);
+                                           
         JTable table = filter.apply();
-                table.setModel( new DefaultTableModel(data, colNames) );
+                 
         table.getColumnModel().getColumn(0).setCellRenderer(new TestRenderer());
         return table;
     }

@@ -86,6 +86,12 @@ public interface ITableFilter<T extends JTable> extends Serializable {
     void removeChangeListener( IFilterChangeListener listener );
 
     /**
+     * Set flag to clear all columns filter if model row count is 0 
+     * @param autoclean
+     */
+    void setAutoClean(boolean autoclean);
+    
+    /**
      * Clear the filter
      */
     void clear();
