@@ -1,4 +1,10 @@
-
 .DS_Store
+
+# Eclipse
+swingbits/.classpath
+swingbits/.project
+swingbits/.settings
+
+# IntelliJ Idea
 swingbits/.idea
 *.iml
