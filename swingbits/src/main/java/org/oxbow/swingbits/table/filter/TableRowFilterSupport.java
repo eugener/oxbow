@@ -34,9 +34,8 @@ package org.oxbow.swingbits.table.filter;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.Collections;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
@@ -57,6 +56,7 @@ public final class TableRowFilterSupport {
     private int filterIconPlacement = SwingConstants.LEADING;
     private boolean useTableRenderers = false;
     private boolean autoclean = false;
+    private Set<?> searchableColumns;
 
     private TableRowFilterSupport( ITableFilter<?> filter ) {
         if ( filter == null ) throw new NullPointerException();
@@ -150,6 +150,7 @@ public final class TableRowFilterSupport {
         filterPopup.setSearchFilter(searchFilter);
         filterPopup.setSearchTranslator(translator);
         filterPopup.setUseTableRenderers( useTableRenderers );
+        filterPopup.setSearchableColumns(searchableColumns);
 
         setupTableHeader();
         
@@ -190,12 +191,16 @@ public final class TableRowFilterSupport {
 
         JTable table =  filter.getTable();
 
-        FilterTableHeaderRenderer headerRenderer =
-                new FilterTableHeaderRenderer(filter, filterIconPlacement);
         filter.modelChanged( newModel );
 
+        FilterTableHeaderRenderer headerRenderer = null;
         for( TableColumn c:  Collections.list( table.getColumnModel().getColumns()) ) {
-            c.setHeaderRenderer( headerRenderer );
+            if (searchable && ((searchableColumns == null || searchableColumns.isEmpty())
+                    || searchableColumns.contains(c.getHeaderValue()))) {
+                headerRenderer =
+                        new FilterTableHeaderRenderer(filter, filterIconPlacement, (String) c.getHeaderValue(), "funnel.png");
+                c.setHeaderRenderer( headerRenderer );
+            }
         }
 
         if ( !fullSetup ) return;
@@ -210,5 +215,44 @@ public final class TableRowFilterSupport {
 
     }
 
+    /**
+     * Column filter list is searchable & supported columns for searching
+     * Any column is not listed in the table model will be ignored
+     *
+     * @param searchableColumns
+     * @return
+     */
+    public TableRowFilterSupport searchableColumns(Object... searchableColumns) {
+        return this.searchableColumns(Arrays.stream(searchableColumns).collect(Collectors.toSet()));
+    }
+
+    /**
+     * Column filter list is searchable & supported columns for searching
+     * Any column is not listed in the table model will be ignored
+     *
+     * @param searchableColumns
+     * @return
+     */
+    public TableRowFilterSupport searchableColumns(Set<?> searchableColumns) {
+        this.searchable = true;
+        this.searchableColumns = searchableColumns;
+        return this;
+    }
+
+    /**
+     * Column filter list is searchable & supported columns for searching
+     * Any column is not listed in the table model will be ignored
+     *
+     * @param searchableColumns
+     * @return
+     */
+    public TableRowFilterSupport searchableColumns(List<?> searchableColumns) {
+        return this.searchableColumns(new HashSet<>(searchableColumns));
+    }
+
+    public TableRowFilterSupport sortable(boolean sortable) {
+        this.filter.setSortable(sortable);
+        return this;
+    }
 
 }

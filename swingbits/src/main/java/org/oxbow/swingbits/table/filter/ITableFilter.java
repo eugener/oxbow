@@ -102,4 +102,12 @@ public interface ITableFilter<T extends JTable> extends Serializable {
      */
     void modelChanged( TableModel model );
 
+    /**
+     * Determines whether the table is sortable or not - Default true
+     * @return true by default
+     */
+
+    void setSortable(boolean sortable);
+    boolean getSortable();
+
 }

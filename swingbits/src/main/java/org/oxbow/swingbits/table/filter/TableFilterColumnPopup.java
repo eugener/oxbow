@@ -39,10 +39,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -58,6 +55,7 @@ import javax.swing.UIManager;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 import org.oxbow.swingbits.list.ActionCheckListModel;
@@ -92,6 +90,7 @@ class TableFilterColumnPopup extends PopupWindow implements MouseListener {
         private boolean actionsVisible = true;
         private boolean useTableRenderers = false;
         ResourceBundle bundle = ResourceBundle.getBundle( "task-dialog" ); // NOI18N
+        private Set<?> searchableColumns;
 
         public TableFilterColumnPopup( ITableFilter<?> filter ) {
 
@@ -236,7 +235,7 @@ class TableFilterColumnPopup extends PopupWindow implements MouseListener {
 
         @Override
         public void mouseReleased(MouseEvent e) {
-            if ( enabled && e.isPopupTrigger() ) showFilterPopup(e);
+            if ( enabled /*&& e.isPopupTrigger()*/ ) showFilterPopup(e);
         }
 
         private void showFilterPopup(MouseEvent e) {
@@ -247,6 +246,9 @@ class TableFilterColumnPopup extends PopupWindow implements MouseListener {
             int vColumnIndex = colModel.getColumnIndexAtX(e.getX());
             if ( vColumnIndex < 0 ) return;
 
+            //if a set of columns provided for only those columns to be filtered, then ignore if the column name is not in the list.
+            TableColumn column = colModel.getColumn(vColumnIndex);
+            if (searchableColumns != null && !searchableColumns.isEmpty() && !searchableColumns.contains(column.getHeaderValue())) return;
 
             // Determine if mouse was clicked between column heads
             Rectangle headerRect = filter.getTable().getTableHeader().getHeaderRect(vColumnIndex);
@@ -320,6 +322,8 @@ class TableFilterColumnPopup extends PopupWindow implements MouseListener {
         @Override
         public void mouseExited(MouseEvent e) {}
 
-
+        public void setSearchableColumns(Set<?> searchableColumns) {
+            this.searchableColumns = searchableColumns;
+        }
     }
 

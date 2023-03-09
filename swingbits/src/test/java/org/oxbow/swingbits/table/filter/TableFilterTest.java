@@ -115,7 +115,8 @@ public class TableFilterTest implements Runnable {
                                                  }
                                              })
                                             .actions(true)
-                                            .searchable(true)
+                                            .sortable(false)
+                                            .searchableColumns("B123", "C123")
                                             .useTableRenderers(true)
                                             .autoclean(true);
                                            
