@@ -1,9 +1,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.oxbow</groupId>
-	<artifactId>swing-bits</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<groupId>org.oxbow.se</groupId>
+	<artifactId>swing-bits-se</artifactId>
+	<version>1.2.2-SNAPSHOT</version>
 	<name>Oxbow Project</name>
 
 	<dependencies>
@@ -23,7 +23,7 @@
 	<repositories>
 		<repository>
 			<id>oxbow-repository</id>
-			<url>https://github.com/eugener/oxbow/raw/master/maven/repository</url>
+			<url>https://github.com/prathumca/oxbow/tree/master/maven/repository</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
