@@ -37,8 +37,8 @@ import java.beans.PropertyChangeListener;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import javax.swing.JTable;
-import javax.swing.SwingConstants;
+import javax.swing.*;
+import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
@@ -57,6 +57,10 @@ public final class TableRowFilterSupport {
     private boolean useTableRenderers = false;
     private boolean autoclean = false;
     private Set<?> searchableColumns;
+    private boolean enableRightClick;
+
+    private Icon filteringIcon;//icon which is displayed on column before any data filtered
+    private Icon filteredIcon;//icon which is displayed on column after any data filtered
 
     private TableRowFilterSupport( ITableFilter<?> filter ) {
         if ( filter == null ) throw new NullPointerException();
@@ -151,6 +155,9 @@ public final class TableRowFilterSupport {
         filterPopup.setSearchTranslator(translator);
         filterPopup.setUseTableRenderers( useTableRenderers );
         filterPopup.setSearchableColumns(searchableColumns);
+        filterPopup.setEnableRightClick(enableRightClick);
+        filterPopup.setFilteringIcon(filteringIcon);
+        filterPopup.setFilteredIcon(filteredIcon);
 
         setupTableHeader();
         
@@ -193,12 +200,20 @@ public final class TableRowFilterSupport {
 
         filter.modelChanged( newModel );
 
-        FilterTableHeaderRenderer headerRenderer = null;
+        //default icons
+        if (filteringIcon == null) {
+            filteringIcon = new ImageIcon(getClass().getResource("funnel.png"));
+        }
+        if (filteredIcon == null) {
+            filteredIcon = new ImageIcon(getClass().getResource("funnel_delete.png"));
+        }
+
+        TableCellRenderer headerRenderer;
         for( TableColumn c:  Collections.list( table.getColumnModel().getColumns()) ) {
             if (searchable && ((searchableColumns == null || searchableColumns.isEmpty())
                     || searchableColumns.contains(c.getHeaderValue()))) {
                 headerRenderer =
-                        new FilterTableHeaderRenderer(filter, filterIconPlacement, (String) c.getHeaderValue(), "funnel.png");
+                        new ExcelFilterTableHeaderRenderer(filter, filterIconPlacement, (String) c.getHeaderValue(), filteringIcon, filteredIcon);
                 c.setHeaderRenderer( headerRenderer );
             }
         }
@@ -255,4 +270,18 @@ public final class TableRowFilterSupport {
         return this;
     }
 
+    public TableRowFilterSupport enableRightClick(boolean enableRightClick) {
+        this.enableRightClick = enableRightClick;
+        return this;
+    }
+
+    public TableRowFilterSupport filteringIcon(Icon filteringIcon) {
+        this.filteringIcon = filteringIcon;
+        return this;
+    }
+
+    public TableRowFilterSupport filteredIcon(Icon filteredIcon) {
+        this.filteredIcon = filteredIcon;
+        return this;
+    }
 }

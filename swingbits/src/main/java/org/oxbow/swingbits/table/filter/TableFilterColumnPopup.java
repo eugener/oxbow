@@ -41,17 +41,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.*;
 
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JToolBar;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
+import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.JTableHeader;
@@ -91,6 +81,9 @@ class TableFilterColumnPopup extends PopupWindow implements MouseListener {
         private boolean useTableRenderers = false;
         ResourceBundle bundle = ResourceBundle.getBundle( "task-dialog" ); // NOI18N
         private Set<?> searchableColumns;
+        private boolean enableRightClick;
+        private Icon filteringIcon;//icon which is displayed on column before any data filtered
+        private Icon filteredIcon;//icon which is displayed on column after any data filtered
 
         public TableFilterColumnPopup( ITableFilter<?> filter ) {
 
@@ -230,12 +223,12 @@ class TableFilterColumnPopup extends PopupWindow implements MouseListener {
         
         @Override
         public void mousePressed(MouseEvent e) {
-            if ( enabled && e.isPopupTrigger() ) showFilterPopup(e);
+            if ( enabled && e.isPopupTrigger() && enableRightClick ) showFilterPopup(e);
         }
 
         @Override
         public void mouseReleased(MouseEvent e) {
-            if ( enabled /*&& e.isPopupTrigger()*/ ) showFilterPopup(e);
+            if ( enabled && e.isPopupTrigger() && enableRightClick ) showFilterPopup(e);
         }
 
         private void showFilterPopup(MouseEvent e) {
@@ -324,6 +317,22 @@ class TableFilterColumnPopup extends PopupWindow implements MouseListener {
 
         public void setSearchableColumns(Set<?> searchableColumns) {
             this.searchableColumns = searchableColumns;
+        }
+
+        public void setEnableRightClick(boolean enableRightClick) {
+            this.enableRightClick = enableRightClick;
+        }
+
+        protected void showPopupWindow(MouseEvent e) {
+            showFilterPopup(e);
+        }
+
+        public void setFilteringIcon(Icon filteringIcon) {
+            this.filteringIcon = filteringIcon;
+        }
+
+        public void setFilteredIcon(Icon filteredIcon) {
+            this.filteredIcon = filteredIcon;
         }
     }
 

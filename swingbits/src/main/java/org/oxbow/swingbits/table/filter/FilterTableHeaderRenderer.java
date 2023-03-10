@@ -31,17 +31,14 @@
 
 package org.oxbow.swingbits.table.filter;
 
-import java.awt.*;
-import java.awt.event.*;
-
-import javax.swing.*;
-import javax.swing.event.PopupMenuEvent;
-import javax.swing.event.PopupMenuListener;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableCellRenderer;
-
 import org.oxbow.swingbits.table.TableHeaderRenderer;
 import org.oxbow.swingbits.util.swing.CompoundIcon;
+
+import javax.swing.*;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
+import java.awt.*;
+import java.awt.event.*;
 
 /**
  * Table header renderer to show the column filter state
@@ -50,7 +47,7 @@ import org.oxbow.swingbits.util.swing.CompoundIcon;
  * @author Eugene Ryzhikov
  *
  */
-class FilterTableHeaderRenderer extends JPanel implements TableCellRenderer {
+class FilterTableHeaderRenderer extends TableHeaderRenderer {
 
     private static final long serialVersionUID = 1L;
 
@@ -58,19 +55,11 @@ class FilterTableHeaderRenderer extends JPanel implements TableCellRenderer {
     private final int filterIconPlacement;
     private final ITableFilter<?> tableFilter;
 
-    private int     column  = -1;
-    private JTable  table   = null;
-    private MenuButton b;
-    private String filterIcon;
 
     public FilterTableHeaderRenderer(ITableFilter<?> tableFilter,
-                                     int filterIconPlacement,
-                                     String columnName,
-                                     String filterIcon) {
-        super(new BorderLayout());
+                                     int filterIconPlacement) {
         this.tableFilter = tableFilter;
         this.filterIconPlacement = filterIconPlacement;
-        this.filterIcon = filterIcon;
 
         if (this.filterIconPlacement != SwingConstants.LEADING &&
                 this.filterIconPlacement != SwingConstants.TRAILING) {
@@ -78,110 +67,51 @@ class FilterTableHeaderRenderer extends JPanel implements TableCellRenderer {
                     "placement can only take the values of " +
                     "SwingConstants.LEADING or SwingConstants.TRAILING");
         }
-        b = new MenuButton(getFilterIcon(filterIcon));
-        b.setBorder(BorderFactory.createEmptyBorder(1,1,1,1));
-        JLabel l = new JLabel(columnName);
-        l.setFont(l.getFont().deriveFont(Font.PLAIN));
-        l.setBorder(BorderFactory.createEmptyBorder(1,5,1,1));
-        l.setHorizontalAlignment(JLabel.CENTER);
-        l.setVerticalAlignment(JLabel.CENTER);
-        add(l, BorderLayout.CENTER);
-        add(b, BorderLayout.EAST);
-        setBorder(UIManager.getBorder("TableHeader.cellBorder"));
     }
 
-    private Icon getFilterIcon(String filterIcon) {
+    private Icon getFilterIcon() {
+
         if (icon == null) {
-            icon = new ImageIcon( getClass().getResource(filterIcon));
+            icon = new ImageIcon( getClass().getResource("funnel.png"));
             icon = new ImageIcon( icon.getImage().getScaledInstance( 12, 12, Image.SCALE_SMOOTH  ));
         }
         return icon;
+
     }
 
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
-            boolean hasFocus, int row, int column) {
+                                                   boolean hasFocus, int row, int column) {
 
-//        final JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-//
-//        int modelColumn =  table.convertColumnIndexToModel(column);
-//        if (tableFilter.isFiltered(modelColumn)) {
-//            Icon oldIcon = label.getIcon();
-//            Icon newIcon = null;
-//            if (oldIcon == null) {
-//                newIcon = getFilterIcon();
-//            } else {
-//                ComponentOrientation orientation =
-//                        label.getComponentOrientation();
-//                if (ComponentOrientation.RIGHT_TO_LEFT.equals(orientation)) {
-//                    if (filterIconPlacement == SwingConstants.LEADING) {
-//                        newIcon = new CompoundIcon(oldIcon, getFilterIcon());
-//                    } else {
-//                        newIcon = new CompoundIcon(getFilterIcon(), oldIcon);
-//                    }
-//                } else {
-//                    if (filterIconPlacement == SwingConstants.LEADING) {
-//                        newIcon = new CompoundIcon(getFilterIcon(), oldIcon);
-//                    } else {
-//                        newIcon = new CompoundIcon(oldIcon, getFilterIcon());
-//                    }
-//                }
-//            }
-//            label.setIcon(newIcon);
-//        }
-//
-//        return label;
-        if (table != null && this.table != table) {
-            this.table = table;
-            final JTableHeader header = table.getTableHeader();
-            if (header != null) {
-                setForeground(header.getForeground());
-                setBackground(header.getBackground());
-                setFont(header.getFont());
+        final JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 
-                header.addMouseListener(new MouseAdapter() {
-
-                    @Override
-                    public void  mouseClicked(MouseEvent e) {
-                        int col = header.getTable().columnAtPoint(e.getPoint());
-                        if (col != column || col == -1) return;
-
-                        int index = header.getColumnModel().getColumnIndexAtX(e.getPoint().x);
-                        if (index == -1) return;
-
-                        setBounds(header.getHeaderRect(index));
-                        header.add(FilterTableHeaderRenderer.this);
-                        validate();
-
-                        b.doClick();
-
-                        header.remove(FilterTableHeaderRenderer.this);
-
-                        header.repaint();
-
-                        for (MouseListener ml : header.getMouseListeners()) {
-                            e.setSource(b);
-                            ml.mousePressed(e);
-                        }
+        int modelColumn =  table.convertColumnIndexToModel(column);
+        if (tableFilter.isFiltered(modelColumn)) {
+            Icon oldIcon = label.getIcon();
+            Icon newIcon = null;
+            if (oldIcon == null) {
+                newIcon = getFilterIcon();
+            } else {
+                ComponentOrientation orientation =
+                        label.getComponentOrientation();
+                if (ComponentOrientation.RIGHT_TO_LEFT.equals(orientation)) {
+                    if (filterIconPlacement == SwingConstants.LEADING) {
+                        newIcon = new CompoundIcon(oldIcon, getFilterIcon());
+                    } else {
+                        newIcon = new CompoundIcon(getFilterIcon(), oldIcon);
                     }
-                });
-            }
-        }
-        this.column = column;
-        return this;
-    }
-
-    class MenuButton extends JToggleButton {
-        public MenuButton(Icon imageIcon) {
-            super(imageIcon);
-            addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent ev) {
-                    JToggleButton b = MenuButton.this;
-                    //now trigger th action back to header action
+                } else {
+                    if (filterIconPlacement == SwingConstants.LEADING) {
+                        newIcon = new CompoundIcon(getFilterIcon(), oldIcon);
+                    } else {
+                        newIcon = new CompoundIcon(oldIcon, getFilterIcon());
+                    }
                 }
-            });
+            }
+            label.setIcon(newIcon);
         }
+
+        return label;
     }
 
 }

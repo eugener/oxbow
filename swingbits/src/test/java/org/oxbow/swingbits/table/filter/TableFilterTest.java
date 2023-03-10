@@ -114,9 +114,11 @@ public class TableFilterTest implements Runnable {
                                                      System.out.println("Filter Changed");
                                                  }
                                              })
+                                            .filterIconPlacement(SwingConstants.TRAILING)
                                             .actions(true)
                                             .sortable(false)
-                                            .searchableColumns("B123", "C123")
+                                            .enableRightClick(false)
+                                            .searchableColumns("C123")
                                             .useTableRenderers(true)
                                             .autoclean(true);
                                            

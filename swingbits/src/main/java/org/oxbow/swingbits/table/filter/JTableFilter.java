@@ -108,12 +108,16 @@ public class JTableFilter extends AbstractTableFilter<JTable> {
 
     public void modelChanged( TableModel model ) {
         //use lazy loading for RowSorter
-        if(this.getSortable() && getTable().getRowSorter()==null){
+        if(getTable().getRowSorter()==null){
             TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>( model );
             sorter.setSortsOnUpdates(true);
             getTable().setRowSorter( sorter );
+            if (!this.getSortable()) {
+                for (int i = 0; i < this.getTable().getColumnCount(); i++) {
+                    sorter.setSortable(i, false);
+                }
+            }
         }
     }
-
 
 }
