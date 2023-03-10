@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata modelVersion="1.1.0">
-  <groupId>org.oxbow</groupId>
-  <artifactId>swing-bits</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <groupId>org.oxbow.se</groupId>
+  <artifactId>swing-bits-se</artifactId>
+  <version>1.2.2-SNAPSHOT</version>
   <versioning>
     <snapshot>
       <localCopy>true</localCopy>
     </snapshot>
-    <lastUpdated>20130102042349</lastUpdated>
+    <lastUpdated>20230310042349</lastUpdated>
     <snapshotVersions>
       <snapshotVersion>
         <classifier>javadoc</classifier>
         <extension>jar</extension>
-        <value>1.0.0-SNAPSHOT</value>
-        <updated>20130102042349</updated>
+        <value>1.2.2-SNAPSHOT</value>
+        <updated>20230310042349</updated>
       </snapshotVersion>
       <snapshotVersion>
         <classifier>sources</classifier>
         <extension>jar</extension>
-        <value>1.0.0-SNAPSHOT</value>
-        <updated>20130102042349</updated>
+        <value>1.2.2-SNAPSHOT</value>
+        <updated>20230310042349</updated>
       </snapshotVersion>
       <snapshotVersion>
         <extension>jar</extension>
-        <value>1.0.0-SNAPSHOT</value>
-        <updated>20130102042349</updated>
+        <value>1.2.2-SNAPSHOT</value>
+        <updated>20230310042349</updated>
       </snapshotVersion>
       <snapshotVersion>
         <extension>pom</extension>
-        <value>1.0.0-SNAPSHOT</value>
-        <updated>20130102042349</updated>
+        <value>1.2.2-SNAPSHOT</value>
+        <updated>20230310042349</updated>
       </snapshotVersion>
     </snapshotVersions>
   </versioning>
