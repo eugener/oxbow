@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata>
-  <groupId>org.oxbow</groupId>
-  <artifactId>swing-bits</artifactId>
+  <groupId>org.oxbow.se</groupId>
+  <artifactId>swing-bits-se</artifactId>
   <versioning>
-    <release>1.0.0</release>
+    <release>1.2.2</release>
     <versions>
-      <version>1.0.0</version>
-      <version>1.0.0-SNAPSHOT</version>
+      <version>1.2.2</version>
+      <version>1.2.2-SNAPSHOT</version>
     </versions>
-    <lastUpdated>20130102042349</lastUpdated>
+    <lastUpdated>20230310042349</lastUpdated>
   </versioning>
 </metadata>
