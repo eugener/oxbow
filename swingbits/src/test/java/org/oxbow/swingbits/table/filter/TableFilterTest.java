@@ -115,6 +115,7 @@ public class TableFilterTest implements Runnable {
                                                  }
                                              })
                                             .filterIconPlacement(SwingConstants.TRAILING)
+                                            .filterType(TableRowFilterSupport.FilterType.EXCEL)
                                             .actions(true)
                                             .sortable(false)
                                             .enableRightClick(false)

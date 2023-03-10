@@ -17,12 +17,12 @@ public class ExcelFilterTableHeaderRenderer extends JPanel implements TableCellR
     private int column = -1;
     private JTable table = null;
     private JButton button;
+    private JLabel title;
     private Icon filteringIcon;//icon which is displayed on column before any data filtered
     private Icon filteredIcon;//icon which is displayed on column after any data filtered
 
     public ExcelFilterTableHeaderRenderer(ITableFilter<?> tableFilter,
                                           int filterIconPlacement,
-                                          String columnName,
                                           Icon filteringIcon,
                                           Icon filteredIcon) {
         super(new BorderLayout());
@@ -42,20 +42,20 @@ public class ExcelFilterTableHeaderRenderer extends JPanel implements TableCellR
         button = new JButton(this.filteringIcon);
         button.setPreferredSize(new Dimension(25, 15));
         button.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        JLabel l = new JLabel(columnName);
+        title = new JLabel();
 
         switch (this.filterIconPlacement) {
             case SwingConstants.LEADING:
                 add(button, BorderLayout.WEST);
-                add(l, BorderLayout.CENTER);
+                add(title, BorderLayout.CENTER);
                 break;
             case SwingConstants.TRAILING:
-                add(l, BorderLayout.CENTER);
+                add(title, BorderLayout.CENTER);
                 add(button, BorderLayout.EAST);
                 break;
         }
-        l.setHorizontalAlignment(JLabel.CENTER);
-        l.setVerticalAlignment(JLabel.CENTER);
+        title.setHorizontalAlignment(JLabel.CENTER);
+        title.setVerticalAlignment(JLabel.CENTER);
         setBorder(UIManager.getBorder("TableHeader.cellBorder"));
     }
 
@@ -63,12 +63,10 @@ public class ExcelFilterTableHeaderRenderer extends JPanel implements TableCellR
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
                                                    boolean hasFocus, int row, int column) {
         if (table != null && this.table != table) {
+            title.setText(table.getColumnName(column));
             this.table = table;
             final JTableHeader header = table.getTableHeader();
             if (header != null) {
-                setForeground(header.getForeground());
-                setBackground(header.getBackground());
-                setFont(header.getFont());
                 header.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {

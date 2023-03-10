@@ -56,11 +56,17 @@ public final class TableRowFilterSupport {
     private int filterIconPlacement = SwingConstants.LEADING;
     private boolean useTableRenderers = false;
     private boolean autoclean = false;
+
+    public enum FilterType {
+        DEFAULT,
+        EXCEL
+    }
     private Set<?> searchableColumns;
     private boolean enableRightClick;
 
     private Icon filteringIcon;//icon which is displayed on column before any data filtered
     private Icon filteredIcon;//icon which is displayed on column after any data filtered
+    private FilterType filterType = FilterType.DEFAULT;
 
     private TableRowFilterSupport( ITableFilter<?> filter ) {
         if ( filter == null ) throw new NullPointerException();
@@ -208,12 +214,19 @@ public final class TableRowFilterSupport {
             filteredIcon = new ImageIcon(getClass().getResource("funnel_delete.png"));
         }
 
-        TableCellRenderer headerRenderer;
+        TableCellRenderer headerRenderer = null;
+        switch (filterType) {
+            case DEFAULT:
+                headerRenderer = new FilterTableHeaderRenderer(filter, filterIconPlacement);
+                break;
+            case EXCEL:
+                headerRenderer =
+                        new ExcelFilterTableHeaderRenderer(filter, filterIconPlacement, filteringIcon, filteredIcon);
+                break;
+        }
         for( TableColumn c:  Collections.list( table.getColumnModel().getColumns()) ) {
             if (searchable && ((searchableColumns == null || searchableColumns.isEmpty())
                     || searchableColumns.contains(c.getHeaderValue()))) {
-                headerRenderer =
-                        new ExcelFilterTableHeaderRenderer(filter, filterIconPlacement, (String) c.getHeaderValue(), filteringIcon, filteredIcon);
                 c.setHeaderRenderer( headerRenderer );
             }
         }
@@ -282,6 +295,11 @@ public final class TableRowFilterSupport {
 
     public TableRowFilterSupport filteredIcon(Icon filteredIcon) {
         this.filteredIcon = filteredIcon;
+        return this;
+    }
+
+    public TableRowFilterSupport filterType(FilterType filterType) {
+        this.filterType = filterType;
         return this;
     }
 }
