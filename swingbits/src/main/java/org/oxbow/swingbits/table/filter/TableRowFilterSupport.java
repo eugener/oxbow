@@ -208,28 +208,35 @@ public final class TableRowFilterSupport {
 
         //default icons
         if (filteringIcon == null) {
-            filteringIcon = new ImageIcon(getClass().getResource("funnel.png"));
+            filteringIcon = new ImageIcon(getClass().getResource("filtering.png"));
         }
         if (filteredIcon == null) {
-            filteredIcon = new ImageIcon(getClass().getResource("funnel_delete.png"));
+            filteredIcon = new ImageIcon(getClass().getResource("filtered.png"));
         }
 
         TableCellRenderer headerRenderer = null;
         switch (filterType) {
             case DEFAULT:
-                headerRenderer = new FilterTableHeaderRenderer(filter, filterIconPlacement);
+            	for( TableColumn c:  Collections.list( table.getColumnModel().getColumns()) ) {
+                    if (searchable && ((searchableColumns == null || searchableColumns.isEmpty())
+                            || searchableColumns.contains(c.getHeaderValue()))) {
+                    	headerRenderer = new FilterTableHeaderRenderer(filter, filterIconPlacement);
+                        c.setHeaderRenderer( headerRenderer );
+                    }
+                }
                 break;
             case EXCEL:
-                headerRenderer =
-                        new ExcelFilterTableHeaderRenderer(filter, filterIconPlacement, filteringIcon, filteredIcon);
+            	for( TableColumn c:  Collections.list( table.getColumnModel().getColumns()) ) {
+                    if (searchable && ((searchableColumns == null || searchableColumns.isEmpty())
+                            || searchableColumns.contains(c.getHeaderValue()))) {
+                    	headerRenderer =
+                    			new ExcelFilterTableHeaderRenderer(filter, filterIconPlacement, (String) c.getHeaderValue(), filteringIcon, filteredIcon);
+                        c.setHeaderRenderer( headerRenderer );
+                    }
+                }
                 break;
         }
-        for( TableColumn c:  Collections.list( table.getColumnModel().getColumns()) ) {
-            if (searchable && ((searchableColumns == null || searchableColumns.isEmpty())
-                    || searchableColumns.contains(c.getHeaderValue()))) {
-                c.setHeaderRenderer( headerRenderer );
-            }
-        }
+        
 
         if ( !fullSetup ) return;
 

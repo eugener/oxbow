@@ -162,14 +162,15 @@ class TableFilterColumnPopup extends PopupWindow implements MouseListener {
             JToolBar toolbar = new JToolBar();
             toolbar.setFloatable(false);
             toolbar.setOpaque(false);
-            toolbar.add( new PopupWindow.CommandAction(
-                    bundle.getString( "Clear_ALL_COLUMN_FILTERS" ),
-                    new ImageIcon(getClass().getResource("funnel_delete.png"))) {
-                @Override
-                protected boolean perform() {
-                    return clearAllFilters();
-                }
-            });
+            //removed clear filter for JTable
+//            toolbar.add( new PopupWindow.CommandAction(
+//                    bundle.getString( "Clear_ALL_COLUMN_FILTERS" ),
+//                    new ImageIcon(getClass().getResource("funnel_delete.png"))) {
+//                @Override
+//                protected boolean perform() {
+//                    return clearAllFilters();
+//                }
+//            });
             commands.add( toolbar );
             
             commands.add(Box.createHorizontalGlue());

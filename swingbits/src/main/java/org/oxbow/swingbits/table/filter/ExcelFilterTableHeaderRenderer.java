@@ -23,6 +23,7 @@ public class ExcelFilterTableHeaderRenderer extends JPanel implements TableCellR
 
     public ExcelFilterTableHeaderRenderer(ITableFilter<?> tableFilter,
                                           int filterIconPlacement,
+    									  String columnName,
                                           Icon filteringIcon,
                                           Icon filteredIcon) {
         super(new BorderLayout());
@@ -41,8 +42,8 @@ public class ExcelFilterTableHeaderRenderer extends JPanel implements TableCellR
 
         button = new JButton(this.filteringIcon);
         button.setPreferredSize(new Dimension(25, 15));
-        button.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        title = new JLabel();
+        button.setBorder(BorderFactory.createBevelBorder(1,Color.GRAY, Color.GRAY));
+        title = new JLabel(columnName);
 
         switch (this.filterIconPlacement) {
             case SwingConstants.LEADING:
@@ -63,7 +64,8 @@ public class ExcelFilterTableHeaderRenderer extends JPanel implements TableCellR
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
                                                    boolean hasFocus, int row, int column) {
         if (table != null && this.table != table) {
-            title.setText(table.getColumnName(column));
+        	//commented to update the column with respective names
+            //title.setText(table.getColumnName(column));
             this.table = table;
             final JTableHeader header = table.getTableHeader();
             if (header != null) {
