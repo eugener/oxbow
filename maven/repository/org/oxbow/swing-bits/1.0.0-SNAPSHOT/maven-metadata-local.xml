@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata modelVersion="1.1.0">
-  <groupId>org.oxbow.se</groupId>
-  <artifactId>swing-bits-se</artifactId>
+  <groupId>org.oxbow</groupId>
+  <artifactId>swing-bits</artifactId>
   <version>1.2.2-SNAPSHOT</version>
   <versioning>
     <snapshot>
