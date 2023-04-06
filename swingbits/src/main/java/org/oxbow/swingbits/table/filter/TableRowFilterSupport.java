@@ -67,6 +67,7 @@ public final class TableRowFilterSupport {
     private Icon filteringIcon;//icon which is displayed on column before any data filtered
     private Icon filteredIcon;//icon which is displayed on column after any data filtered
     private FilterType filterType = FilterType.DEFAULT;
+    private boolean clearTableFilter = false;
 
     private TableRowFilterSupport( ITableFilter<?> filter ) {
         if ( filter == null ) throw new NullPointerException();
@@ -164,6 +165,7 @@ public final class TableRowFilterSupport {
         filterPopup.setEnableRightClick(enableRightClick);
         filterPopup.setFilteringIcon(filteringIcon);
         filterPopup.setFilteredIcon(filteredIcon);
+        filterPopup.setClearFilterIcon(clearTableFilter);
 
         setupTableHeader();
         
@@ -308,5 +310,10 @@ public final class TableRowFilterSupport {
     public TableRowFilterSupport filterType(FilterType filterType) {
         this.filterType = filterType;
         return this;
+    }
+    
+    public TableRowFilterSupport enableClearTableFilter(boolean clearTableFilter) {
+    	this.clearTableFilter = clearTableFilter;
+    	return this;
     }
 }

@@ -119,8 +119,10 @@ public class TableFilterTest implements Runnable {
                                             .actions(true)
                                             .sortable(false)
                                             .enableRightClick(false)
-                                            .searchableColumns("C123")
+                                            .searchable(true)
+                                            .searchableColumns("A123","B123")
                                             .useTableRenderers(true)
+                                            .enableClearTableFilter(true)
                                             .autoclean(true);
                                            
         JTable table = filter.apply();

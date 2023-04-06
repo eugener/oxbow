@@ -84,6 +84,7 @@ class TableFilterColumnPopup extends PopupWindow implements MouseListener {
         private boolean enableRightClick;
         private Icon filteringIcon;//icon which is displayed on column before any data filtered
         private Icon filteredIcon;//icon which is displayed on column after any data filtered
+        private boolean clearTableFilterIcon = false;
 
         public TableFilterColumnPopup( ITableFilter<?> filter ) {
 
@@ -162,15 +163,16 @@ class TableFilterColumnPopup extends PopupWindow implements MouseListener {
             JToolBar toolbar = new JToolBar();
             toolbar.setFloatable(false);
             toolbar.setOpaque(false);
-            //removed clear filter for JTable
-//            toolbar.add( new PopupWindow.CommandAction(
-//                    bundle.getString( "Clear_ALL_COLUMN_FILTERS" ),
-//                    new ImageIcon(getClass().getResource("funnel_delete.png"))) {
-//                @Override
-//                protected boolean perform() {
-//                    return clearAllFilters();
-//                }
-//            });
+			if (clearTableFilterIcon) {
+
+				toolbar.add(new PopupWindow.CommandAction(bundle.getString("Clear_ALL_COLUMN_FILTERS"),
+						new ImageIcon(getClass().getResource("funnel_delete.png"))) {
+					@Override
+					protected boolean perform() {
+						return clearAllFilters();
+					}
+				});
+			}
             commands.add( toolbar );
             
             commands.add(Box.createHorizontalGlue());
@@ -334,6 +336,10 @@ class TableFilterColumnPopup extends PopupWindow implements MouseListener {
 
         public void setFilteredIcon(Icon filteredIcon) {
             this.filteredIcon = filteredIcon;
+        }
+        
+        public void setClearFilterIcon(boolean clearFilter) {
+        	this.clearTableFilterIcon = clearFilter;
         }
     }
 
