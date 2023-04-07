@@ -34,12 +34,11 @@ package org.oxbow.swingbits.table.filter;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.Collections;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
-import javax.swing.JTable;
-import javax.swing.SwingConstants;
+import javax.swing.*;
+import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
@@ -57,6 +56,18 @@ public final class TableRowFilterSupport {
     private int filterIconPlacement = SwingConstants.LEADING;
     private boolean useTableRenderers = false;
     private boolean autoclean = false;
+
+    public enum FilterType {
+        DEFAULT,
+        EXCEL
+    }
+    private Set<?> searchableColumns;
+    private boolean enableRightClick;
+
+    private Icon filteringIcon;//icon which is displayed on column before any data filtered
+    private Icon filteredIcon;//icon which is displayed on column after any data filtered
+    private FilterType filterType = FilterType.DEFAULT;
+    private boolean clearTableFilter = false;
 
     private TableRowFilterSupport( ITableFilter<?> filter ) {
         if ( filter == null ) throw new NullPointerException();
@@ -150,6 +161,11 @@ public final class TableRowFilterSupport {
         filterPopup.setSearchFilter(searchFilter);
         filterPopup.setSearchTranslator(translator);
         filterPopup.setUseTableRenderers( useTableRenderers );
+        filterPopup.setSearchableColumns(searchableColumns);
+        filterPopup.setEnableRightClick(enableRightClick);
+        filterPopup.setFilteringIcon(filteringIcon);
+        filterPopup.setFilteredIcon(filteredIcon);
+        filterPopup.setClearFilterIcon(clearTableFilter);
 
         setupTableHeader();
         
@@ -190,13 +206,39 @@ public final class TableRowFilterSupport {
 
         JTable table =  filter.getTable();
 
-        FilterTableHeaderRenderer headerRenderer =
-                new FilterTableHeaderRenderer(filter, filterIconPlacement);
         filter.modelChanged( newModel );
 
-        for( TableColumn c:  Collections.list( table.getColumnModel().getColumns()) ) {
-            c.setHeaderRenderer( headerRenderer );
+        //default icons
+        if (filteringIcon == null) {
+            filteringIcon = new ImageIcon(getClass().getResource("filtering.png"));
         }
+        if (filteredIcon == null) {
+            filteredIcon = new ImageIcon(getClass().getResource("filtered.png"));
+        }
+
+        TableCellRenderer headerRenderer = null;
+        switch (filterType) {
+            case DEFAULT:
+            	for( TableColumn c:  Collections.list( table.getColumnModel().getColumns()) ) {
+                    if (searchable && ((searchableColumns == null || searchableColumns.isEmpty())
+                            || searchableColumns.contains(c.getHeaderValue()))) {
+                    	headerRenderer = new FilterTableHeaderRenderer(filter, filterIconPlacement);
+                        c.setHeaderRenderer( headerRenderer );
+                    }
+                }
+                break;
+            case EXCEL:
+            	for( TableColumn c:  Collections.list( table.getColumnModel().getColumns()) ) {
+                    if (searchable && ((searchableColumns == null || searchableColumns.isEmpty())
+                            || searchableColumns.contains(c.getHeaderValue()))) {
+                    	headerRenderer =
+                    			new ExcelFilterTableHeaderRenderer(filter, filterIconPlacement, (String) c.getHeaderValue(), filteringIcon, filteredIcon);
+                        c.setHeaderRenderer( headerRenderer );
+                    }
+                }
+                break;
+        }
+        
 
         if ( !fullSetup ) return;
 
@@ -210,5 +252,68 @@ public final class TableRowFilterSupport {
 
     }
 
+    /**
+     * Column filter list is searchable & supported columns for searching
+     * Any column is not listed in the table model will be ignored
+     *
+     * @param searchableColumns
+     * @return
+     */
+    public TableRowFilterSupport searchableColumns(Object... searchableColumns) {
+        return this.searchableColumns(Arrays.stream(searchableColumns).collect(Collectors.toSet()));
+    }
 
+    /**
+     * Column filter list is searchable & supported columns for searching
+     * Any column is not listed in the table model will be ignored
+     *
+     * @param searchableColumns
+     * @return
+     */
+    public TableRowFilterSupport searchableColumns(Set<?> searchableColumns) {
+        this.searchable = true;
+        this.searchableColumns = searchableColumns;
+        return this;
+    }
+
+    /**
+     * Column filter list is searchable & supported columns for searching
+     * Any column is not listed in the table model will be ignored
+     *
+     * @param searchableColumns
+     * @return
+     */
+    public TableRowFilterSupport searchableColumns(List<?> searchableColumns) {
+        return this.searchableColumns(new HashSet<>(searchableColumns));
+    }
+
+    public TableRowFilterSupport sortable(boolean sortable) {
+        this.filter.setSortable(sortable);
+        return this;
+    }
+
+    public TableRowFilterSupport enableRightClick(boolean enableRightClick) {
+        this.enableRightClick = enableRightClick;
+        return this;
+    }
+
+    public TableRowFilterSupport filteringIcon(Icon filteringIcon) {
+        this.filteringIcon = filteringIcon;
+        return this;
+    }
+
+    public TableRowFilterSupport filteredIcon(Icon filteredIcon) {
+        this.filteredIcon = filteredIcon;
+        return this;
+    }
+
+    public TableRowFilterSupport filterType(FilterType filterType) {
+        this.filterType = filterType;
+        return this;
+    }
+    
+    public TableRowFilterSupport enableClearTableFilter(boolean clearTableFilter) {
+    	this.clearTableFilter = clearTableFilter;
+    	return this;
+    }
 }

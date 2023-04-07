@@ -114,9 +114,15 @@ public class TableFilterTest implements Runnable {
                                                      System.out.println("Filter Changed");
                                                  }
                                              })
+                                            .filterIconPlacement(SwingConstants.TRAILING)
+                                            .filterType(TableRowFilterSupport.FilterType.EXCEL)
                                             .actions(true)
+                                            .sortable(false)
+                                            .enableRightClick(false)
                                             .searchable(true)
+                                            .searchableColumns("A123","B123")
                                             .useTableRenderers(true)
+                                            .enableClearTableFilter(true)
                                             .autoclean(true);
                                            
         JTable table = filter.apply();

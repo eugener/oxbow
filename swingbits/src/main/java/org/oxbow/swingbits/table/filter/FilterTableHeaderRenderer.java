@@ -31,22 +31,18 @@
 
 package org.oxbow.swingbits.table.filter;
 
-import java.awt.Component;
-import java.awt.ComponentOrientation;
-import java.awt.Image;
-
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JTable;
-import javax.swing.SwingConstants;
-
 import org.oxbow.swingbits.table.TableHeaderRenderer;
 import org.oxbow.swingbits.util.swing.CompoundIcon;
 
+import javax.swing.*;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
+import java.awt.*;
+import java.awt.event.*;
+
 /**
- * Table header renderer to show the column filter state 
- * 
+ * Table header renderer to show the column filter state
+ *
  * Created on Feb 10, 2011
  * @author Eugene Ryzhikov
  *
@@ -59,9 +55,9 @@ class FilterTableHeaderRenderer extends TableHeaderRenderer {
     private final int filterIconPlacement;
     private final ITableFilter<?> tableFilter;
 
-    
+
     public FilterTableHeaderRenderer(ITableFilter<?> tableFilter,
-            int filterIconPlacement) {
+                                     int filterIconPlacement) {
         this.tableFilter = tableFilter;
         this.filterIconPlacement = filterIconPlacement;
 
@@ -72,7 +68,7 @@ class FilterTableHeaderRenderer extends TableHeaderRenderer {
                     "SwingConstants.LEADING or SwingConstants.TRAILING");
         }
     }
-    
+
     private Icon getFilterIcon() {
 
         if (icon == null) {
@@ -85,8 +81,8 @@ class FilterTableHeaderRenderer extends TableHeaderRenderer {
 
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
-            boolean hasFocus, int row, int column) {
-        
+                                                   boolean hasFocus, int row, int column) {
+
         final JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 
         int modelColumn =  table.convertColumnIndexToModel(column);
@@ -94,7 +90,7 @@ class FilterTableHeaderRenderer extends TableHeaderRenderer {
             Icon oldIcon = label.getIcon();
             Icon newIcon = null;
             if (oldIcon == null) {
-                newIcon = getFilterIcon();     
+                newIcon = getFilterIcon();
             } else {
                 ComponentOrientation orientation =
                         label.getComponentOrientation();
@@ -114,7 +110,7 @@ class FilterTableHeaderRenderer extends TableHeaderRenderer {
             }
             label.setIcon(newIcon);
         }
-        
+
         return label;
     }
 

@@ -112,8 +112,12 @@ public class JTableFilter extends AbstractTableFilter<JTable> {
             TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>( model );
             sorter.setSortsOnUpdates(true);
             getTable().setRowSorter( sorter );
+            if (!this.getSortable()) {
+                for (int i = 0; i < this.getTable().getColumnCount(); i++) {
+                    sorter.setSortable(i, false);
+                }
+            }
         }
     }
-
 
 }

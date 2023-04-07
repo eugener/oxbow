@@ -60,6 +60,7 @@ public abstract class AbstractTableFilter<T extends JTable> implements ITableFil
     private final T table;
     private final TableFilterState filterState = new TableFilterState();
     private boolean autoclean;
+    private boolean sortable = true;
 
     public AbstractTableFilter( T table ) {
         this.table = table;
@@ -186,6 +187,14 @@ public abstract class AbstractTableFilter<T extends JTable> implements ITableFil
             execute(column, items);
         }
         fireFilterChange();
+    }
+
+    public boolean getSortable() {
+        return this.sortable;
+    }
+
+    public void setSortable(boolean sortable) {
+        this.sortable = sortable;
     }
 
 }

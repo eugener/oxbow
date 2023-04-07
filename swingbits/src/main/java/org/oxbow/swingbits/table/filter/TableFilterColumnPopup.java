@@ -39,25 +39,13 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JToolBar;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
+import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 import org.oxbow.swingbits.list.ActionCheckListModel;
@@ -92,6 +80,11 @@ class TableFilterColumnPopup extends PopupWindow implements MouseListener {
         private boolean actionsVisible = true;
         private boolean useTableRenderers = false;
         ResourceBundle bundle = ResourceBundle.getBundle( "task-dialog" ); // NOI18N
+        private Set<?> searchableColumns;
+        private boolean enableRightClick;
+        private Icon filteringIcon;//icon which is displayed on column before any data filtered
+        private Icon filteredIcon;//icon which is displayed on column after any data filtered
+        private boolean clearTableFilterIcon = false;
 
         public TableFilterColumnPopup( ITableFilter<?> filter ) {
 
@@ -170,14 +163,16 @@ class TableFilterColumnPopup extends PopupWindow implements MouseListener {
             JToolBar toolbar = new JToolBar();
             toolbar.setFloatable(false);
             toolbar.setOpaque(false);
-            toolbar.add( new PopupWindow.CommandAction(
-                    bundle.getString( "Clear_ALL_COLUMN_FILTERS" ),
-                    new ImageIcon(getClass().getResource("funnel_delete.png"))) {
-                @Override
-                protected boolean perform() {
-                    return clearAllFilters();
-                }
-            });
+			if (clearTableFilterIcon) {
+
+				toolbar.add(new PopupWindow.CommandAction(bundle.getString("Clear_ALL_COLUMN_FILTERS"),
+						new ImageIcon(getClass().getResource("funnel_delete.png"))) {
+					@Override
+					protected boolean perform() {
+						return clearAllFilters();
+					}
+				});
+			}
             commands.add( toolbar );
             
             commands.add(Box.createHorizontalGlue());
@@ -231,12 +226,12 @@ class TableFilterColumnPopup extends PopupWindow implements MouseListener {
         
         @Override
         public void mousePressed(MouseEvent e) {
-            if ( enabled && e.isPopupTrigger() ) showFilterPopup(e);
+            if ( enabled && e.isPopupTrigger() && enableRightClick ) showFilterPopup(e);
         }
 
         @Override
         public void mouseReleased(MouseEvent e) {
-            if ( enabled && e.isPopupTrigger() ) showFilterPopup(e);
+            if ( enabled && e.isPopupTrigger() && enableRightClick ) showFilterPopup(e);
         }
 
         private void showFilterPopup(MouseEvent e) {
@@ -247,6 +242,9 @@ class TableFilterColumnPopup extends PopupWindow implements MouseListener {
             int vColumnIndex = colModel.getColumnIndexAtX(e.getX());
             if ( vColumnIndex < 0 ) return;
 
+            //if a set of columns provided for only those columns to be filtered, then ignore if the column name is not in the list.
+            TableColumn column = colModel.getColumn(vColumnIndex);
+            if (searchableColumns != null && !searchableColumns.isEmpty() && !searchableColumns.contains(column.getHeaderValue())) return;
 
             // Determine if mouse was clicked between column heads
             Rectangle headerRect = filter.getTable().getTableHeader().getHeaderRect(vColumnIndex);
@@ -320,6 +318,28 @@ class TableFilterColumnPopup extends PopupWindow implements MouseListener {
         @Override
         public void mouseExited(MouseEvent e) {}
 
+        public void setSearchableColumns(Set<?> searchableColumns) {
+            this.searchableColumns = searchableColumns;
+        }
 
+        public void setEnableRightClick(boolean enableRightClick) {
+            this.enableRightClick = enableRightClick;
+        }
+
+        protected void showPopupWindow(MouseEvent e) {
+            showFilterPopup(e);
+        }
+
+        public void setFilteringIcon(Icon filteringIcon) {
+            this.filteringIcon = filteringIcon;
+        }
+
+        public void setFilteredIcon(Icon filteredIcon) {
+            this.filteredIcon = filteredIcon;
+        }
+        
+        public void setClearFilterIcon(boolean clearFilter) {
+        	this.clearTableFilterIcon = clearFilter;
+        }
     }
 
