@@ -1,13 +1,8 @@
-[![Build Status](https://travis-ci.org/eugener/oxbow.svg?branch=master)](https://travis-ci.org/eugener/oxbow)
-
 
 **SwingBits** is a collection of useful components and utilities for Java Swing Toolkit. 
 
 The documentation can be found in the [Project Wiki](https://github.com/eugener/oxbow/wiki/_pages).   
 
-```
- NOTE: The TaskDialog library is becoming a part of SwingBits starting with SwingBits v1.0 
-```
 
 Here are some of its features:
    
