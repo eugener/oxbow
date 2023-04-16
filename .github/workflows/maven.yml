@@ -14,6 +14,10 @@ on:
   pull_request:
     branches: [ "master" ]
 
+defaults:
+ run:
+   working-directory: ./swingbits
+
 jobs:
   build:
 
@@ -28,5 +32,5 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven  
-      run: ./swingbits/mvnw -B clean compile
+      run: ./mvnw clean compile
 
