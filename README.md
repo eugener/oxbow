@@ -1,7 +1,7 @@
 
 **SwingBits** is a collection of useful components and utilities for Java Swing Toolkit. 
 
-![Maven Central](https://img.shields.io/maven-central/v/org.oxbow/swingbits)
+[![Maven Central](https://img.shields.io/maven-central/v/org.oxbow/swingbits)](https://central.sonatype.com/artifact/org.oxbow/swingbits)
 
 The documentation can be found in the [Project Wiki](https://github.com/eugener/oxbow/wiki/_pages).   
 
